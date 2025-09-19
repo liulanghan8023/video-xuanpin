@@ -244,11 +244,11 @@ def run():
                                             data['sales'] = parse_sales(sales_text)
 
                                 # 9. 带货人数
-                                influencer_count_element = soup.find('div', class_='index_module__dataTitle____0bd5', string=re.compile(r'带货人数'))
+                                influencer_count_element = soup.find(lambda tag: tag.name == 'div' and 'index_module__dataTitle____0bd5' in tag.get('class', []) and '带货人数' in tag.text)
                                 if influencer_count_element:
                                     influencer_count_content_element = influencer_count_element.find_next_sibling('div', class_='index_module__dataContent____0bd5')
                                     if influencer_count_content_element:
-                                        count = influencer_count_content_element.text
+                                        count = influencer_count_content_element.find('div').text
                                         data['influencer_count'] = int(count) if count.isdigit() else 0
 
                                 # 13. 图片列表
