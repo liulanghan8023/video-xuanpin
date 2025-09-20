@@ -24,6 +24,22 @@ def parse_sales(sales_str):
         return int(float(sales_str) * 10000)
     return int(sales_str)
 
+def parse_video_data(soup, title_text):
+    title_element = soup.find('div', class_='index_module__title____45dd', string=re.compile(title_text))
+    print(f"title_element for {title_text}: {title_element}")
+    if title_element:
+        parent_data_item = title_element.find_parent('div', class_='index_module__dataItem____45dd')
+        print(f"parent_data_item for {title_text}: {parent_data_item is not None}")
+        if parent_data_item:
+            video_element = parent_data_item.find('div', class_='index_module__contentType____45dd', string='视频')
+            print(f"video_element for {title_text}: {video_element is not None}")
+            if video_element:
+                video_value_element = video_element.find_next_sibling('div', class_='index_module__num____45dd')
+                print(f"video_value_element for {title_text}: {video_value_element is not None}")
+                if video_value_element:
+                    return video_value_element.text.strip()
+    return None
+
 def run():
     with sync_playwright() as p:
         browser = p.chromium.launch(headless=False)
@@ -128,6 +144,8 @@ def run():
                         print(f"找到 {count} 个商品。")
 
                         for i in range(count):
+                            if i > 0:
+                                break
                             # Re-fetch locators in each iteration to avoid stale element issues
                             item_locator = page.locator("tr.auxo-table-row").nth(i)
                             name_element = item_locator.locator('div.index_module__title____4ca9')
@@ -160,9 +178,31 @@ def run():
                                     seven_day_button.click()
                                     print("  等待数据更新...")
                                     detail_page.wait_for_load_state('networkidle', timeout=30000)
+                                    detail_page.wait_for_timeout(3000) # Extra 3-second wait for UI to settle.
                                     print("  '近7天'数据已加载。")
                                 else:
                                     print("  未找到'近7天'按钮。")
+
+                                # Scroll down to trigger lazy loading and wait for content to appear.
+                                print("  滚动页面并等待动态内容加载...")
+                                try:
+                                    # Scroll to the bottom to make sure all elements are loaded
+                                    detail_page.evaluate("window.scrollTo(0, document.body.scrollHeight)")
+                                    
+                                    # Wait for the network to settle after scrolling
+                                    detail_page.wait_for_load_state('networkidle', timeout=30000)
+
+                                    # Specifically wait for the container of the video data to be visible.
+                                    # This is a more reliable approach than a fixed timeout.
+                                    video_data_container_selector = "div.index_module__dataItem____45dd"
+                                    detail_page.wait_for_selector(video_data_container_selector, state='visible', timeout=15000)
+                                    print("  视频数据容器已加载。")
+                                    
+                                    # Add a small final wait for rendering just in case.
+                                    detail_page.wait_for_timeout(2000)
+
+                                except PlaywrightError:
+                                    print("  警告: 等待或滚动加载动态内容时超时。视频数据可能不完整。")
 
                                 print("  开始提取详细数据...")
                                 
@@ -175,78 +215,78 @@ def run():
                                 data = {}
 
                                 # 1. 体验分
-                                experience_score_element = soup.find('span', class_='index_module__bigNum____1d3f')
+                                experience_score_element = soup.find('span', class_=re.compile(r'^index_module__bigNum__'))
                                 if experience_score_element:
                                     data['experience_score'] = int(experience_score_element.text)
 
                                 # 2. 商品评分
-                                product_score_element = soup.find('div', class_='index_module__textLine____1d3f', string='商品')
+                                product_score_element = soup.find('div', class_=re.compile(r'^index_module__textLine__'), string='商品')
                                 if product_score_element:
-                                    score_element = product_score_element.find_previous_sibling('div').find('span', class_='index_module__smallNum____1d3f')
+                                    score_element = product_score_element.find_previous_sibling('div').find('span', class_=re.compile(r'^index_module__smallNum__'))
                                     if score_element:
                                         data['product_score'] = int(score_element.text)
 
                                 # 3. 物流评分
-                                logistics_score_element = soup.find('div', class_='index_module__textLine____1d3f', string='物流')
+                                logistics_score_element = soup.find('div', class_=re.compile(r'^index_module__textLine__'), string='物流')
                                 if logistics_score_element:
-                                    score_element = logistics_score_element.find_previous_sibling('div').find('span', class_='index_module__smallNum____1d3f')
+                                    score_element = logistics_score_element.find_previous_sibling('div').find('span', class_=re.compile(r'^index_module__smallNum__'))
                                     if score_element:
                                         data['logistics_score'] = int(score_element.text)
 
                                 # 4. 商家评分
-                                merchant_score_element = soup.find('div', class_='index_module__textLine____1d3f', string='商家')
+                                merchant_score_element = soup.find('div', class_=re.compile(r'^index_module__textLine__'), string='商家')
                                 if merchant_score_element:
-                                    score_element = merchant_score_element.find_previous_sibling('div').find('span', class_='index_module__smallNum____1d3f')
+                                    score_element = merchant_score_element.find_previous_sibling('div').find('span', class_=re.compile(r'^index_module__smallNum__'))
                                     if score_element:
                                         data['merchant_score'] = int(score_element.text)
 
                                 # 5. 到手价
-                                price_element = soup.find('div', class_='index_module__dataTitle____0bd5', string='到手价')
+                                price_element = soup.find('div', class_=re.compile(r'^index_module__dataTitle__'), string='到手价')
                                 if price_element:
-                                    price_content_element = price_element.find_next_sibling('div', class_='index_module__dataContent____0bd5')
+                                    price_content_element = price_element.find_next_sibling('div', class_=re.compile(r'^index_module__dataContent__'))
                                     if price_content_element:
                                         price_text = price_content_element.contents[0].strip()
                                         price = re.search(r'¥(\d+\.?\d*)', price_text)
-                                        old_price_element = price_content_element.find('span', class_='index_module__lineThrough____0bd5')
+                                        old_price_element = price_content_element.find('span', class_=re.compile(r'^index_module__lineThrough__'))
                                         if old_price_element:
                                             old_price = re.search(r'¥(\d+\.?\d*)', old_price_element.text)
                                             data['original_price'] = parse_price(old_price.group(1)) if old_price else 0
                                         data['price'] = parse_price(price.group(1)) if price else 0
 
                                 # 6. 佣金率|佣金
-                                commission_element = soup.find('div', class_='index_module__dataTitle____0bd5', string='佣金')
+                                commission_element = soup.find('div', class_=re.compile(r'^index_module__dataTitle__'), string='佣金')
                                 if commission_element:
-                                    commission_content_element = commission_element.find_next_sibling('div', class_='index_module__dataContent____0bd5')
+                                    commission_content_element = commission_element.find_next_sibling('div', class_=re.compile(r'^index_module__dataContent__'))
                                     if commission_content_element:
                                         commission_rate = commission_content_element.find('span').text.replace('%', '')
-                                        commission = commission_content_element.find('span', class_='index_module__smallText____0bd5').text.replace('赚', '')
+                                        commission = commission_content_element.find('span', class_=re.compile(r'^index_module__smallText__')).text.replace('赚', '')
                                         data['commission_rate'] = float(commission_rate)
                                         data['commission'] = float(commission)
 
                                 # 7. 好评率
-                                praise_rate_element = soup.find('div', class_='index_module__dataTitle____0bd5', string='好评率')
+                                praise_rate_element = soup.find('div', class_=re.compile(r'^index_module__dataTitle__'), string='好评率')
                                 if praise_rate_element:
-                                    praise_rate_content_element = praise_rate_element.find_next_sibling('div', class_='index_module__dataContent____0bd5')
+                                    praise_rate_content_element = praise_rate_element.find_next_sibling('div', class_=re.compile(r'^index_module__dataContent__'))
                                     if praise_rate_content_element:
                                         praise_rate = praise_rate_content_element.text.replace('%', '')
                                         data['praise_rate'] = float(praise_rate)
 
                                 # 8. 已售数量
-                                sales_element = soup.find('div', class_='index_module__dataTitle____0bd5', string='已售')
+                                sales_element = soup.find('div', class_=re.compile(r'^index_module__dataTitle__'), string='已售')
                                 if sales_element:
-                                    sales_content_element = sales_element.find_next_sibling('div', class_='index_module__dataContent____0bd5')
+                                    sales_content_element = sales_element.find_next_sibling('div', class_=re.compile(r'^index_module__dataContent__'))
                                     if sales_content_element:
                                         sales_text = sales_content_element.find('div').text
-                                        unit = sales_content_element.find('div', class_='index_module__suffix____0bd5').text
+                                        unit = sales_content_element.find('div', class_=re.compile(r'^index_module__suffix__')).text
                                         if '万' in unit:
                                             data['sales'] = parse_sales(sales_text + '万')
                                         else:
                                             data['sales'] = parse_sales(sales_text)
 
                                 # 9. 带货人数
-                                influencer_count_element = soup.find(lambda tag: tag.name == 'div' and 'index_module__dataTitle____0bd5' in tag.get('class', []) and '带货人数' in tag.text)
+                                influencer_count_element = soup.find('div', class_=re.compile(r'^index_module__dataTitle__'), string=re.compile('带货人数'))
                                 if influencer_count_element:
-                                    influencer_count_content_element = influencer_count_element.find_next_sibling('div', class_='index_module__dataContent____0bd5')
+                                    influencer_count_content_element = influencer_count_element.find_next_sibling('div', class_=re.compile(r'^index_module__dataContent__'))
                                     if influencer_count_content_element:
                                         count = influencer_count_content_element.find('div').text
                                         data['influencer_count'] = int(count) if count.isdigit() else 0
@@ -256,6 +296,13 @@ def run():
                                 if image_list_element:
                                     images = [img['src'] for img in image_list_element.find_all('img')]
                                     data['image_list'] = images
+
+                                data['total_sales_video'] = parse_video_data(soup, r'总销售额')
+                                data['total_volume_video'] = parse_video_data(soup, r'总销量')
+                                data['ordered_influencers_video'] = parse_video_data(soup, r'出单达人数')
+                                data['ordered_content_video'] = parse_video_data(soup, r'出单内容数')
+                                data['order_conversion_rate_video'] = parse_video_data(soup, r'下单转化率')
+                                data['views_video'] = parse_video_data(soup, r'浏览量')
 
                                 print(json.dumps(data, indent=4, ensure_ascii=False))
 
