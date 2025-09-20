@@ -1,358 +1,89 @@
 import os
 import json
-from playwright.sync_api import sync_playwright, Error as PlaywrightError
-from bs4 import BeautifulSoup
-import re
+from playwright.sync_api import sync_playwright, Error
 
+# --- 配置 ---
+# 目标网址
+TARGET_URL = "https://buyin.jinritemai.com/dashboard/merch-picking-hall/rank?btm_ppre=a10091.b24215.c68160.d839440_i16852609794&btm_pre=a10091.b71710.c68160.d839440_i1482933506&btm_show_id=ebf82770-5d02-48ed-9f92-c1a75d6fd2f3&pre_universal_page_params_id=&universal_page_params_id=e0b97666-5e57-41ab-850a-5418bb06acad"
+# 要拦截的API地址
+INTERCEPT_URL = "https://buyin.jinritemai.com/pc/leaderboard/center/pmt"
+# 登录状态存储文件
 STORAGE_STATE_FILE = 'storage_state.json'
+# 浏览器用户代理
 USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36"
 
-def parse_price(price_str):
-    if not price_str:
-        return 0
-    price_str = price_str.replace('¥', '')
-    if '万' in price_str:
-        price_str = price_str.replace('万', '')
-        return float(price_str) * 10000
-    return float(price_str)
 
-def parse_sales(sales_str):
-    if not sales_str:
-        return 0
-    if '万' in sales_str:
-        sales_str = sales_str.replace('万', '').replace('+', '')
-        return int(float(sales_str) * 10000)
-    return int(sales_str)
+def handle_response(response):
+    """监听并打印指定URL的响应数据"""
+    if INTERCEPT_URL in response.url:
+        print(f"--- 截获到响应来自: {response.url} ---")
+        try:
+            # 获取响应的JSON数据
+            body = response.json()
+            # 美化后打印到控制台
+            print(json.dumps(body, indent=2, ensure_ascii=False))
+        except Exception as e:
+            print(f"无法将响应体解析为JSON: {e}")
+        print("----------------------------------------------------")
 
-def parse_video_data(soup, title_text):
-    title_element = soup.find('div', class_='index_module__title____45dd', string=re.compile(title_text))
-    print(f"title_element for {title_text}: {title_element}")
-    if title_element:
-        parent_data_item = title_element.find_parent('div', class_='index_module__dataItem____45dd')
-        print(f"parent_data_item for {title_text}: {parent_data_item is not None}")
-        if parent_data_item:
-            video_element = parent_data_item.find('div', class_='index_module__contentType____45dd', string='视频')
-            print(f"video_element for {title_text}: {video_element is not None}")
-            if video_element:
-                video_value_element = video_element.find_next_sibling('div', class_='index_module__num____45dd')
-                print(f"video_value_element for {title_text}: {video_value_element is not None}")
-                if video_value_element:
-                    return video_value_element.text.strip()
-    return None
-
-def run():
+def run_browser():
+    """
+    启动Playwright，处理登录状态、请求拦截和用户交互。
+    """
     with sync_playwright() as p:
-        browser = p.chromium.launch(headless=False)
-
-        context_options = {
-            'user_agent': USER_AGENT
-        }
+        # 检查是否存在已保存的登录状态
+        storage_state = None
         if os.path.exists(STORAGE_STATE_FILE):
-            with open(STORAGE_STATE_FILE, 'r', encoding='utf-8') as f:
-                try:
+            try:
+                with open(STORAGE_STATE_FILE, 'r', encoding='utf-8') as f:
                     storage_state = json.load(f)
-                    # Merge the loaded state with our options
-                    context_options['storage_state'] = storage_state
-                    print("已加载保存的登录信息。")
-                except json.JSONDecodeError:
-                    print("登录信息文件已损坏，将创建新的登录会话。")
-        else:
-            print("未找到登录信息，请手动登录。")
+                print(f"成功加载已保存的登录状态: {STORAGE_STATE_FILE}")
+            except (json.JSONDecodeError, IOError) as e:
+                print(f"读取登录状态文件失败: {e}。将启动新的登录会话。")
+                storage_state = None
 
-        context = browser.new_context(**context_options)
+        # 启动浏览器
+        browser = p.chromium.launch(headless=False)
+        context = browser.new_context(
+            storage_state=storage_state,
+            user_agent=USER_AGENT
+        )
         page = context.new_page()
 
+        # 设置请求拦截
+        # 注意：这里我们监听 'response' 事件，如果需要修改请求或响应，需要使用 page.route
+        page.on("response", handle_response)
+
+        print(f"正在导航到: {TARGET_URL}")
         try:
-            print("正在导航到页面...")
-            page.goto("https://buyin.jinritemai.com/dashboard/merch-picking-hall/rank?btm_ppre=a0.b0.c0.d0&btm_pre=a10091.b24215.c68160.d839440_i1482933506&btm_show_id=5c7ac95d-1630-4da4-8849-efb657bb97db&pre_universal_page_params_id=&universal_page_params_id=031b9a6c-1026-4f6a-a838-7c18bd578f86", wait_until="domcontentloaded", timeout=60000)
+            page.goto(TARGET_URL, wait_until="domcontentloaded", timeout=60000)
+            print("页面加载完成。")
+            print("\n>>> 浏览器已打开，您可以进行操作（如首次登录）。 <<<")
+            print(">>> 操作完成后，请直接关闭浏览器窗口以继续执行。 <<<")
             
-            print("页面加载中，等待网络稳定...")
-            page.wait_for_load_state('networkidle', timeout=60000)
+            # 暂停脚本，将控制权交给用户
+            # 当用户关闭浏览器时，page.pause()会结束，代码会继续执行
+            page.pause()
 
-            print(f"页面标题: {page.title()}")
-
-            # Check for network error message and try reloading once.
-            try:
-                error_selector = 'text="当前网络不稳定"'
-                page.wait_for_selector(error_selector, timeout=5000)
-                print("检测到网络不稳定提示，尝试刷新页面...")
-                page.reload()
-                print("等待页面刷新后网络稳定...")
-                page.wait_for_load_state('networkidle', timeout=30000)
-                print("页面已刷新。")
-            except PlaywrightError:
-                # This is the good path: the error message did not appear.
-                print("未检测到网络不稳定提示，加载成功。")
-
-            print("\n页面加载成功，正在查找并点击'趋势榜'...")
-            try:
-                # Use a robust selector based on role and name
-                trend_list_tab = page.get_by_role("tab", name="趋势榜")
-                trend_list_tab.click()
-                print("已成功点击'趋势榜'。")
-                
-                # After clicking, wait for the content to load
-                print("等待趋势榜内容加载...")
-                page.wait_for_load_state('networkidle', timeout=30000)
-                print("趋势榜内容已加载。")
-
-                print("\n正在查找并点击'本周'按钮...")
-                try:
-                    # Use a more direct and robust locator
-                    this_week_button = page.locator('label:has-text("本周")')
-                    
-                    # Explicitly wait for the button to be visible
-                    print("等待'本周'按钮可见...")
-                    this_week_button.wait_for(state='visible', timeout=10000) # 10s timeout
-                    
-                    this_week_button.click()
-                    print("已成功点击'本周'按钮。")
-
-                    # Wait for the data to update
-                    print("等待'本周'数据加载...")
-                    page.wait_for_load_state('networkidle', timeout=30000)
-                    print("'本周'数据已加载。")
-
-                    print("\n正在查找并点击'短视频'按钮...")
-                    try:
-                        # Apply the same robust pattern here
-                        short_video_button = page.locator('label:has-text("短视频")')
-                        
-                        print("等待'短视频'按钮可见...")
-                        short_video_button.wait_for(state='visible', timeout=10000)
-
-                        short_video_button.click()
-                        print("已成功点击'短视频'按钮。")
-
-                        print("等待'短视频'数据加载...")
-                        page.wait_for_load_state('networkidle', timeout=30000)
-                        print("'短视频'数据已加载。")
-
-                        print("\n等待界面渲染...")
-                        page.wait_for_timeout(3000) # Extra 3-second wait for UI to settle. 
-
-                        print("开始模拟向上滚动页面...")
-                        for i in range(2):
-                            print(f"第 {i+1}/2 次向上滚动...")
-                            page.keyboard.press("PageUp")
-                            page.wait_for_timeout(2000)
-                        print("滚动完成。")
-
-                        print("获取商品列表并逐个点击...")
-                        items_locator = page.locator("tr.auxo-table-row")
-                        count = items_locator.count()
-                        print(f"找到 {count} 个商品。")
-
-                        for i in range(count):
-                            if i > 0:
-                                break
-                            # Re-fetch locators in each iteration to avoid stale element issues
-                            item_locator = page.locator("tr.auxo-table-row").nth(i)
-                            name_element = item_locator.locator('div.index_module__title____4ca9')
-
-                            name = "未知名称"
-                            if name_element.count() > 0:
-                                name = name_element.inner_text().strip()
-                            
-                            print(f"--- 处理第 {i+1}/{count} 个商品: {name} ---")
-
-                            try:
-                                # Context manager to handle the new page
-                                with context.expect_page(timeout=10000) as new_page_info:
-                                    # Click the element to open the detail page
-                                    if name_element.count() > 0:
-                                        name_element.click()
-                                    else:
-                                        item_locator.click()
-                                
-                                detail_page = new_page_info.value
-                                
-                                print("  等待详情页加载完成...")
-                                detail_page.wait_for_load_state('networkidle', timeout=60000)
-                                print(f"  详情页 '{detail_page.title()}' 加载成功。")
-
-                                # Click the "7天" button
-                                print("  点击'近7天'按钮...")
-                                seven_day_button = detail_page.locator('div.index_module__switchItem____9ac7:has-text("近7天")')
-                                if seven_day_button.count() > 0:
-                                    seven_day_button.click()
-                                    print("  等待数据更新...")
-                                    detail_page.wait_for_load_state('networkidle', timeout=30000)
-                                    detail_page.wait_for_timeout(3000) # Extra 3-second wait for UI to settle.
-                                    print("  '近7天'数据已加载。")
-                                else:
-                                    print("  未找到'近7天'按钮。")
-
-                                # Scroll down to trigger lazy loading and wait for content to appear.
-                                print("  滚动页面并等待动态内容加载...")
-                                try:
-                                    # Scroll to the bottom to make sure all elements are loaded
-                                    detail_page.evaluate("window.scrollTo(0, document.body.scrollHeight)")
-                                    
-                                    # Wait for the network to settle after scrolling
-                                    detail_page.wait_for_load_state('networkidle', timeout=30000)
-
-                                    # Specifically wait for the container of the video data to be visible.
-                                    # This is a more reliable approach than a fixed timeout.
-                                    video_data_container_selector = "div.index_module__dataItem____45dd"
-                                    detail_page.wait_for_selector(video_data_container_selector, state='visible', timeout=15000)
-                                    print("  视频数据容器已加载。")
-                                    
-                                    # Add a small final wait for rendering just in case.
-                                    detail_page.wait_for_timeout(2000)
-
-                                except PlaywrightError:
-                                    print("  警告: 等待或滚动加载动态内容时超时。视频数据可能不完整。")
-
-                                print("  开始提取详细数据...")
-                                
-                                # Get the HTML content of the detail page
-                                html_content = detail_page.content()
-
-                                # Parse the HTML content with BeautifulSoup
-                                soup = BeautifulSoup(html_content, 'html.parser')
-
-                                data = {}
-
-                                # 1. 体验分
-                                experience_score_element = soup.find('span', class_=re.compile(r'^index_module__bigNum__'))
-                                if experience_score_element:
-                                    data['experience_score'] = int(experience_score_element.text)
-
-                                # 2. 商品评分
-                                product_score_element = soup.find('div', class_=re.compile(r'^index_module__textLine__'), string='商品')
-                                if product_score_element:
-                                    score_element = product_score_element.find_previous_sibling('div').find('span', class_=re.compile(r'^index_module__smallNum__'))
-                                    if score_element:
-                                        data['product_score'] = int(score_element.text)
-
-                                # 3. 物流评分
-                                logistics_score_element = soup.find('div', class_=re.compile(r'^index_module__textLine__'), string='物流')
-                                if logistics_score_element:
-                                    score_element = logistics_score_element.find_previous_sibling('div').find('span', class_=re.compile(r'^index_module__smallNum__'))
-                                    if score_element:
-                                        data['logistics_score'] = int(score_element.text)
-
-                                # 4. 商家评分
-                                merchant_score_element = soup.find('div', class_=re.compile(r'^index_module__textLine__'), string='商家')
-                                if merchant_score_element:
-                                    score_element = merchant_score_element.find_previous_sibling('div').find('span', class_=re.compile(r'^index_module__smallNum__'))
-                                    if score_element:
-                                        data['merchant_score'] = int(score_element.text)
-
-                                # 5. 到手价
-                                price_element = soup.find('div', class_=re.compile(r'^index_module__dataTitle__'), string='到手价')
-                                if price_element:
-                                    price_content_element = price_element.find_next_sibling('div', class_=re.compile(r'^index_module__dataContent__'))
-                                    if price_content_element:
-                                        price_text = price_content_element.contents[0].strip()
-                                        price = re.search(r'¥(\d+\.?\d*)', price_text)
-                                        old_price_element = price_content_element.find('span', class_=re.compile(r'^index_module__lineThrough__'))
-                                        if old_price_element:
-                                            old_price = re.search(r'¥(\d+\.?\d*)', old_price_element.text)
-                                            data['original_price'] = parse_price(old_price.group(1)) if old_price else 0
-                                        data['price'] = parse_price(price.group(1)) if price else 0
-
-                                # 6. 佣金率|佣金
-                                commission_element = soup.find('div', class_=re.compile(r'^index_module__dataTitle__'), string='佣金')
-                                if commission_element:
-                                    commission_content_element = commission_element.find_next_sibling('div', class_=re.compile(r'^index_module__dataContent__'))
-                                    if commission_content_element:
-                                        commission_rate = commission_content_element.find('span').text.replace('%', '')
-                                        commission = commission_content_element.find('span', class_=re.compile(r'^index_module__smallText__')).text.replace('赚', '')
-                                        data['commission_rate'] = float(commission_rate)
-                                        data['commission'] = float(commission)
-
-                                # 7. 好评率
-                                praise_rate_element = soup.find('div', class_=re.compile(r'^index_module__dataTitle__'), string='好评率')
-                                if praise_rate_element:
-                                    praise_rate_content_element = praise_rate_element.find_next_sibling('div', class_=re.compile(r'^index_module__dataContent__'))
-                                    if praise_rate_content_element:
-                                        praise_rate = praise_rate_content_element.text.replace('%', '')
-                                        data['praise_rate'] = float(praise_rate)
-
-                                # 8. 已售数量
-                                sales_element = soup.find('div', class_=re.compile(r'^index_module__dataTitle__'), string='已售')
-                                if sales_element:
-                                    sales_content_element = sales_element.find_next_sibling('div', class_=re.compile(r'^index_module__dataContent__'))
-                                    if sales_content_element:
-                                        sales_text = sales_content_element.find('div').text
-                                        unit = sales_content_element.find('div', class_=re.compile(r'^index_module__suffix__')).text
-                                        if '万' in unit:
-                                            data['sales'] = parse_sales(sales_text + '万')
-                                        else:
-                                            data['sales'] = parse_sales(sales_text)
-
-                                # 9. 带货人数
-                                influencer_count_element = soup.find('div', class_=re.compile(r'^index_module__dataTitle__'), string=re.compile('带货人数'))
-                                if influencer_count_element:
-                                    influencer_count_content_element = influencer_count_element.find_next_sibling('div', class_=re.compile(r'^index_module__dataContent__'))
-                                    if influencer_count_content_element:
-                                        count = influencer_count_content_element.find('div').text
-                                        data['influencer_count'] = int(count) if count.isdigit() else 0
-
-                                # 13. 图片列表
-                                image_list_element = soup.find('div', class_='auxo-carousel')
-                                if image_list_element:
-                                    images = [img['src'] for img in image_list_element.find_all('img')]
-                                    data['image_list'] = images
-
-                                data['total_sales_video'] = parse_video_data(soup, r'总销售额')
-                                data['total_volume_video'] = parse_video_data(soup, r'总销量')
-                                data['ordered_influencers_video'] = parse_video_data(soup, r'出单达人数')
-                                data['ordered_content_video'] = parse_video_data(soup, r'出单内容数')
-                                data['order_conversion_rate_video'] = parse_video_data(soup, r'下单转化率')
-                                data['views_video'] = parse_video_data(soup, r'浏览量')
-
-                                print(json.dumps(data, indent=4, ensure_ascii=False))
-
-
-                                print("  关闭详情页...")
-                                detail_page.close()
-                                print("  详情页已关闭。")
-
-                                # Wait a moment for the original page to be ready
-                                page.wait_for_timeout(1000)
-
-                            except PlaywrightError as e:
-                                print(f"  处理商品 '{name}' 时发生错误: {e}")
-                                print("  继续下一个商品。")
-                                # Check if a stray page was opened and close it
-                                if len(context.pages) > 1:
-                                    stray_page = context.pages[-1]
-                                    if stray_page != page:
-                                        stray_page.close()
-
-                    except PlaywrightError as e_video:
-                        print(f"错误：无法找到或点击'短视频'按钮。请检查页面是否已更改。\n详细信息: {e_video}")
-
-                except PlaywrightError as e_week:
-                    print(f"错误：无法找到或点击'本周'按钮。请检查页面是否已更改。\n详细信息: {e_week}")
-
-            except PlaywrightError as e_trend:
-                print(f"错误：无法找到或点击'趋势榜'。请检查页面是否已更改。\n详细信息: {e_trend}")
-
-            print("\n请在浏览器窗口中操作。完成操作或登录后，请手动关闭浏览器窗口。")
-            print("关闭窗口后，程序将自动保存您的登录状态。")
-
-            # Wait for the page to be closed by the user. This is a blocking call.
-            page.wait_for_event('close')
-            print("检测到页面已关闭。")
-
-        except PlaywrightError as e:
-            print(f"操作被中断或浏览器已关闭: {e}")
+        except Error as e:
+            print(f"Playwright操作失败: {e}")
         finally:
-            # This block will execute after the user closes the page, or if an error occurs.
+            # 在浏览器关闭后执行
+            print("浏览器窗口已关闭，正在保存当前会话状态...")
             try:
-                storage = context.storage_state()
+                # 保存当前上下文的存储状态（包含最新的cookies）
+                updated_storage_state = context.storage_state()
                 with open(STORAGE_STATE_FILE, 'w', encoding='utf-8') as f:
-                    json.dump(storage, f, indent=2)
-                print(f"当前登录会话已保存到 {STORAGE_STATE_FILE}。")
-            except PlaywrightError as e:
-                print(f"无法保存会话状态，浏览器可能已强制关闭: {e}")
+                    json.dump(updated_storage_state, f, indent=2)
+                print(f"会话状态已成功保存到: {STORAGE_STATE_FILE}")
+            except Error as e:
+                print(f"保存会话状态失败: {e}")
             
-            print("正在关闭浏览器...")
+            # 清理资源
+            context.close()
             browser.close()
+            print("浏览器已关闭。")
+
 
 if __name__ == "__main__":
-    run()
+    run_browser()

@@ -1,0 +1,12 @@
+我需要使用playwright抓取一个网站的榜单数据，需要加载某个网址，并顺序进入到详情抓取必要的数据，能给我出几个方案介绍，我对比下。操作路径如下
+0、如果已经存在cookies在本地，则直接使用，避免重复登录
+1、打开网址https://buyin.jinritemai.com/dashboard/merch-picking-hall/rank?btm_ppre=a10091.b24215.c68160.d839440_i16852609794&btm_pre=a10091.b71710.c68160.d839440_i1482933506&btm_show_id=ebf82770-5d02-48ed-9f92-c1a75d6fd2f3&pre_universal_page_params_id=&universal_page_params_id=e0b97666-5e57-41ab-850a-5418bb06acad
+2、找到趋势榜按钮，触发点击，等待界面加载
+<div class="auxo-tabs-tab auxo-tabs-tab-active" elementtiming="element-timing"><div role="tab" aria-selected="true" id="rc-tabs-0-tab-incr_pay_prod_qty_cnt" class="auxo-tabs-tab-btn" aria-controls="rc-tabs-0-panel-incr_pay_prod_qty_cnt" tabindex="0" elementtiming="element-timing">趋势榜</div></div>
+3、找到本周按钮和短视频按钮，分别触发点击
+<label class="auxo-radio-button-wrapper" elementtiming="element-timing"><span class="auxo-radio-button" elementtiming="element-timing"><input type="radio" class="auxo-radio-button-input" value="7d" elementtiming="element-timing"><span class="auxo-radio-button-inner" elementtiming="element-timing"></span></span><span elementtiming="element-timing">本周</span></label>
+<label class="auxo-radio-button-wrapper" elementtiming="element-timing"><span class="auxo-radio-button" elementtiming="element-timing"><input type="radio" class="auxo-radio-button-input" value="video" elementtiming="element-timing"><span class="auxo-radio-button-inner" elementtiming="element-timing"></span></span><span elementtiming="element-timing">短视频</span></label>
+4、拦截3步骤点击触发的网络请求，打印输出请求的结果数据，并正常返回浏览器，需要拦截的请求链接包含https://buyin.jinritemai.com/pc/leaderboard/center/pmt
+5、根据拦截得到的json数据promotions下每一项product_id，去构造详情页的url，并使用浏览器打开详情页，详情页的url类似https://buyin.jinritemai.com/dashboard/merch-picking-library/merch-promoting?id=3761588070223315064，目前测试阶段仅仅只处理第一个详情即可
+6、等待详情加载完成后，找到近7天的按钮，触发点击，并在点击后拦截https://buyin.jinritemai.com/pc/selection/decision/pack_detail这个接口产生的数据，并答应到控制台，并使接口正常返回
+<div class="index_module__switchItem____9ac7" elementtiming="element-timing">近7天</div>
