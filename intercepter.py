@@ -1,5 +1,6 @@
 import asyncio
 import json
+import os
 import random
 import re
 import time
@@ -98,19 +99,29 @@ async def cat_run(page, page_detail, cat, max_count=None, catch_per_minute=3):
         if not promotions:
             print("❌ Could not find 'promotions' in rank data. Cannot proceed.")
             return data_list
+        # 今日的日期
+        today = time.strftime("%Y-%m-%d", time.localtime())
+        # 存储地址
+        cache_dir = f"data/{today}/{cat}"
+        # 目录不存在则创建
+        Path(cache_dir).mkdir(parents=True, exist_ok=True)
         # 循环访问详情页
         for index, item in enumerate(promotions):
+            # 随机睡眠15-20秒
+            if max_count is not None and index + 1 > max_count:
+                break
             if index != 0:
                 # 每分钟抓取n个商品
                 print("随机睡眠...等待")
                 time.sleep(random.uniform(60 / catch_per_minute - 5, 60 / catch_per_minute))
-
-            # 随机睡眠15-20秒
-            if max_count is not None and index + 1 > max_count:
-                break
             first_product_id = item.get("promotion_id")
             if not first_product_id:
                 print("❌ Could not find 'product_id' for the first product. Cannot proceed.")
+                continue
+            # 存储文件地址
+            file_path = f"{cache_dir}/{first_product_id}.json"
+            if os.path.exists(file_path):
+                print(f"数据已存在，跳过：{file_path}")
                 continue
 
             detail_page_url = Config.DETAIL_PAGE_URL_TEMPLATE.format(first_product_id)
@@ -135,12 +146,17 @@ async def cat_run(page, page_detail, cat, max_count=None, catch_per_minute=3):
                 seven_data = await get_response_json(seven_day_response, "Detail Page 7-Day Data")
                 if not seven_data:
                     continue
-                data_list.append({
+                save_data = {
                     "rank": index,
                     "category": cat,
                     "detail_data": detail_data,
                     "seven_data": seven_data,
-                })
+                }
+                data_list.append(save_data)
+                print("数据保存中...:" + file_path)
+                with open(file_path, "w", encoding="utf-8") as f:
+                    f.write(json.dumps(save_data, indent=4, ensure_ascii=False))
+                print("数据保存完毕")
             except TimeoutError:
                 print(f"❌ Timed out waiting for 7-day data after clicking '近7天'.")
                 print("💡 This might happen if the 7-day data was already loaded by default.")
@@ -235,11 +251,6 @@ async def run(playwright: Playwright, mode, remote_config, catch_num, catch_per_
             print("触发类目", cat)
             try:
                 data_list = await cat_run(page, page_detail, cat, catch_num, catch_per_minute)
-                if data_list:
-                    print("数据保存中...")
-                    with open("data/" + cat + ".json", "w", encoding="utf-8") as f:
-                        f.write(json.dumps(data_list, indent=4, ensure_ascii=False))
-                    print("数据保存完毕")
             except Exception as e:
                 continue
     except TimeoutError:
