@@ -49,12 +49,11 @@ async def run(playwright: Playwright):
         await page.get_by_text("趋势榜", exact=True).click()
 
         # 步骤3 & 4: 点击 "本周" 和 "短视频"，并等待相应的网络请求
-        print("点击 '本周' 和 '短视频'，并等待榜单数据加载...")
+        print("点击 '短视频'，并等待榜单数据加载...")
         # 使用 page.expect_response 作为上下文管理器，可以精准捕获在 'with' 代码块内触发的网络响应
         async with page.expect_response(lambda r: RANK_API_URL_PART in r.url, timeout=30000) as response_info:
             # 根据新的HTML结构，使用 get_by_text 点击对应的标签
-            print("点击 '本周'...")
-            await page.get_by_text("本周", exact=True).click()
+
             
             print("点击 '短视频'...")
             await page.get_by_text("短视频", exact=True).click()
@@ -65,6 +64,8 @@ async def run(playwright: Playwright):
         # 使用 json.dumps 美化输出
         print(json.dumps(rank_data, indent=2, ensure_ascii=False))
         print("--- 榜单数据结束 ---\n")
+
+
 
         # 步骤5: 解析数据，构造并访问详情页
         promotions = rank_data.get("data", {}).get("promotions")
