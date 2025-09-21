@@ -100,8 +100,10 @@ async def cat_run(page, page_detail, cat, max_count=None):
             return data_list
         # 循环访问详情页
         for index, item in enumerate(promotions):
-            if index != 0:
-                time.sleep(1)
+            # 每分钟抓取n个商品
+            count_pers = 3
+            # 随机睡眠15-20秒
+            time.sleep(random.uniform(60/count_pers - 5, 60/count_pers))
             if max_count is not None and index + 1 >= max_count:
                 break
             first_product_id = item.get("product_id")
@@ -189,23 +191,23 @@ async def run(playwright: Playwright):
         page_detail = await context.new_page()
         # 循环选择类目，触发加载
         for cat in [
-            "服饰内衣",
-            "美妆",
-            "食品饮料",
+            # "服饰内衣",
+            # "美妆",
+            # "食品饮料",
             "个护家清",
             "鞋靴箱包",
-            "钟表配饰",
+            # "钟表配饰",
             "母婴宠物",
-            "图书教育",
-            "智能家居",
-            "3C数码产品",
-            "运动户外",
-            "玩具乐器",
-            "生鲜"
+            # "图书教育",
+            # "智能家居",
+            # "3C数码产品",
+            # "运动户外",
+            # "玩具乐器",
+            # "生鲜"
         ]:
             print("触发类目", cat)
             try:
-                data_list = await cat_run(page, page_detail, cat, 3)
+                data_list = await cat_run(page, page_detail, cat, None)
                 if data_list:
                     print("数据保存中...")
                     with open("data/" + cat + ".json", "w", encoding="utf-8") as f:
