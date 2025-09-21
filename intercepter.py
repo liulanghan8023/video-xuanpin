@@ -110,10 +110,6 @@ async def cat_run(page, page_detail, cat, max_count=None, catch_per_minute=3):
             # 随机睡眠15-20秒
             if max_count is not None and index + 1 > max_count:
                 break
-            if index != 0:
-                # 每分钟抓取n个商品
-                print("随机睡眠...等待")
-                time.sleep(random.uniform(60 / catch_per_minute - 5, 60 / catch_per_minute))
             first_product_id = item.get("promotion_id")
             if not first_product_id:
                 print("❌ Could not find 'product_id' for the first product. Cannot proceed.")
@@ -123,6 +119,11 @@ async def cat_run(page, page_detail, cat, max_count=None, catch_per_minute=3):
             if os.path.exists(file_path):
                 print(f"数据已存在，跳过：{file_path}")
                 continue
+
+            if index != 0:
+                # 每分钟抓取n个商品
+                print("随机睡眠...等待")
+                time.sleep(random.uniform(60 / catch_per_minute - 5, 60 / catch_per_minute))
 
             detail_page_url = Config.DETAIL_PAGE_URL_TEMPLATE.format(first_product_id)
             print(f"Found product ID: {first_product_id}")
@@ -277,7 +278,7 @@ async def main():
     user_data_dir = r"C:\Users\gsma\AppData\Local\Google\Chrome\User Data"
     executable_path = r"C:\Users\gsma\AppData\Local\Google\Chrome\Application\chrome.exe"
     # 每个榜单抓取的数据量
-    catch_num = 2
+    catch_num = 100
     # 没分钟抓几个
     catch_per_minute = 3
     async with async_playwright() as playwright:
