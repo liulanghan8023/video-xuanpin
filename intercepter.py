@@ -122,8 +122,9 @@ async def cat_run(page, page_detail, cat, max_count=None, catch_per_minute=3):
 
             if index != 0:
                 # 每分钟抓取n个商品
-                print("随机睡眠...等待")
-                time.sleep(random.uniform(60 / catch_per_minute - 5, 60 / catch_per_minute))
+                sleep_time = random.uniform(60 / catch_per_minute - 5, 60 / catch_per_minute)
+                print(f"随机睡眠...等待{sleep_time}s")
+                time.sleep(sleep_time)
 
             detail_page_url = Config.DETAIL_PAGE_URL_TEMPLATE.format(first_product_id)
             print(f"Found product ID: {first_product_id}")
@@ -280,7 +281,7 @@ async def main():
     # 每个榜单抓取的数据量
     catch_num = 100
     # 没分钟抓几个
-    catch_per_minute = 3
+    catch_per_minute = 2
     async with async_playwright() as playwright:
         await run(playwright, "remote", {
             "user_data_dir": user_data_dir,
