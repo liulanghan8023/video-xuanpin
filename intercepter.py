@@ -1,6 +1,7 @@
 import asyncio
 import json
 import random
+import re
 from pathlib import Path
 from playwright.async_api import async_playwright, Playwright, TimeoutError, Response
 
@@ -116,6 +117,8 @@ async def run(playwright: Playwright):
         
         print("Clicking '短视频' (Short Video) and waiting for rank data...")
         async with page.expect_response(_is_rank_data_response, timeout=Config.REQUEST_TIMEOUT) as response_info:
+            await page.locator("div").filter(has_text=re.compile(r"^体验分$")).click()
+            await page.get_by_role("menuitem", name="≥85").click()
             await page.get_by_text("短视频", exact=True).click()
         
         rank_response = await response_info.value
