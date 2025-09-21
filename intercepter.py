@@ -100,6 +100,7 @@ async def cat_run(page, page_detail, cat, max_count=None):
             return data_list
         # 循环访问详情页
         for index, item in enumerate(promotions):
+            print("随机睡眠...等待")
             # 每分钟抓取n个商品
             count_pers = 3
             # 随机睡眠15-20秒
