@@ -145,7 +145,8 @@ async def run(playwright: Playwright):
         # --- Fetch 7-Day Data ---
         print("Clicking '近7天' (Last 7 days) to get 7-day data...")
         try:
-            await page.wait_for_load_state('networkidle')
+            # The .click() action automatically waits for the element to be ready,
+            # so an explicit wait for network idle is not needed and can cause delays.
             async with page.expect_response(_is_detail_7day_data_response, timeout=Config.REQUEST_TIMEOUT) as seven_day_response_info:
                 await page.get_by_text("近7天", exact=True).click()
             
