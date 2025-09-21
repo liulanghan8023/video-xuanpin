@@ -90,7 +90,8 @@ async def cat_run(page, page_detail, cat, max_count=None):
     try:
         async with page.expect_response(_is_rank_data_response, timeout=Config.REQUEST_TIMEOUT) as response_info:
             await page.locator("div").filter(has_text=re.compile(r"^" + cat + "$")).click()
-
+            await page.evaluate("window.scrollTo(0, document.body.scrollHeight)")
+            time.sleep(10)
         rank_response = await response_info.value
         rank_data = await get_response_json(rank_response, "Rank Data")
 
@@ -107,7 +108,7 @@ async def cat_run(page, page_detail, cat, max_count=None):
             time.sleep(random.uniform(60/count_pers - 5, 60/count_pers))
             if max_count is not None and index + 1 >= max_count:
                 break
-            first_product_id = item.get("product_id")
+            first_product_id = item.get("promotion_id")
             if not first_product_id:
                 print("❌ Could not find 'product_id' for the first product. Cannot proceed.")
                 continue
@@ -152,24 +153,30 @@ async def cat_run(page, page_detail, cat, max_count=None):
 
 async def run(playwright: Playwright):
     """Main execution function."""
-    storage_state = str(Config.STORAGE_STATE_FILE.absolute()) if Config.STORAGE_STATE_FILE.exists() else None
-    if storage_state:
-        print(f"Found session file at {Config.STORAGE_STATE_FILE}, attempting to reuse it.")
-    else:
-        print("No local session file found, proceeding with a new session (may require login).")
+    # !!! 重要提示 !!!
+    # 1. 请将下面的 <YOUR_WINDOWS_USERNAME> 替换为您的实际 Windows 用户名。
+    # 2. 在运行脚本之前，请确保已关闭所有 Chrome 浏览器实例。
+    user_data_dir = r"C:\Users\gsma\AppData\Local\Google\Chrome\User Data"
+    # 您的Chrome浏览器可执行文件路径
+    executable_path = r"C:\Users\gsma\AppData\Local\Google\Chrome\Application\chrome.exe"
 
-    browser = await playwright.chromium.launch(headless=False)
-    context = await browser.new_context(
-        storage_state=storage_state,
-        user_agent=Config.USER_AGENT
+    context = await playwright.chromium.launch_persistent_context(
+        user_data_dir,
+        headless=False,
+        executable_path=executable_path,
+        user_agent=Config.USER_AGENT,
+        # args=['--profile-directory=Default'] # 如果您有多个配置文件，可以指定使用某一个
     )
+
     await context.add_init_script(INIT_SCRIPT)
-    page = await context.new_page()
+    # 持久化上下文通常会有一个默认的空白页面，我们获取第一个实际的页面
+    page = context.pages[0] if context.pages else await context.new_page()
 
     try:
         print(f"Navigating to rank page: {Config.RANK_URL}")
         await page.goto(Config.RANK_URL, wait_until="domcontentloaded")
 
+        # 如果您在浏览器中已经登录，则可能不需要此登录检查
         if "login" in page.url:
             print("Login required. Please log in in the browser window.")
             print("Waiting for successful login...")
@@ -208,7 +215,7 @@ async def run(playwright: Playwright):
         ]:
             print("触发类目", cat)
             try:
-                data_list = await cat_run(page, page_detail, cat, None)
+                data_list = await cat_run(page, page_detail, cat, 2)
                 if data_list:
                     print("数据保存中...")
                     with open("data/" + cat + ".json", "w", encoding="utf-8") as f:
@@ -222,12 +229,11 @@ async def run(playwright: Playwright):
     except Exception as e:
         print(f"❌ An unexpected error occurred: {e}")
     finally:
-        print("Saving current session state (cookies, etc.)...")
-        await context.storage_state(path=Config.STORAGE_STATE_FILE)
-        print(f"Session state saved to: {Config.STORAGE_STATE_FILE}")
+        print("Script finished. Closing browser context.")
+        # 因为我们使用的是持久化上下文，所以不需要保存存储状态。
+        # 我们只关闭上下文，而不是整个浏览器。
         await context.close()
-        await browser.close()
-        print("Browser closed.")
+        print("Browser context closed.")
 
 
 async def main():
