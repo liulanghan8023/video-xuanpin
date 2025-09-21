@@ -238,7 +238,7 @@ async def run(playwright: Playwright, mode, remote_config, catch_num, catch_per_
                 if data_list:
                     print("数据保存中...")
                     with open("data/" + cat + ".json", "w", encoding="utf-8") as f:
-                        f.write(json.dumps(data_list, ensure_ascii=False))
+                        f.write(json.dumps(data_list, indent=4, ensure_ascii=False))
                     print("数据保存完毕")
             except Exception as e:
                 continue
