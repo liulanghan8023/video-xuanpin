@@ -3,6 +3,7 @@ import json
 import sqlite3
 from pathlib import Path
 import re
+import os
 
 # 数据库文件路径
 DB_FILE = Path(__file__).parent / "data.db"
@@ -11,55 +12,69 @@ DATA_DIR = Path(__file__).parent / "data"
 
 def init_db():
     """初始化数据库，创建表"""
+    # 删除旧的数据库文件以应用新结构
+    if DB_FILE.exists():
+        print(f"发现旧的数据库文件 {DB_FILE}，正在删除...")
+        os.remove(DB_FILE)
+
     with sqlite3.connect(DB_FILE) as conn:
         cursor = conn.cursor()
-        # 创建商品表
+        # 创建商品表 (新结构)
         cursor.execute("""
         CREATE TABLE IF NOT EXISTS products (
             date TEXT,
             product_id TEXT,
             promotion_id TEXT,
-            rank_type TEXT,
             category TEXT,
             title TEXT,
+            cover TEXT,
             rank INTEGER,
-            sales_volume INTEGER,
-            influencer_count INTEGER,
+            sold INTEGER,
+            douyin_share_text TEXT,
             juliang_url TEXT,
             douyin_url TEXT,
             price REAL,
             commission_rate REAL,
             good_review_rate REAL,
+            influencer_count INTEGER,
             shop_experience_score INTEGER,
             product_score INTEGER,
             logistics_score INTEGER,
             seller_score INTEGER,
             shop_name TEXT,
+            creation_time DATETIME DEFAULT CURRENT_TIMESTAMP,
             PRIMARY KEY (date, product_id, promotion_id)
         )
         """)
-        # 创建推广数据表
+        # 创建推广数据表 (新结构)
         cursor.execute("""
         CREATE TABLE IF NOT EXISTS promotion_data (
             date TEXT,
             product_id TEXT,
             promotion_id TEXT,
             time_range TEXT,
+            category TEXT,
             type TEXT,
-            sales_amount REAL,
+            total_sales_amount REAL,
+            total_sales_amount_formatted TEXT,
             total_sales_volume INTEGER,
+            total_sales_volume_formatted TEXT,
             converting_influencers INTEGER,
             converting_contents INTEGER,
-            conversion_rate_start REAL,
-            conversion_rate_end REAL,
+            order_conversion_rate REAL,
+            order_conversion_rate_formatted TEXT,
             views INTEGER,
+            creation_time DATETIME DEFAULT CURRENT_TIMESTAMP,
             PRIMARY KEY (date, product_id, promotion_id)
         )
         """)
         conn.commit()
+        print("数据库和表已成功初始化 (新结构)。")
 
 def get_json_value(data, path, default=None):
     """安全地从嵌套字典中获取值"""
+    if not path:
+        return default
     keys = path.split('.')
     for key in keys:
         if isinstance(data, dict) and key in data:
@@ -68,28 +83,13 @@ def get_json_value(data, path, default=None):
             return default
     return data
 
-def parse_conversion_rate(rate_str):
-    """解析'7.5%~10%'这样的转化率字符串"""
-    if not rate_str or '%' not in rate_str:
-        return None, None
-    parts = rate_str.replace('%', '').split('~')
-    try:
-        start = float(parts[0])
-        end = float(parts[1]) if len(parts) > 1 else start
-        return start, end
-    except (ValueError, IndexError):
-        return None, None
-
 def process_json_file(file_path: Path, conn: sqlite3.Connection):
     """处理单个JSON文件并存入数据库"""
     print(f"正在处理文件: {file_path}")
-    # 从路径中提取日期
     try:
         date_str = file_path.parts[-3]
         if not re.match(r'\d{4}-\d{2}-\d{2}', date_str):
-             date_str = get_json_value(data, 'seven_data.data.model.promotion_data.calculate_data.calculate_time')
-             date_str = str(date_str)
-             date_str = f"{date_str[:4]}-{date_str[4:6]}-{date_str[6:]}"
+            raise IndexError
     except IndexError:
         print(f"无法从路径 {file_path} 中提取日期，跳过。")
         return
@@ -99,7 +99,7 @@ def process_json_file(file_path: Path, conn: sqlite3.Connection):
 
     cursor = conn.cursor()
 
-    # 提取并插入商品表数据
+    # 提取关键ID
     product_id = get_json_value(data, 'detail_data.data.product_id')
     promotion_id = get_json_value(data, 'detail_data.data.promotion_id')
 
@@ -117,33 +117,30 @@ def process_json_file(file_path: Path, conn: sqlite3.Connection):
             date_str,
             product_id,
             promotion_id,
-            get_json_value(data, 'detail_data.data.model.product.product_rec_reason.recommend_info.extra.cur_rank_type'),
             get_json_value(data, 'category'),
             get_json_value(data, 'detail_data.data.model.product.product_base.title'),
-            get_json_value(data, 'detail_data.data.model.product.product_rec_reason.recommend_info.extra.cur_rank', 0),
-            get_json_value(data, 'detail_data.data.model.product.product_sales.sell_num', 0),
-            get_json_value(data, 'detail_data.data.model.product.product_match.author_num', 0),
-            None, # 巨量的url - Not found in JSON
-            get_json_value(data, 'detail_data.data.model.product.product_base.detail_url'),
+            get_json_value(data, 'detail_data.data.model.product.product_base.cover'),
+            get_json_value(data, 'rank', 0),
+            get_json_value(data, 'detail_data.data.model.product.product_sales.sell_num', 0), # 已售
+            get_json_value(data, 'detail_data.data.model.product.product_kol_info.kol_info.sample_token'),
+            None,  # 巨量的url - Not specified
+            get_json_value(data, 'detail_data.data.model.product.product_base.detail_url'), # 抖音的url
             get_json_value(data, 'detail_data.data.model.product.product_price.price_label.price', 0) / 100.0,
             get_json_value(data, 'detail_data.data.model.product.product_cos.cos_label.cos.cos_ratio', 0),
             get_json_value(data, 'detail_data.data.model.product.product_comment.good_ratio', 0),
+            get_json_value(data, 'detail_data.data.model.product.product_match.author_num', 0), # 带货人数
             get_json_value(data, 'detail_data.data.model.shop.shop_exper_scores.shop_exper_score_label.exper_score.score'),
             get_json_value(data, 'detail_data.data.model.shop.shop_exper_scores.shop_exper_score_label.goods_score.score'),
             get_json_value(data, 'detail_data.data.model.shop.shop_exper_scores.shop_exper_score_label.logistics_score.score'),
             get_json_value(data, 'detail_data.data.model.shop.shop_exper_scores.shop_exper_score_label.service_score.score'),
             get_json_value(data, 'detail_data.data.model.shop.shop_base.shop_name')
         )
-        cursor.execute("INSERT INTO products VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", product_data)
+        # The creation_time column is filled by default by the database
+        cursor.execute("INSERT INTO products (date, product_id, promotion_id, category, title, cover, rank, sold, douyin_share_text, juliang_url, douyin_url, price, commission_rate, good_review_rate, influencer_count, shop_experience_score, product_score, logistics_score, seller_score, shop_name) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", product_data)
         print(f"成功插入产品数据: {date_str}, {product_id}, {promotion_id}")
 
-    # 提取并插入推广数据表数据
-    promo_date_int = get_json_value(data, 'seven_data.data.model.promotion_data.calculate_data.calculate_time')
-    if promo_date_int:
-        promo_date_str = str(promo_date_int)
-        promo_date = f"{promo_date_str[:4]}-{promo_date_str[4:6]}-{promo_date_str[6:]}"
-    else:
-        promo_date = date_str # Fallback to file path date
+    # 推广数据表使用文件路径中的日期
+    promo_date = date_str
 
     # 检查推广数据是否存在
     cursor.execute("SELECT 1 FROM promotion_data WHERE date = ? AND product_id = ? AND promotion_id = ?",
@@ -151,24 +148,26 @@ def process_json_file(file_path: Path, conn: sqlite3.Connection):
     if cursor.fetchone():
         print(f"推广数据已存在: {promo_date}, {product_id}, {promotion_id}")
     else:
-        rate_start, rate_end = parse_conversion_rate(get_json_value(data, 'seven_data.data.model.promotion_data.calculate_data.format_order_conversion_rate'))
         promotion_table_data = (
             promo_date,
             product_id,
             promotion_id,
-            '7日', # 时间范围
-            '视频', # 类型
-            get_json_value(data, 'seven_data.data.model.promotion_data.calculate_data.sales_amount', 0) / 100.0,
-            get_json_value(data, 'seven_data.data.model.promotion_data.calculate_data.sales', 0),
-            get_json_value(data, 'seven_data.data.model.promotion_data.calculate_data.match_order_num', 0),
-            get_json_value(data, 'seven_data.data.model.promotion_data.calculate_data.sales_content_num', 0),
-            rate_start,
-            rate_end,
-            get_json_value(data, 'seven_data.data.model.promotion_data.calculate_data.pv', 0)
+            '7日',  # 时间范围
+            get_json_value(data, 'category'), # 商品类目
+            '视频',  # 类型
+            get_json_value(data, 'seven_data.data.model.content_data.calculate_data.video_sales_amount', 0) / 100.0,
+            get_json_value(data, 'seven_data.data.model.content_data.calculate_data.format_video_sales_amount'),
+            get_json_value(data, 'seven_data.data.model.content_data.calculate_data.video_sales', 0),
+            get_json_value(data, 'seven_data.data.model.content_data.calculate_data.format_video_sales'),
+            get_json_value(data, 'seven_data.data.model.content_data.calculate_data.video_match_order_num', 0),
+            get_json_value(data, 'seven_data.data.model.content_data.calculate_data.video_sales_content_num', 0),
+            get_json_value(data, 'seven_data.data.model.content_data.calculate_data.video_order_conversion_rate', 0),
+            get_json_value(data, 'seven_data.data.model.content_data.calculate_data.format_video_order_conversion_rate'),
+            get_json_value(data, 'seven_data.data.model.content_data.calculate_data.video_pv', 0)
         )
-        cursor.execute("INSERT INTO promotion_data VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", promotion_table_data)
+        # The creation_time column is filled by default by the database
+        cursor.execute("INSERT INTO promotion_data (date, product_id, promotion_id, time_range, category, type, total_sales_amount, total_sales_amount_formatted, total_sales_volume, total_sales_volume_formatted, converting_influencers, converting_contents, order_conversion_rate, order_conversion_rate_formatted, views) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", promotion_table_data)
         print(f"成功插入推广数据: {promo_date}, {product_id}, {promotion_id}")
-
 
 def main():
     """主函数"""

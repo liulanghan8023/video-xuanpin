@@ -8,7 +8,6 @@
 排名: rank
 销量: detail_data.data.model.product.product_base.cover
 抖音分享文本: detail_data.data.model.product.product_kol_info.kol_info.sample_token
-带货达人数
 巨量的url
 抖音的url
 到手价: detail_data.data.model.product.product_price.price_label.price
@@ -21,6 +20,7 @@
 物流分: detail_data.data.model.shop.shop_exper_scores.shop_exper_score_label.logistics_score.score
 商家分: detail_data.data.model.shop.shop_exper_scores.shop_exper_score_label.service_score.score
 店铺名: detail_data.data.model.shop.shop_base.shop_name
+创建时间
 
 推广数据表：
 日期
@@ -38,3 +38,4 @@
 下单转化率：seven_data.data.model.content_data.calculate_data.video_order_conversion_rate
 下单转化率格式化：seven_data.data.model.content_data.calculate_data.format_video_order_conversion_rate
 浏览量：seven_data.data.model.content_data.calculate_data.video_pv
+创建时间
