@@ -2,33 +2,39 @@
 日期
 产品id
 促销id
-榜单类型
-商品类目
-商品标题
-排名
-销量
+商品类目: category
+商品标题: detail_data.data.model.product.product_base.title
+封面: detail_data.data.model.product.product_base.cover
+排名: rank
+销量: detail_data.data.model.product.product_base.cover
+抖音分享文本: detail_data.data.model.product.product_kol_info.kol_info.sample_token
 带货达人数
 巨量的url
 抖音的url
-到手价
-佣金率
-好评率
-店铺体验分
-商品分
-物流分
-商家分
-店铺名
+到手价: detail_data.data.model.product.product_price.price_label.price
+佣金率: detail_data.data.model.product.product_cos.cos_label.cos.cos_ratio
+好评率: detail_data.data.model.product.product_comment.good_ratio
+已售: detail_data.data.model.product.product_sales.sell_num
+带货人数: detail_data.data.model.product.product_match.author_num
+店铺体验分: detail_data.data.model.shop.shop_exper_scores.shop_exper_score_label.exper_score.score
+商品分: detail_data.data.model.shop.shop_exper_scores.shop_exper_score_label.goods_score.score
+物流分: detail_data.data.model.shop.shop_exper_scores.shop_exper_score_label.logistics_score.score
+商家分: detail_data.data.model.shop.shop_exper_scores.shop_exper_score_label.service_score.score
+店铺名: detail_data.data.model.shop.shop_base.shop_name
 
 推广数据表：
 日期
 产品id
 促销id
 时间范围：7日
+商品类目: category
 类型：视频
-销售额
-总销量
-出单达人数
-出单内容数
-下单转化率起
-下单转化率末
-浏览量
+总销售额：seven_data.data.model.content_data.calculate_data.video_sales_amount
+总销售额格式化：seven_data.data.model.content_data.calculate_data.format_video_sales_amount
+总销量：seven_data.data.model.content_data.calculate_data.video_sales
+总销量格式化：seven_data.data.model.content_data.calculate_data.format_video_sales
+出单达人数：seven_data.data.model.content_data.calculate_data.video_match_order_num
+出单内容数：seven_data.data.model.content_data.calculate_data.video_sales_content_num
+下单转化率：seven_data.data.model.content_data.calculate_data.video_order_conversion_rate
+下单转化率格式化：seven_data.data.model.content_data.calculate_data.format_video_order_conversion_rate
+浏览量：seven_data.data.model.content_data.calculate_data.video_pv
