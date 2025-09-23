@@ -122,7 +122,7 @@ async def cat_run(page, page_detail, cat, max_count=None, catch_per_minute=3):
 
             if index != 0:
                 # 每分钟抓取n个商品
-                sleep_time = random.uniform(60 / catch_per_minute - 5, 60 / catch_per_minute)
+                sleep_time = random.uniform(60 / catch_per_minute - 10, 60 / catch_per_minute + 10)
                 print(f"随机睡眠...等待{sleep_time}s")
                 time.sleep(sleep_time)
 
@@ -207,7 +207,7 @@ async def get_chrome(playwright, mode, remote_config):
         page = await context.new_page()
     return browser, page, context
 
-async def run(playwright: Playwright, mode, remote_config, catch_num, catch_per_minute):
+async def run(cats, playwright: Playwright, mode, remote_config, catch_num, catch_per_minute):
     browser, page, context = await get_chrome(playwright, mode, remote_config)
     try:
         print(f"Navigating to rank page: {Config.RANK_URL}")
@@ -235,21 +235,7 @@ async def run(playwright: Playwright, mode, remote_config, catch_num, catch_per_
         # 新开一个界面，给详情用
         page_detail = await context.new_page()
         # 循环选择类目，触发加载
-        for cat in [
-            # "服饰内衣",
-            # "美妆",
-            # "食品饮料",
-            "个护家清",
-            "鞋靴箱包",
-            # "钟表配饰",
-            "母婴宠物",
-            # "图书教育",
-            # "智能家居",
-            # "3C数码产品",
-            # "运动户外",
-            # "玩具乐器",
-            # "生鲜"
-        ]:
+        for cat in cats:
             print("触发类目", cat)
             try:
                 data_list = await cat_run(page, page_detail, cat, catch_num, catch_per_minute)
@@ -281,9 +267,25 @@ async def main():
     # 每个榜单抓取的数据量
     catch_num = 100
     # 没分钟抓几个
-    catch_per_minute = 2
+    catch_per_minute = 0.5
+    cats = [
+        # "服饰内衣",
+        # "美妆",
+        # "食品饮料",
+        # 一个账号一个，然后2分钟一次请求
+        "个护家清",
+        ## "鞋靴箱包",
+        # "钟表配饰",
+        ## "母婴宠物",
+        # "图书教育",
+        # "智能家居",
+        # "3C数码产品",
+        # "运动户外",
+        # "玩具乐器",
+        # "生鲜"
+    ]
     async with async_playwright() as playwright:
-        await run(playwright, "remote", {
+        await run(cats, playwright, "remote", {
             "user_data_dir": user_data_dir,
             "executable_path": executable_path,
         }, catch_num, catch_per_minute)
@@ -298,5 +300,5 @@ if __name__ == "__main__":
         print("Please install it via pip: pip install playwright")
         print("And then run: playwright install")
         exit(1)
-        
+
     asyncio.run(main())
