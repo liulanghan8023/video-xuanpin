@@ -6,6 +6,8 @@ import re
 import time
 from pathlib import Path
 from playwright.async_api import async_playwright, Playwright, TimeoutError, Response
+from playwright_stealth import Stealth
+
 
 class Config:
     """Configuration constants for the scraper."""
@@ -205,6 +207,10 @@ async def get_chrome(playwright, mode, remote_config):
         )
         await context.add_init_script(INIT_SCRIPT)
         page = await context.new_page()
+
+    # 处理防止检测
+    stealth = Stealth()
+    await stealth.apply_stealth_async(page)
     return browser, page, context
 
 async def run(cats, playwright: Playwright, mode, remote_config, catch_num, catch_per_minute):
@@ -234,6 +240,9 @@ async def run(cats, playwright: Playwright, mode, remote_config, catch_num, catc
 
         # 新开一个界面，给详情用
         page_detail = await context.new_page()
+        # 处理防止检测
+        stealth = Stealth()
+        await stealth.apply_stealth_async(page_detail)
         # 循环选择类目，触发加载
         for cat in cats:
             print("触发类目", cat)
