@@ -267,7 +267,7 @@ async def main():
     # 每个榜单抓取的数据量
     catch_num = 100
     # 没分钟抓几个
-    catch_per_minute = 0.5
+    catch_per_minute = 0.3
     cats = [
         # "服饰内衣",
         # "美妆",
