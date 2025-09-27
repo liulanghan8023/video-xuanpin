@@ -88,6 +88,12 @@ async def get_response_json(response: Response, description: str):
         print(await response.text())
         return None
 
+def sleep_catch(catch_per_minute):
+    # 每分钟抓取n个商品
+    sleep_time = random.uniform(60 / catch_per_minute - 10, 60 / catch_per_minute + 10)
+    print(f"随机睡眠...等待{sleep_time}s")
+    time.sleep(sleep_time)
+
 
 async def cat_run(page, page_detail, cat, max_count=None, catch_per_minute=3):
     data_list = []
@@ -125,11 +131,11 @@ async def cat_run(page, page_detail, cat, max_count=None, catch_per_minute=3):
                 print(f"数据已存在，跳过：{file_path}")
                 continue
 
-            if index != 0:
-                # 每分钟抓取n个商品
-                sleep_time = random.uniform(60 / catch_per_minute - 10, 60 / catch_per_minute + 10)
-                print(f"随机睡眠...等待{sleep_time}s")
-                time.sleep(sleep_time)
+            # if index != 0:
+            #     # 每分钟抓取n个商品
+            #     sleep_time = random.uniform(60 / catch_per_minute - 10, 60 / catch_per_minute + 10)
+            #     print(f"随机睡眠...等待{sleep_time}s")
+            #     time.sleep(sleep_time)
 
             detail_page_url = Config.DETAIL_PAGE_URL_TEMPLATE.format(first_product_id)
             print(f"Found product ID: {first_product_id}")
@@ -142,6 +148,7 @@ async def cat_run(page, page_detail, cat, max_count=None, catch_per_minute=3):
             core_response = await core_response_info.value
             detail_data = await get_response_json(core_response, "Detail Page Core Data")
             if not detail_data:
+                sleep_catch(catch_per_minute)
                 continue
             if "请稍后再试" in json.dumps(detail_data, ensure_ascii=False):
                 # 出现限制，退出操作
@@ -156,6 +163,7 @@ async def cat_run(page, page_detail, cat, max_count=None, catch_per_minute=3):
                 seven_day_response = await seven_day_response_info.value
                 seven_data = await get_response_json(seven_day_response, "Detail Page 7-Day Data")
                 if not seven_data:
+                    sleep_catch(catch_per_minute)
                     continue
                 if "请稍后再试" in json.dumps(seven_data, ensure_ascii=False):
                     # 出现限制，退出操作
@@ -172,9 +180,12 @@ async def cat_run(page, page_detail, cat, max_count=None, catch_per_minute=3):
                 with open(file_path, "w", encoding="utf-8") as f:
                     f.write(json.dumps(save_data, indent=4, ensure_ascii=False))
                 print("数据保存完毕")
+
+                sleep_catch(catch_per_minute)
             except TimeoutError:
                 print(f"❌ Timed out waiting for 7-day data after clicking '近7天'.")
                 print("💡 This might happen if the 7-day data was already loaded by default.")
+                sleep_catch(catch_per_minute)
                 continue
     except TimeoutError:
         print(f"❌ Timed out waiting for 7-day data after clicking '近7天'.")
