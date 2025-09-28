@@ -1,4 +1,5 @@
 import asyncio
+import datetime
 import json
 import os
 import random
@@ -17,8 +18,8 @@ class Config:
     DETAIL_PAGE_URL_TEMPLATE = "https://buyin.jinritemai.com/dashboard/merch-picking-library/merch-promoting?id={}"
     STORAGE_STATE_FILE = Path("storage_state.json")
     USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36"
-    LOGIN_TIMEOUT = 300000  # 5 minutes
-    REQUEST_TIMEOUT = 30000  # 30 seconds
+    LOGIN_TIMEOUT = 3000000  # 5 minutes
+    REQUEST_TIMEOUT = 300000  # 30 seconds
 
 INIT_SCRIPT = """
     Object.defineProperty(navigator, 'webdriver', {get: () => false});
@@ -87,6 +88,12 @@ async def get_response_json(response: Response, description: str):
         print(await response.text())
         return None
 
+def sleep_catch(catch_per_minute):
+    # 每分钟抓取n个商品
+    sleep_time = random.uniform(60 / catch_per_minute - 10, 60 / catch_per_minute + 10)
+    print(f"随机睡眠...等待{sleep_time}s")
+    time.sleep(sleep_time)
+
 
 async def cat_run(page, page_detail, cat, max_count=None, catch_per_minute=3):
     data_list = []
@@ -109,8 +116,10 @@ async def cat_run(page, page_detail, cat, max_count=None, catch_per_minute=3):
         Path(cache_dir).mkdir(parents=True, exist_ok=True)
         # 循环访问详情页
         for index, item in enumerate(promotions):
+            print(f"抓取{index}：{datetime.datetime.now()}")
             # 随机睡眠15-20秒
             if max_count is not None and index + 1 > max_count:
+                print(f"已抓取指定数量的商品，停止抓取:{datetime.datetime.now()}")
                 break
             first_product_id = item.get("promotion_id")
             if not first_product_id:
@@ -122,11 +131,11 @@ async def cat_run(page, page_detail, cat, max_count=None, catch_per_minute=3):
                 print(f"数据已存在，跳过：{file_path}")
                 continue
 
-            if index != 0:
-                # 每分钟抓取n个商品
-                sleep_time = random.uniform(60 / catch_per_minute - 10, 60 / catch_per_minute + 10)
-                print(f"随机睡眠...等待{sleep_time}s")
-                time.sleep(sleep_time)
+            # if index != 0:
+            #     # 每分钟抓取n个商品
+            #     sleep_time = random.uniform(60 / catch_per_minute - 10, 60 / catch_per_minute + 10)
+            #     print(f"随机睡眠...等待{sleep_time}s")
+            #     time.sleep(sleep_time)
 
             detail_page_url = Config.DETAIL_PAGE_URL_TEMPLATE.format(first_product_id)
             print(f"Found product ID: {first_product_id}")
@@ -139,7 +148,12 @@ async def cat_run(page, page_detail, cat, max_count=None, catch_per_minute=3):
             core_response = await core_response_info.value
             detail_data = await get_response_json(core_response, "Detail Page Core Data")
             if not detail_data:
+                sleep_catch(catch_per_minute)
                 continue
+            if "请稍后再试" in json.dumps(detail_data, ensure_ascii=False):
+                # 出现限制，退出操作
+                print(f"出现限制，退出操作，当前时间：{datetime.datetime.now()}")
+                break
 
             # --- Fetch 7-Day Data ---
             print("Clicking '近7天' (Last 7 days) to get 7-day data...")
@@ -149,7 +163,12 @@ async def cat_run(page, page_detail, cat, max_count=None, catch_per_minute=3):
                 seven_day_response = await seven_day_response_info.value
                 seven_data = await get_response_json(seven_day_response, "Detail Page 7-Day Data")
                 if not seven_data:
+                    sleep_catch(catch_per_minute)
                     continue
+                if "请稍后再试" in json.dumps(seven_data, ensure_ascii=False):
+                    # 出现限制，退出操作
+                    print(f"出现限制，退出操作，当前时间：{datetime.datetime.now()}")
+                    break
                 save_data = {
                     "rank": index,
                     "category": cat,
@@ -161,9 +180,12 @@ async def cat_run(page, page_detail, cat, max_count=None, catch_per_minute=3):
                 with open(file_path, "w", encoding="utf-8") as f:
                     f.write(json.dumps(save_data, indent=4, ensure_ascii=False))
                 print("数据保存完毕")
+
+                sleep_catch(catch_per_minute)
             except TimeoutError:
                 print(f"❌ Timed out waiting for 7-day data after clicking '近7天'.")
                 print("💡 This might happen if the 7-day data was already loaded by default.")
+                sleep_catch(catch_per_minute)
                 continue
     except TimeoutError:
         print(f"❌ Timed out waiting for 7-day data after clicking '近7天'.")
@@ -274,9 +296,9 @@ async def main():
     user_data_dir = r"C:\Users\gsma\AppData\Local\Google\Chrome\User Data"
     executable_path = r"C:\Users\gsma\AppData\Local\Google\Chrome\Application\chrome.exe"
     # 每个榜单抓取的数据量
-    catch_num = 100
+    catch_num = 18
     # 没分钟抓几个
-    catch_per_minute = 0.3
+    catch_per_minute = 0.1
     cats = [
         # "服饰内衣",
         # "美妆",
