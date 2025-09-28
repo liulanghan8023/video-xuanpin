@@ -61,16 +61,13 @@ def _is_detail_core_data_response(response: Response) -> bool:
     except (json.JSONDecodeError, AttributeError):
         return False
 
-def _is_detail_7day_data_response(response: Response) -> bool:
-    """Check if the response is for the detail page 7-day data API."""
+def _is_detail_30day_data_response(response: Response) -> bool:
+    """Check if the response is for the detail page 30-day data API."""
     if Config.DETAIL_API_URL_PART not in response.url or response.request.method != "POST":
         return False
     try:
         post_data = response.request.post_data_json
-        return (
-            post_data.get("data_module") == "dynamic" and
-            post_data.get("dynamic_params", {}).get("promotion_data_params", {}).get("time_range") == '7'
-        )
+        return post_data.get("data_module") == "pc-non-core"
     except (json.JSONDecodeError, AttributeError):
         return False
 
@@ -141,39 +138,37 @@ async def cat_run(page, page_detail, cat, max_count=None, catch_per_minute=3):
             print(f"Found product ID: {first_product_id}")
             print(f"Navigating to detail page: {detail_page_url}")
 
-            # --- Fetch Core Data ---
-            async with page_detail.expect_response(_is_detail_core_data_response, timeout=Config.REQUEST_TIMEOUT) as core_response_info:
-                await page_detail.goto(detail_page_url, wait_until="domcontentloaded")
-
-            core_response = await core_response_info.value
-            detail_data = await get_response_json(core_response, "Detail Page Core Data")
-            if not detail_data:
-                sleep_catch(catch_per_minute)
-                continue
-            if "请稍后再试" in json.dumps(detail_data, ensure_ascii=False):
-                # 出现限制，退出操作
-                print(f"出现限制，退出操作，当前时间：{datetime.datetime.now()}")
-                break
-
-            # --- Fetch 7-Day Data ---
-            print("Clicking '近7天' (Last 7 days) to get 7-day data...")
             try:
-                async with page_detail.expect_response(_is_detail_7day_data_response, timeout=Config.REQUEST_TIMEOUT) as seven_day_response_info:
-                    await page_detail.get_by_text("近7天", exact=True).click()
-                seven_day_response = await seven_day_response_info.value
-                seven_data = await get_response_json(seven_day_response, "Detail Page 7-Day Data")
-                if not seven_data:
+                # --- Fetch Core and 30-Day Data ---
+                print("Waiting for detail page core and 30-day data...")
+                async with page_detail.expect_response(_is_detail_core_data_response,
+                                                       timeout=Config.REQUEST_TIMEOUT) as core_response_info, \
+                        page_detail.expect_response(_is_detail_30day_data_response,
+                                                    timeout=Config.REQUEST_TIMEOUT) as thirty_day_response_info:
+                    await page_detail.goto(detail_page_url, wait_until="domcontentloaded")
+
+                core_response = await core_response_info.value
+                detail_data = await get_response_json(core_response, "Detail Page Core Data")
+
+                thirty_day_response = await thirty_day_response_info.value
+                thirty_data = await get_response_json(thirty_day_response, "Detail Page 30-Day Data")
+
+                if not detail_data or not thirty_data:
+                    print("❌ Could not get both core and 30-day data.")
                     sleep_catch(catch_per_minute)
                     continue
-                if "请稍后再试" in json.dumps(seven_data, ensure_ascii=False):
+
+                if "请稍后再试" in json.dumps(detail_data, ensure_ascii=False) or "请稍后再试" in json.dumps(thirty_data,
+                                                                                                        ensure_ascii=False):
                     # 出现限制，退出操作
                     print(f"出现限制，退出操作，当前时间：{datetime.datetime.now()}")
                     break
+
                 save_data = {
                     "rank": index,
                     "category": cat,
                     "detail_data": detail_data,
-                    "seven_data": seven_data,
+                    "thirty_data": thirty_data,
                 }
                 data_list.append(save_data)
                 print("数据保存中...:" + file_path)
@@ -182,14 +177,14 @@ async def cat_run(page, page_detail, cat, max_count=None, catch_per_minute=3):
                 print("数据保存完毕")
 
                 sleep_catch(catch_per_minute)
+
             except TimeoutError:
-                print(f"❌ Timed out waiting for 7-day data after clicking '近7天'.")
-                print("💡 This might happen if the 7-day data was already loaded by default.")
+                print(f"❌ Timed out waiting for core or 30-day data.")
                 sleep_catch(catch_per_minute)
                 continue
     except TimeoutError:
-        print(f"❌ Timed out waiting for 7-day data after clicking '近7天'.")
-        print("💡 This might happen if the 7-day data was already loaded by default.")
+        print(f"❌ Timed out waiting for 30-day data after clicking '近30天'.")
+        print("💡 This might happen if the 30-day data was already loaded by default.")
     return data_list
 
 

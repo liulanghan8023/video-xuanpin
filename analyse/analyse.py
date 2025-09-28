@@ -155,15 +155,15 @@ def process_json_file(file_path: Path, conn: sqlite3.Connection):
             '7日',  # 时间范围
             get_json_value(data, 'category'), # 商品类目
             '视频',  # 类型
-            get_json_value(data, 'seven_data.data.model.content_data.calculate_data.video_sales_amount', 0) / 100.0,
-            get_json_value(data, 'seven_data.data.model.content_data.calculate_data.format_video_sales_amount'),
-            get_json_value(data, 'seven_data.data.model.content_data.calculate_data.video_sales', 0),
-            get_json_value(data, 'seven_data.data.model.content_data.calculate_data.format_video_sales'),
-            get_json_value(data, 'seven_data.data.model.content_data.calculate_data.video_match_order_num', 0),
-            get_json_value(data, 'seven_data.data.model.content_data.calculate_data.video_sales_content_num', 0),
-            get_json_value(data, 'seven_data.data.model.content_data.calculate_data.video_order_conversion_rate', 0),
-            get_json_value(data, 'seven_data.data.model.content_data.calculate_data.format_video_order_conversion_rate'),
-            get_json_value(data, 'seven_data.data.model.content_data.calculate_data.video_pv', 0)
+            get_json_value(data, 'thirty_data.data.model.content_data.calculate_data.video_sales_amount', 0) / 100.0,
+            get_json_value(data, 'thirty_data.data.model.content_data.calculate_data.format_video_sales_amount'),
+            get_json_value(data, 'thirty_data.data.model.content_data.calculate_data.video_sales', 0),
+            get_json_value(data, 'thirty_data.data.model.content_data.calculate_data.format_video_sales'),
+            get_json_value(data, 'thirty_data.data.model.content_data.calculate_data.video_match_order_num', 0),
+            get_json_value(data, 'thirty_data.data.model.content_data.calculate_data.video_sales_content_num', 0),
+            get_json_value(data, 'thirty_data.data.model.content_data.calculate_data.video_order_conversion_rate', 0),
+            get_json_value(data, 'thirty_data.data.model.content_data.calculate_data.format_video_order_conversion_rate'),
+            get_json_value(data, 'thirty_data.data.model.content_data.calculate_data.video_pv', 0)
         )
         # The creation_time column is filled by default by the database
         cursor.execute("INSERT INTO promotion_data (date, product_id, promotion_id, time_range, category, type, total_sales_amount, total_sales_amount_formatted, total_sales_volume, total_sales_volume_formatted, converting_influencers, converting_contents, order_conversion_rate, order_conversion_rate_formatted, views) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", promotion_table_data)

@@ -29,13 +29,13 @@
 时间范围：7日
 商品类目: category
 类型：视频
-总销售额：seven_data.data.model.content_data.calculate_data.video_sales_amount
-总销售额格式化：seven_data.data.model.content_data.calculate_data.format_video_sales_amount
-总销量：seven_data.data.model.content_data.calculate_data.video_sales
-总销量格式化：seven_data.data.model.content_data.calculate_data.format_video_sales
-出单达人数：seven_data.data.model.content_data.calculate_data.video_match_order_num
-出单内容数：seven_data.data.model.content_data.calculate_data.video_sales_content_num
-下单转化率：seven_data.data.model.content_data.calculate_data.video_order_conversion_rate
-下单转化率格式化：seven_data.data.model.content_data.calculate_data.format_video_order_conversion_rate
-浏览量：seven_data.data.model.content_data.calculate_data.video_pv
+总销售额：thirty_data.data.model.content_data.calculate_data.video_sales_amount
+总销售额格式化：thirty_data.data.model.content_data.calculate_data.format_video_sales_amount
+总销量：thirty_data.data.model.content_data.calculate_data.video_sales
+总销量格式化：thirty_data.data.model.content_data.calculate_data.format_video_sales
+出单达人数：thirty_data.data.model.content_data.calculate_data.video_match_order_num
+出单内容数：thirty_data.data.model.content_data.calculate_data.video_sales_content_num
+下单转化率：thirty_data.data.model.content_data.calculate_data.video_order_conversion_rate
+下单转化率格式化：thirty_data.data.model.content_data.calculate_data.format_video_order_conversion_rate
+浏览量：thirty_data.data.model.content_data.calculate_data.video_pv
 创建时间
