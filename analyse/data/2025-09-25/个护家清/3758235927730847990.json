@@ -1,0 +1,571 @@
+{
+    "rank": 16,
+    "category": "个护家清",
+    "detail_data": {
+        "code": 0,
+        "data": {
+            "promotion_id": "3758235927730847990",
+            "product_id": "3758234791678443668",
+            "item_type": 4,
+            "model": {
+                "product": {
+                    "product_base": {
+                        "title": "【大容量300g】377烟酰胺美白祛斑洗面奶温和清洁改暗沉提亮洁面乳",
+                        "cover": "https://p3-aio.ecombdimg.com/obj/ecom-shop-material/jpeg_m_958f2fb041ab7e631c4e2e8171895ab0_sx_401878_www800-800",
+                        "detail_url": "https://haohuo.jinritemai.com/ecommerce/trade/detail/index.html?id=3758234791678443668&origin_type=pc_buyin_selection_decision",
+                        "images": [
+                            "https://p3-aio.ecombdimg.com/obj/ecom-shop-material/jpeg_m_958f2fb041ab7e631c4e2e8171895ab0_sx_401878_www800-800",
+                            "https://p3-aio.ecombdimg.com/obj/ecom-shop-material/jpeg_m_a86768c05a1fcef4bb48dd7b0188b37c_sx_405330_www800-800",
+                            "https://p9-aio.ecombdimg.com/obj/ecom-shop-material/jpeg_m_71fca9623d0cf1a3f931b6d3a612bbdb_sx_346342_www800-800",
+                            "https://p3-aio.ecombdimg.com/obj/ecom-shop-material/jpeg_m_4bdac4298075d4ab4e1d8fa31f1865c9_sx_271084_www800-800",
+                            "https://p3-aio.ecombdimg.com/obj/ecom-shop-material/jpeg_m_af9b5851e54eb812cc178a9dce9d2392_sx_124118_www800-800"
+                        ],
+                        "white_background": "https://p9-aio.ecombdimg.com/obj/ecom-shop-material/jpeg_m_af9b5851e54eb812cc178a9dce9d2392_sx_124118_www800-800",
+                        "is_in_window": false,
+                        "is_in_cart": false,
+                        "is_global_shoping": false,
+                        "high_light": "福利品源头工厂。佣金机制可谈，无限投流。可提供素材，免费寄样。欢迎各团长达人前来合作。V1：13418173432，V2：19303062642，V3：13002040932",
+                        "is_sui_xin_tui": true,
+                        "big_imgs": [
+                            "https://p3-aio.ecombdimg.com/obj/ecom-shop-material/jpeg_m_4906b73f2c320cd200e61bb7da233505_sx_561359_www790-1771",
+                            "https://p3-aio.ecombdimg.com/obj/ecom-shop-material/jpeg_m_1bfcb017d64f388692994f315dab425e_sx_428258_www790-970",
+                            "https://p3-aio.ecombdimg.com/obj/ecom-shop-material/jpeg_m_80ae40034fe027a813cb95028ae2ce59_sx_320440_www790-926",
+                            "https://p3-aio.ecombdimg.com/obj/ecom-shop-material/jpeg_m_192df48a3b65d6e0ed72dd7e623fa4b7_sx_561388_www790-1799",
+                            "https://p3-aio.ecombdimg.com/obj/ecom-shop-material/jpeg_m_ee02630b3b185ee39d93cb6b8525cd13_sx_755980_www790-1682",
+                            "https://p3-aio.ecombdimg.com/obj/ecom-shop-material/jpeg_m_498095c0d7409da9b6daaaaa534b5df7_sx_415004_www790-1695",
+                            "https://p3-aio.ecombdimg.com/obj/ecom-shop-material/jpeg_m_de77bed85ce14a78cca6933796e3d38c_sx_255380_www790-1138",
+                            "https://p3-aio.ecombdimg.com/obj/ecom-shop-material/jpeg_m_a96eab6189069be7d5154f769c615d53_sx_200601_www790-1020",
+                            "https://p3-aio.ecombdimg.com/obj/ecom-shop-material/jpeg_m_9ebd43d36a0c57eda6e42e12d3e86c9e_sx_456098_www790-1377",
+                            "https://p3-aio.ecombdimg.com/obj/ecom-shop-material/jpeg_m_f893876a7171196c000a727fc7d2a338_sx_268361_www790-1009",
+                            "https://p3-aio.ecombdimg.com/obj/ecom-shop-material/jpeg_m_1435ac6068c5306fc3f0edbc77af61bf_sx_312507_www790-1040",
+                            "https://p3-aio.ecombdimg.com/obj/ecom-shop-material/jpeg_m_4deba145f8da95e9ef6267d06aa9051b_sx_46759_www1125-600"
+                        ]
+                    },
+                    "product_price": {
+                        "price_label": {
+                            "price": 1580,
+                            "price_text": "到手价",
+                            "price_type": 1
+                        }
+                    },
+                    "product_cos": {
+                        "cos_label": {
+                            "cos": {
+                                "cos_ratio": 35,
+                                "cos_fee": 553
+                            },
+                            "cos_type": 3,
+                            "cos_ratio_text": "佣金"
+                        }
+                    },
+                    "product_sales": {
+                        "product_label": {
+                            "sales_num": 182233,
+                            "sales_text": "已售"
+                        },
+                        "sell_num": 182233,
+                        "total_sales": 182233
+                    },
+                    "product_fans_match": {
+                        "fans_match": {
+                            "score": 0,
+                            "level": 4
+                        }
+                    },
+                    "product_comment": {
+                        "comment_label": {
+                            "good_ratio": "89.3%"
+                        },
+                        "good_ratio": 89.34065934065934
+                    },
+                    "product_match": {
+                        "author_num": 6529
+                    },
+                    "product_privilege": {
+                        "privilege_info_label": {
+                            "privilege_id": 2,
+                            "privilege_info_detail": [
+                                {
+                                    "tag_id": "insurance_freight",
+                                    "title": "运费险",
+                                    "content": "商家已为您投保，退货成功后保险公司赔付一定金额运费至钱包（保单生效以下单为准）",
+                                    "icon": {
+                                        "url_list": [
+                                            "https://lf26-cm.ecombdstatic.com/obj/eden-cn/nupfupebo/services/FreightInsurance.png"
+                                        ]
+                                    }
+                                },
+                                {
+                                    "tag_id": "refund_speed",
+                                    "title": "极速退款",
+                                    "content": "支付后6小时内，待发货状态下，提交退款申请将立即退款",
+                                    "icon": {
+                                        "url_list": [
+                                            "https://lf26-cm.ecombdstatic.com/obj/eden-cn/nupfupebo/services/QuickRefund.png"
+                                        ]
+                                    }
+                                },
+                                {
+                                    "tag_id": "support_7days_refund",
+                                    "title": "7天无理由退货",
+                                    "content": "在签收商品之日起7天内，符合完好标准的商品，可申请无理由退货",
+                                    "icon": {
+                                        "url_list": [
+                                            "https://lf3-cm.ecombdstatic.com/obj/temai/full_return.png"
+                                        ]
+                                    }
+                                },
+                                {
+                                    "tag_id": "customer_protection",
+                                    "title": "消费者保障服务",
+                                    "content": "该卖家已缴纳保证金，如有商品质量问题，描述不符等，您有权申请退款或退货",
+                                    "icon": {
+                                        "url_list": [
+                                            "https://lf26-cm.ecombdstatic.com/obj/temai/comsumer_protect.png"
+                                        ]
+                                    }
+                                },
+                                {
+                                    "tag_id": "merchant_qualification",
+                                    "title": "商家资质",
+                                    "content": "该商家已办理市场主体登记，请移步APP查看资质信息",
+                                    "icon": {
+                                        "url_list": [
+                                            "https://lf26-cm.ecombdstatic.com/obj/temai/shop_certification.png"
+                                        ]
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "product_kol_info": {
+                        "kol_info": {
+                            "extrance_status": 4,
+                            "extrance_tip_str": "没有达到商家样品门槛",
+                            "sample_token": "8c.:/ n@Q.kC 04/17 【【大容量300g】377烟酰胺美白祛斑洗面奶温和清洁改暗沉提亮洁面乳】复制此条消息打开抖音，查看商品详情。【※※5Cq1vhn2009➝➝】\t",
+                            "show_coupon_button": false,
+                            "sample_rule_tip_info": {
+                                "sample_rule_page_type": 2,
+                                "entrance_tip": "出单≥5单，返全款 "
+                            },
+                            "sample_rule_list": [
+                                {
+                                    "sample_rule_page_type": 1,
+                                    "entrance_tip": "粉丝量未满足\"免费申样\"门槛",
+                                    "entrance_tip_with_detail": "您的粉丝量＜5000，未满足商家要求",
+                                    "support": false,
+                                    "in_order": false,
+                                    "decision_text": "不支持免费申样",
+                                    "deliver_version": 1
+                                },
+                                {
+                                    "sample_rule_page_type": 2,
+                                    "entrance_tip": "达人出单量≥5单，商家返还买样全款",
+                                    "support": true,
+                                    "in_order": false,
+                                    "decision_text": "先买样，出单≥5单返全款",
+                                    "deliver_version": 1
+                                }
+                            ],
+                            "sample_reminder_text": "买样享佣金，样品6.5折到手，快来买样带货吧"
+                        }
+                    },
+                    "product_hot_topic": {
+                        "hot_topic_info": {
+                            "topic_id": "1616194438566915",
+                            "topic_name": "超便宜超划算",
+                            "hot_value": 5994987
+                        }
+                    },
+                    "product_logistics": {
+                        "product_logistics_label": {
+                            "logistic_text": "从广东省广州市发货，包邮"
+                        }
+                    },
+                    "product_colonel_activity": {
+                        "cooperation_activity": {
+                            "count": 178
+                        }
+                    },
+                    "product_commission_ticket": {
+                        "commission_ticket_tip_info": {
+                            "type": 1,
+                            "effect_time": 0,
+                            "freeze_ratio": 0,
+                            "effecte_time": 0
+                        }
+                    },
+                    "product_risk_tip": {},
+                    "product_rec_reason": {
+                        "recommend_info": {
+                            "text": "入选美白洁面乳热推榜",
+                            "icon": "https://lf26-cm.ecombdstatic.com/obj/cmp-ecom-alliance/iconboard.png",
+                            "rec_type": 2,
+                            "extra": {
+                                "alli_cate_id": "",
+                                "cur_date_type": "榜单",
+                                "cur_genre_type": "",
+                                "cur_rank": "11",
+                                "cur_rank_type": "热推榜",
+                                "date_type": "",
+                                "genre_type": "",
+                                "industry_id": "",
+                                "is_flagship": "",
+                                "leaderboard_id": "美白洁面乳榜单榜单热推榜11",
+                                "leaderboard_name": "美白洁面乳榜单",
+                                "rank": "20",
+                                "rank_id": "12649",
+                                "rank_type": "seller",
+                                "sub_rec_type": "201",
+                                "type": "2"
+                            }
+                        }
+                    },
+                    "product_contact_info": {
+                        "sec_shop_mobile": "CjvdQxGK61Z8Ha/ofrXgqtZAKTp3MaVKPwG/vAYpj7oCEvq3iSjNmCSJrAtvShyKDgg3jzb+Eu0XV5q4rBpLCjwAAAAAAAAAAAAAT4NkF7/XuDuYF9kyrCbS9RuAHw1QbknEZbWzj98LVJaPvNQok0/kb7CvBRsiLqSFf6sQh4n9DRjlreTJASABIgEDd/CQ3Q==",
+                        "sec_shop_wechat_id": "CjY4gqrr+tCPDwA0IY85o8NEIyioyLUwTaNtJZ4y+/5dr4Kq6tmKATMczJ5ACIZGrP2w2JZ3B94aSwo8AAAAAAAAAAAAAE+DZBe/17g7mBfZMqwm0vUbgB8NUG5JxGW1s4/fC1SWj7zUKJNP5G+wrwUbIi6khX+rEIeJ/Q0Y5a3kyQEgASIBA8jimjk="
+                    }
+                },
+                "shop": {
+                    "shop_id": "188874074",
+                    "shop_base": {
+                        "shop_name": "欧丽琦专营店",
+                        "shop_logo": "https://p6-ecom-qualification-sign.ecombdimg.com/tos-cn-i-6vegkygxbk/9b571fe2d8f94c87af40c0c430c101ba~tplv-6vegkygxbk-s:750.image?lk3s=c9156bde&x-expires=1790252555&x-signature=liGKs1ifz4wHi%2B5f3B8ux2EKIgo%3D",
+                        "platform_source": 4
+                    },
+                    "shop_exper_scores": {
+                        "shop_exper_score_label": {
+                            "exper_score": {
+                                "score": "86",
+                                "level": 2
+                            },
+                            "goods_score": {
+                                "score": "68",
+                                "level": 3
+                            },
+                            "logistics_score": {
+                                "score": "100",
+                                "level": 1
+                            },
+                            "service_score": {
+                                "score": "100",
+                                "level": 1
+                            },
+                            "has_data": true,
+                            "is_show_score": true
+                        }
+                    },
+                    "pic_product_tag": [
+                        {
+                            "type": "shop_platform_xiaodian",
+                            "pic": "https://lf6-cm.ecombdstatic.com/obj/cmp-ecom-alliance/shop_platform_xiaodian_pc.png"
+                        }
+                    ]
+                },
+                "promotion_data": {
+                    "code": -1
+                },
+                "comment_data": {
+                    "code": -1
+                },
+                "author_data": {
+                    "code": -1
+                },
+                "content_data": {
+                    "code": -1
+                },
+                "hot_content_data": {
+                    "code": -1
+                },
+                "shop_product_data": {
+                    "code": -1
+                },
+                "extra": {
+                    "Track_AceFactory": "2",
+                    "mob_enhance_creative_version": "0"
+                }
+            },
+            "label": {
+                "service_module": {
+                    "module_list": [
+                        {
+                            "module_type": "advantage",
+                            "title": {
+                                "title_list": [
+                                    {
+                                        "rich_text": {
+                                            "rich_text_type": 2,
+                                            "icon": {
+                                                "url": "https://lf6-cm.ecombdstatic.com/obj/cmp-ecom-alliance/advantage.png"
+                                            }
+                                        },
+                                        "suffix_type": 0
+                                    }
+                                ]
+                            },
+                            "content": {
+                                "content_list": [
+                                    {
+                                        "content_type": "alliance_rank",
+                                        "content": {
+                                            "title_list": [
+                                                {
+                                                    "rich_text": {
+                                                        "rich_text_type": 1,
+                                                        "text": {
+                                                            "text": "入选美白洁面乳热推榜"
+                                                        }
+                                                    },
+                                                    "suffix_type": 0
+                                                }
+                                            ]
+                                        },
+                                        "suffix_type": 2
+                                    },
+                                    {
+                                        "content_type": "hot_topic",
+                                        "content": {
+                                            "title_list": [
+                                                {
+                                                    "rich_text": {
+                                                        "rich_text_type": 2,
+                                                        "icon": {
+                                                            "url": "https://lf6-cm.ecombdstatic.com/obj/cmp-ecom-alliance/hot_topic.png"
+                                                        }
+                                                    },
+                                                    "suffix_type": 0
+                                                },
+                                                {
+                                                    "rich_text": {
+                                                        "rich_text_type": 1,
+                                                        "text": {
+                                                            "text": "超便宜超划算",
+                                                            "font_color": ""
+                                                        }
+                                                    },
+                                                    "suffix_type": 1
+                                                }
+                                            ]
+                                        },
+                                        "suffix_type": 1
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "module_type": "privilege",
+                            "title": {
+                                "title_list": [
+                                    {
+                                        "rich_text": {
+                                            "rich_text_type": 1,
+                                            "text": {
+                                                "text": "保障"
+                                            }
+                                        },
+                                        "suffix_type": 1
+                                    }
+                                ]
+                            },
+                            "content": {
+                                "content_list": [
+                                    {
+                                        "content_type": "privilege",
+                                        "content": {
+                                            "title_list": [
+                                                {
+                                                    "rich_text": {
+                                                        "rich_text_type": 1,
+                                                        "text": {
+                                                            "text": "运费险",
+                                                            "font_color": ""
+                                                        }
+                                                    },
+                                                    "suffix_type": 3
+                                                },
+                                                {
+                                                    "rich_text": {
+                                                        "rich_text_type": 1,
+                                                        "text": {
+                                                            "text": "极速退款",
+                                                            "font_color": ""
+                                                        }
+                                                    },
+                                                    "suffix_type": 3
+                                                },
+                                                {
+                                                    "rich_text": {
+                                                        "rich_text_type": 1,
+                                                        "text": {
+                                                            "text": "7天无理由退货",
+                                                            "font_color": ""
+                                                        }
+                                                    },
+                                                    "suffix_type": 3
+                                                },
+                                                {
+                                                    "rich_text": {
+                                                        "rich_text_type": 1,
+                                                        "text": {
+                                                            "text": "消费者保障服务",
+                                                            "font_color": ""
+                                                        }
+                                                    },
+                                                    "suffix_type": 3
+                                                },
+                                                {
+                                                    "rich_text": {
+                                                        "rich_text_type": 1,
+                                                        "text": {
+                                                            "text": "商家资质",
+                                                            "font_color": ""
+                                                        }
+                                                    },
+                                                    "suffix_type": 3
+                                                }
+                                            ]
+                                        },
+                                        "suffix_type": 1
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "module_type": "sample",
+                            "title": {
+                                "title_list": [
+                                    {
+                                        "rich_text": {
+                                            "rich_text_type": 1,
+                                            "text": {
+                                                "text": "样品"
+                                            }
+                                        },
+                                        "suffix_type": 1
+                                    }
+                                ]
+                            },
+                            "content": {
+                                "content_list": [
+                                    {
+                                        "content_type": "sample",
+                                        "content": {
+                                            "title_list": [
+                                                {
+                                                    "rich_text": {
+                                                        "rich_text_type": 1,
+                                                        "text": {
+                                                            "text": "不支持免费申样",
+                                                            "font_color": "rgba(22, 24, 35, 0.5)"
+                                                        }
+                                                    },
+                                                    "suffix_type": 2
+                                                },
+                                                {
+                                                    "rich_text": {
+                                                        "rich_text_type": 1,
+                                                        "text": {
+                                                            "text": "先买样，出单≥5单返全款",
+                                                            "font_color": ""
+                                                        }
+                                                    },
+                                                    "suffix_type": 2
+                                                }
+                                            ]
+                                        },
+                                        "suffix_type": 1
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "module_type": "certification",
+                            "title": {
+                                "title_list": [
+                                    {
+                                        "rich_text": {
+                                            "rich_text_type": 1,
+                                            "text": {
+                                                "text": "资质"
+                                            }
+                                        },
+                                        "suffix_type": 1
+                                    }
+                                ]
+                            },
+                            "content": {
+                                "content_list": [
+                                    {
+                                        "content_type": "sui_xin_tui",
+                                        "content": {
+                                            "title_list": [
+                                                {
+                                                    "rich_text": {
+                                                        "rich_text_type": 1,
+                                                        "text": {
+                                                            "text": "小店随心推",
+                                                            "font_color": ""
+                                                        }
+                                                    },
+                                                    "suffix_type": 2
+                                                }
+                                            ]
+                                        },
+                                        "suffix_type": 1
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "module_type": "logistics",
+                            "title": {
+                                "title_list": [
+                                    {
+                                        "rich_text": {
+                                            "rich_text_type": 1,
+                                            "text": {
+                                                "text": "物流"
+                                            }
+                                        },
+                                        "suffix_type": 1
+                                    }
+                                ]
+                            },
+                            "content": {
+                                "content_list": [
+                                    {
+                                        "content_type": "logistics",
+                                        "content": {
+                                            "title_list": [
+                                                {
+                                                    "rich_text": {
+                                                        "rich_text_type": 1,
+                                                        "text": {
+                                                            "text": "从广东省广州市发货，包邮",
+                                                            "font_color": ""
+                                                        }
+                                                    },
+                                                    "suffix_type": 2
+                                                }
+                                            ]
+                                        },
+                                        "suffix_type": 1
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            }
+        },
+        "log_id": "202509250104154D02D2ACE3484A9A8073",
+        "msg": "",
+        "st": 0
+    },
+    "seven_data": {
+        "code": 11001,
+        "data": null,
+        "msg": "请求过于频繁，请稍后再试",
+        "st": 11001
+    }
+}

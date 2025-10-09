@@ -1,0 +1,2722 @@
+{
+    "rank": 13,
+    "category": "个护家清",
+    "detail_data": {
+        "code": 0,
+        "data": {
+            "promotion_id": "3712954189735947632",
+            "product_id": "3712213832584790054",
+            "item_type": 4,
+            "model": {
+                "product": {
+                    "product_base": {
+                        "title": "【快速除醛】光触媒甲醛清除剂 新房家用空气净化去甲醛除味WB",
+                        "cover": "https://p3-aio.ecombdimg.com/obj/ecom-shop-material/jpeg_m_43e9939b98414f5556a6abcf6c270be5_sx_1560762_www2222-2222",
+                        "detail_url": "https://haohuo.jinritemai.com/ecommerce/trade/detail/index.html?id=3712213832584790054&origin_type=pc_buyin_selection_decision",
+                        "images": [
+                            "https://p3-aio.ecombdimg.com/obj/ecom-shop-material/jpeg_m_43e9939b98414f5556a6abcf6c270be5_sx_1560762_www2222-2222",
+                            "https://p3-aio.ecombdimg.com/obj/ecom-shop-material/jpeg_m_71f3af20c978ab5c8c44a448baef480a_sx_2705760_www2222-2222",
+                            "https://p3-aio.ecombdimg.com/obj/ecom-shop-material/jpeg_m_1dbf749b5ba73b62e0d099c69ed175ac_sx_480212_www800-800",
+                            "https://p3-aio.ecombdimg.com/obj/ecom-shop-material/jpeg_m_c5c149a64c0cd26529296d07c3123040_sx_430810_www800-800"
+                        ],
+                        "white_background": "https://p3-aio.ecombdimg.com/obj/ecom-shop-material/VTnkBzLw_m_0c32a4b2ce93de5f867546a6aa0dba1e_sx_486764_www3896-3896",
+                        "is_in_window": false,
+                        "is_in_cart": false,
+                        "is_global_shoping": false,
+                        "is_sui_xin_tui": true,
+                        "big_imgs": [
+                            "https://p3-aio.ecombdimg.com/obj/ecom-shop-material/jpeg_m_d0ad5cb7e33c396c0c091f3ce1ca999e_sx_251262_www790-936",
+                            "https://p3-aio.ecombdimg.com/obj/ecom-shop-material/jpeg_m_fa78b6ad738c0d2fe3a70d1e352c31f2_sx_1082089_www790-1789",
+                            "https://p3-aio.ecombdimg.com/obj/ecom-shop-material/jpeg_m_50d402e19dc9ee40fb5acc0c7c6a081a_sx_500987_www790-1789",
+                            "https://p3-aio.ecombdimg.com/obj/ecom-shop-material/jpeg_m_a9306afb256878b8e17df02251b0a2ce_sx_698238_www790-1788",
+                            "https://p3-aio.ecombdimg.com/obj/ecom-shop-material/jpeg_m_f0bb5d205ac44ccc4c3b29fd23920a6b_sx_765217_www790-1789",
+                            "https://p3-aio.ecombdimg.com/obj/ecom-shop-material/jpeg_m_4c41b494fa20f7fed3cb964d7a5c0838_sx_819347_www790-1789",
+                            "https://p3-aio.ecombdimg.com/obj/ecom-shop-material/jpeg_m_e47a2f80162825666d82da5bcf6479c8_sx_511972_www790-1789",
+                            "https://p3-aio.ecombdimg.com/obj/ecom-shop-material/jpeg_m_4e2d510932247c2e503e37babf8ecbad_sx_555022_www790-1789",
+                            "https://p3-aio.ecombdimg.com/obj/ecom-shop-material/jpeg_m_4b91769185ccc1dd393d8a8635cd88c4_sx_650142_www790-1788",
+                            "https://p3-aio.ecombdimg.com/obj/ecom-shop-material/jpeg_m_5a7bef3e064e4051233e8732deeaf54d_sx_721010_www790-1789",
+                            "https://p3-aio.ecombdimg.com/obj/ecom-shop-material/jpeg_m_c156a4c41faadc28baf9c2f9bb318d5a_sx_490663_www790-1789",
+                            "https://p3-aio.ecombdimg.com/obj/ecom-shop-material/jpeg_m_b35d11893a74bce5dc2e12607a3d2cb8_sx_50967_www790-790",
+                            "https://p3-aio.ecombdimg.com/obj/ecom-shop-material/jpeg_m_e1298713c7967e3ced75ae860ea1ba02_sx_135442_www790-623"
+                        ]
+                    },
+                    "product_price": {
+                        "price_label": {
+                            "price": 2180,
+                            "price_text": "到手价",
+                            "price_type": 1
+                        }
+                    },
+                    "product_cos": {
+                        "cos_label": {
+                            "cos": {
+                                "cos_ratio": 40,
+                                "cos_fee": 872
+                            },
+                            "cos_type": 3,
+                            "cos_ratio_text": "佣金"
+                        }
+                    },
+                    "product_sales": {
+                        "product_label": {
+                            "sales_num": 547276,
+                            "sales_text": "已售"
+                        },
+                        "sell_num": 547276,
+                        "total_sales": 547276
+                    },
+                    "product_fans_match": {
+                        "fans_match": {
+                            "score": 0,
+                            "level": 4
+                        }
+                    },
+                    "product_comment": {
+                        "comment_label": {
+                            "good_ratio": "93.7%"
+                        },
+                        "good_ratio": 93.73171352245261
+                    },
+                    "product_match": {
+                        "author_num": 5052
+                    },
+                    "pic_product_tag": [
+                        {
+                            "type": "aweme_flagship",
+                            "pic": "https://lf6-cm.ecombdstatic.com/obj/cmp-ecom-alliance/product_tag/aweme_flagship_v1.png"
+                        }
+                    ],
+                    "product_privilege": {
+                        "privilege_info_label": {
+                            "privilege_id": 2,
+                            "privilege_info_detail": [
+                                {
+                                    "tag_id": "insurance_freight",
+                                    "title": "运费险",
+                                    "content": "商家已为您投保，退货成功后保险公司赔付一定金额运费至钱包（保单生效以下单为准）",
+                                    "icon": {
+                                        "url_list": [
+                                            "https://lf3-cm.ecombdstatic.com/obj/eden-cn/nupfupebo/services/FreightInsurance.png"
+                                        ]
+                                    }
+                                },
+                                {
+                                    "tag_id": "refund_speed",
+                                    "title": "极速退款",
+                                    "content": "支付后6小时内，待发货状态下，提交退款申请将立即退款",
+                                    "icon": {
+                                        "url_list": [
+                                            "https://lf3-cm.ecombdstatic.com/obj/eden-cn/nupfupebo/services/QuickRefund.png"
+                                        ]
+                                    }
+                                },
+                                {
+                                    "tag_id": "support_7days_refund",
+                                    "title": "7天无理由退货",
+                                    "content": "在签收商品之日起7天内，符合完好标准的商品，可申请无理由退货",
+                                    "icon": {
+                                        "url_list": [
+                                            "https://lf3-cm.ecombdstatic.com/obj/temai/full_return.png"
+                                        ]
+                                    }
+                                },
+                                {
+                                    "tag_id": "customer_protection",
+                                    "title": "消费者保障服务",
+                                    "content": "该卖家已缴纳保证金，如有商品质量问题，描述不符等，您有权申请退款或退货",
+                                    "icon": {
+                                        "url_list": [
+                                            "https://lf3-cm.ecombdstatic.com/obj/temai/comsumer_protect.png"
+                                        ]
+                                    }
+                                },
+                                {
+                                    "tag_id": "merchant_qualification",
+                                    "title": "商家资质",
+                                    "content": "该商家已办理市场主体登记，请移步APP查看资质信息",
+                                    "icon": {
+                                        "url_list": [
+                                            "https://lf26-cm.ecombdstatic.com/obj/temai/shop_certification.png"
+                                        ]
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "product_kol_info": {
+                        "kol_info": {
+                            "extrance_status": 4,
+                            "extrance_tip_str": "没有达到商家样品门槛",
+                            "sample_token": "2s:/ C@H.iC 01/30 【【快速除醛】光触媒甲醛清除剂 新房家用空气净化去甲醛除味WB】复制此条消息打开抖音，查看商品详情。【︽︽3gDWknL7xy709ŠŠ】\t",
+                            "show_coupon_button": false,
+                            "sample_rule_tip_info": {
+                                "sample_rule_page_type": 2,
+                                "entrance_tip": "出单≥5单，返全款 "
+                            },
+                            "sample_rule_list": [
+                                {
+                                    "sample_rule_page_type": 1,
+                                    "entrance_tip": "粉丝量未满足\"免费申样\"门槛",
+                                    "entrance_tip_with_detail": "您的粉丝量＜5000，未满足商家要求",
+                                    "support": false,
+                                    "in_order": false,
+                                    "decision_text": "不支持免费申样",
+                                    "deliver_version": 1
+                                },
+                                {
+                                    "sample_rule_page_type": 2,
+                                    "entrance_tip": "达人出单量≥5单，商家返还买样全款",
+                                    "support": true,
+                                    "in_order": false,
+                                    "decision_text": "先买样，出单≥5单返全款",
+                                    "deliver_version": 1
+                                }
+                            ],
+                            "sample_reminder_text": "买样享佣金，样品6折到手，快来买样带货吧"
+                        }
+                    },
+                    "product_hot_topic": {
+                        "hot_topic_info": {
+                            "topic_id": "1767586229303309",
+                            "topic_name": "内容过于真实",
+                            "hot_value": 4549971
+                        }
+                    },
+                    "product_logistics": {
+                        "product_logistics_label": {
+                            "logistic_text": "预计今天下午发货，后天送达，包邮"
+                        }
+                    },
+                    "product_colonel_activity": {
+                        "cooperation_activity": {
+                            "count": 25
+                        }
+                    },
+                    "product_commission_ticket": {
+                        "commission_ticket_tip_info": {
+                            "type": 1,
+                            "effect_time": 0,
+                            "freeze_ratio": 0,
+                            "effecte_time": 0
+                        }
+                    },
+                    "product_risk_tip": {},
+                    "product_rec_reason": {
+                        "recommend_info": {
+                            "text": "洗护清洁本月爆款榜",
+                            "icon": "https://lf26-cm.ecombdstatic.com/obj/cmp-ecom-alliance/iconboard.png",
+                            "rec_type": 2,
+                            "extra": {
+                                "alli_cate_id": "5002",
+                                "cur_date_type": "本月榜单",
+                                "cur_genre_type": "",
+                                "cur_rank": "0",
+                                "cur_rank_type": "爆款榜",
+                                "date_type": "30d",
+                                "genre_type": "all",
+                                "industry_id": "5",
+                                "is_flagship": "all",
+                                "leaderboard_id": "洗护清洁榜单本月榜单爆款榜11",
+                                "leaderboard_name": "洗护清洁榜单",
+                                "rank": "131",
+                                "rank_id": "",
+                                "rank_type": "pay_prod_qty_cnt",
+                                "sub_rec_type": "201",
+                                "type": "1"
+                            }
+                        }
+                    },
+                    "product_contact_info": {
+                        "sec_shop_mobile": "Cjs4wvpDqqTzscuES+BpIGRQcVqt7ITIwlFafpIkeKv0NxNr9iVG5NsOMFkbacIdUOSBk6awwhhhlU1TsxpLCjwAAAAAAAAAAAAAT4hTaMuS/V4XXAW94gBQfsfxybd1Ah7uzQBq5MI4YtsKs5zP5ddVi7Hp9JBF4i3vnfoQrLv9DRjlreTJASABIgED/Us9Kw==",
+                        "sec_shop_wechat_id": "CjeOC3hYwqTd7s7iyNQ5ckqoNoIejCmMJc6K4kpPcixFbH4XNuIeFS2FnNrTbwK56MpbRSrUU+1eGksKPAAAAAAAAAAAAABPiFNoy5L9XhdcBb3iAFB+x/HJt3UCHu7NAGrkwjhi2wqznM/l11WLsen0kEXiLe+d+hCsu/0NGOWt5MkBIAEiAQNimaI5"
+                    }
+                },
+                "shop": {
+                    "shop_id": "192450017",
+                    "shop_base": {
+                        "shop_name": "净家熊家居清洁旗舰店",
+                        "shop_logo": "https://p3-ecom-qualification-sign.ecombdimg.com/tos-cn-i-6vegkygxbk/1818a312e6eb480b8d2c75736f8645a2~tplv-6vegkygxbk-s:750.image?lk3s=c9156bde&x-expires=1790634010&x-signature=aahYz1NF2SChRW7spDXw0F7ybkE%3D",
+                        "platform_source": 4
+                    },
+                    "shop_exper_scores": {
+                        "shop_exper_score_label": {
+                            "exper_score": {
+                                "score": "85",
+                                "level": 2
+                            },
+                            "goods_score": {
+                                "score": "74",
+                                "level": 2
+                            },
+                            "logistics_score": {
+                                "score": "99",
+                                "level": 1
+                            },
+                            "service_score": {
+                                "score": "93",
+                                "level": 1
+                            },
+                            "has_data": true,
+                            "is_show_score": true
+                        }
+                    },
+                    "pic_product_tag": [
+                        {
+                            "type": "shop_platform_xiaodian",
+                            "pic": "https://lf6-cm.ecombdstatic.com/obj/cmp-ecom-alliance/shop_platform_xiaodian_pc.png"
+                        },
+                        {
+                            "type": "shop_cos_stability",
+                            "pic": "https://lf3-cm.ecombdstatic.com/obj/cmp-ecom-alliance/shop-cos-stability-high-pc.png",
+                            "action": {
+                                "click": {
+                                    "text": [
+                                        {
+                                            "text": "100"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    ]
+                },
+                "promotion_data": {
+                    "code": -1
+                },
+                "comment_data": {
+                    "code": -1
+                },
+                "author_data": {
+                    "code": -1
+                },
+                "content_data": {
+                    "code": -1
+                },
+                "hot_content_data": {
+                    "code": -1
+                },
+                "shop_product_data": {
+                    "code": -1
+                },
+                "extra": {
+                    "Track_AceFactory": "2",
+                    "mob_enhance_creative_version": "0"
+                }
+            },
+            "label": {
+                "service_module": {
+                    "module_list": [
+                        {
+                            "module_type": "advantage",
+                            "title": {
+                                "title_list": [
+                                    {
+                                        "rich_text": {
+                                            "rich_text_type": 2,
+                                            "icon": {
+                                                "url": "https://lf6-cm.ecombdstatic.com/obj/cmp-ecom-alliance/advantage.png"
+                                            }
+                                        },
+                                        "suffix_type": 0
+                                    }
+                                ]
+                            },
+                            "content": {
+                                "content_list": [
+                                    {
+                                        "content_type": "alliance_rank",
+                                        "content": {
+                                            "title_list": [
+                                                {
+                                                    "rich_text": {
+                                                        "rich_text_type": 1,
+                                                        "text": {
+                                                            "text": "洗护清洁本月爆款榜"
+                                                        }
+                                                    },
+                                                    "suffix_type": 0
+                                                }
+                                            ]
+                                        },
+                                        "suffix_type": 2
+                                    },
+                                    {
+                                        "content_type": "hot_topic",
+                                        "content": {
+                                            "title_list": [
+                                                {
+                                                    "rich_text": {
+                                                        "rich_text_type": 2,
+                                                        "icon": {
+                                                            "url": "https://lf6-cm.ecombdstatic.com/obj/cmp-ecom-alliance/hot_topic.png"
+                                                        }
+                                                    },
+                                                    "suffix_type": 0
+                                                },
+                                                {
+                                                    "rich_text": {
+                                                        "rich_text_type": 1,
+                                                        "text": {
+                                                            "text": "内容过于真实",
+                                                            "font_color": ""
+                                                        }
+                                                    },
+                                                    "suffix_type": 1
+                                                }
+                                            ]
+                                        },
+                                        "suffix_type": 1
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "module_type": "privilege",
+                            "title": {
+                                "title_list": [
+                                    {
+                                        "rich_text": {
+                                            "rich_text_type": 1,
+                                            "text": {
+                                                "text": "保障"
+                                            }
+                                        },
+                                        "suffix_type": 1
+                                    }
+                                ]
+                            },
+                            "content": {
+                                "content_list": [
+                                    {
+                                        "content_type": "privilege",
+                                        "content": {
+                                            "title_list": [
+                                                {
+                                                    "rich_text": {
+                                                        "rich_text_type": 1,
+                                                        "text": {
+                                                            "text": "运费险",
+                                                            "font_color": ""
+                                                        }
+                                                    },
+                                                    "suffix_type": 3
+                                                },
+                                                {
+                                                    "rich_text": {
+                                                        "rich_text_type": 1,
+                                                        "text": {
+                                                            "text": "极速退款",
+                                                            "font_color": ""
+                                                        }
+                                                    },
+                                                    "suffix_type": 3
+                                                },
+                                                {
+                                                    "rich_text": {
+                                                        "rich_text_type": 1,
+                                                        "text": {
+                                                            "text": "7天无理由退货",
+                                                            "font_color": ""
+                                                        }
+                                                    },
+                                                    "suffix_type": 3
+                                                },
+                                                {
+                                                    "rich_text": {
+                                                        "rich_text_type": 1,
+                                                        "text": {
+                                                            "text": "消费者保障服务",
+                                                            "font_color": ""
+                                                        }
+                                                    },
+                                                    "suffix_type": 3
+                                                },
+                                                {
+                                                    "rich_text": {
+                                                        "rich_text_type": 1,
+                                                        "text": {
+                                                            "text": "商家资质",
+                                                            "font_color": ""
+                                                        }
+                                                    },
+                                                    "suffix_type": 3
+                                                }
+                                            ]
+                                        },
+                                        "suffix_type": 1
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "module_type": "sample",
+                            "title": {
+                                "title_list": [
+                                    {
+                                        "rich_text": {
+                                            "rich_text_type": 1,
+                                            "text": {
+                                                "text": "样品"
+                                            }
+                                        },
+                                        "suffix_type": 1
+                                    }
+                                ]
+                            },
+                            "content": {
+                                "content_list": [
+                                    {
+                                        "content_type": "sample",
+                                        "content": {
+                                            "title_list": [
+                                                {
+                                                    "rich_text": {
+                                                        "rich_text_type": 1,
+                                                        "text": {
+                                                            "text": "不支持免费申样",
+                                                            "font_color": "rgba(22, 24, 35, 0.5)"
+                                                        }
+                                                    },
+                                                    "suffix_type": 2
+                                                },
+                                                {
+                                                    "rich_text": {
+                                                        "rich_text_type": 1,
+                                                        "text": {
+                                                            "text": "先买样，出单≥5单返全款",
+                                                            "font_color": ""
+                                                        }
+                                                    },
+                                                    "suffix_type": 2
+                                                }
+                                            ]
+                                        },
+                                        "suffix_type": 1
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "module_type": "certification",
+                            "title": {
+                                "title_list": [
+                                    {
+                                        "rich_text": {
+                                            "rich_text_type": 1,
+                                            "text": {
+                                                "text": "资质"
+                                            }
+                                        },
+                                        "suffix_type": 1
+                                    }
+                                ]
+                            },
+                            "content": {
+                                "content_list": [
+                                    {
+                                        "content_type": "sui_xin_tui",
+                                        "content": {
+                                            "title_list": [
+                                                {
+                                                    "rich_text": {
+                                                        "rich_text_type": 1,
+                                                        "text": {
+                                                            "text": "小店随心推",
+                                                            "font_color": ""
+                                                        }
+                                                    },
+                                                    "suffix_type": 2
+                                                }
+                                            ]
+                                        },
+                                        "suffix_type": 1
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "module_type": "logistics",
+                            "title": {
+                                "title_list": [
+                                    {
+                                        "rich_text": {
+                                            "rich_text_type": 1,
+                                            "text": {
+                                                "text": "物流"
+                                            }
+                                        },
+                                        "suffix_type": 1
+                                    }
+                                ]
+                            },
+                            "content": {
+                                "content_list": [
+                                    {
+                                        "content_type": "logistics",
+                                        "content": {
+                                            "title_list": [
+                                                {
+                                                    "rich_text": {
+                                                        "rich_text_type": 1,
+                                                        "text": {
+                                                            "text": "预计今天下午发货，后天送达，包邮",
+                                                            "font_color": ""
+                                                        }
+                                                    },
+                                                    "suffix_type": 2
+                                                }
+                                            ]
+                                        },
+                                        "suffix_type": 1
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            }
+        },
+        "log_id": "20250929111437DCEF074F07785E4ACA3B",
+        "msg": "",
+        "st": 0
+    },
+    "thirty_data": {
+        "code": 0,
+        "data": {
+            "promotion_id": "3712954189735947632",
+            "product_id": "3712213832584790054",
+            "item_type": 4,
+            "model": {
+                "product": {
+                    "product_risk_tip": {}
+                },
+                "promotion_data": {
+                    "calculate_data": {
+                        "calculate_time": 20250928,
+                        "sales": 115643,
+                        "pv": 834990,
+                        "match_num": 1768,
+                        "order_conversion_rate": 0.1360998335309405,
+                        "sales_amount": 414054734,
+                        "sales_content_num": 2946,
+                        "match_order_num": 640,
+                        "format_order_conversion_rate": "10%~15%",
+                        "format_sales_amount": "¥410万+"
+                    },
+                    "calculate_data_list": [
+                        {
+                            "calculate_time": 20250830,
+                            "sales": 1621,
+                            "pv": 7793,
+                            "match_num": 124,
+                            "order_conversion_rate": 0.2044142178878481,
+                            "sales_amount": 5904310,
+                            "sales_content_num": 13,
+                            "match_order_num": 82,
+                            "format_order_conversion_rate": "20%~25%",
+                            "format_sales_amount": "¥5万+"
+                        },
+                        {
+                            "calculate_time": 20250831,
+                            "sales": 1319,
+                            "pv": 6850,
+                            "match_num": 67,
+                            "order_conversion_rate": 0.1881751824817518,
+                            "sales_amount": 4897668,
+                            "sales_content_num": 8,
+                            "match_order_num": 73,
+                            "format_order_conversion_rate": "15%~20%",
+                            "format_sales_amount": "¥4万+"
+                        },
+                        {
+                            "calculate_time": 20250901,
+                            "sales": 1619,
+                            "pv": 9176,
+                            "match_num": 118,
+                            "order_conversion_rate": 0.171207497820401,
+                            "sales_amount": 5915719,
+                            "sales_content_num": 14,
+                            "match_order_num": 82,
+                            "format_order_conversion_rate": "15%~20%",
+                            "format_sales_amount": "¥5万+"
+                        },
+                        {
+                            "calculate_time": 20250902,
+                            "sales": 1439,
+                            "pv": 7590,
+                            "match_num": 108,
+                            "order_conversion_rate": 0.1868247694334651,
+                            "sales_amount": 5157047,
+                            "sales_content_num": 12,
+                            "match_order_num": 90,
+                            "format_order_conversion_rate": "15%~20%",
+                            "format_sales_amount": "¥5万+"
+                        },
+                        {
+                            "calculate_time": 20250903,
+                            "sales": 2043,
+                            "pv": 14889,
+                            "match_num": 164,
+                            "order_conversion_rate": 0.1347975015111828,
+                            "sales_amount": 7480425,
+                            "sales_content_num": 12,
+                            "match_order_num": 82,
+                            "format_order_conversion_rate": "10%~15%",
+                            "format_sales_amount": "¥7万+"
+                        },
+                        {
+                            "calculate_time": 20250904,
+                            "sales": 13929,
+                            "pv": 113105,
+                            "match_num": 261,
+                            "order_conversion_rate": 0.1206489545112948,
+                            "sales_amount": 50471168,
+                            "sales_content_num": 11,
+                            "match_order_num": 129,
+                            "format_order_conversion_rate": "10%~15%",
+                            "format_sales_amount": "¥50万+"
+                        },
+                        {
+                            "calculate_time": 20250905,
+                            "sales": 7236,
+                            "pv": 71469,
+                            "match_num": 298,
+                            "order_conversion_rate": 0.0998334942422589,
+                            "sales_amount": 26580449,
+                            "sales_content_num": 11,
+                            "match_order_num": 147,
+                            "format_order_conversion_rate": "7.5%~10%",
+                            "format_sales_amount": "¥20万+"
+                        },
+                        {
+                            "calculate_time": 20250906,
+                            "sales": 5229,
+                            "pv": 49520,
+                            "match_num": 206,
+                            "order_conversion_rate": 0.1039176090468498,
+                            "sales_amount": 19304299,
+                            "sales_content_num": 13,
+                            "match_order_num": 141,
+                            "format_order_conversion_rate": "10%~15%",
+                            "format_sales_amount": "¥10万+"
+                        },
+                        {
+                            "calculate_time": 20250907,
+                            "sales": 4054,
+                            "pv": 23412,
+                            "match_num": 135,
+                            "order_conversion_rate": 0.1696992995045276,
+                            "sales_amount": 14936608,
+                            "sales_content_num": 12,
+                            "match_order_num": 128,
+                            "format_order_conversion_rate": "15%~20%",
+                            "format_sales_amount": "¥10万+"
+                        },
+                        {
+                            "calculate_time": 20250908,
+                            "sales": 4894,
+                            "pv": 44704,
+                            "match_num": 186,
+                            "order_conversion_rate": 0.1074176807444524,
+                            "sales_amount": 17429462,
+                            "sales_content_num": 10,
+                            "match_order_num": 125,
+                            "format_order_conversion_rate": "10%~15%",
+                            "format_sales_amount": "¥10万+"
+                        },
+                        {
+                            "calculate_time": 20250909,
+                            "sales": 3544,
+                            "pv": 29463,
+                            "match_num": 180,
+                            "order_conversion_rate": 0.1180124223602484,
+                            "sales_amount": 12806975,
+                            "sales_content_num": 9,
+                            "match_order_num": 114,
+                            "format_order_conversion_rate": "10%~15%",
+                            "format_sales_amount": "¥10万+"
+                        },
+                        {
+                            "calculate_time": 20250910,
+                            "sales": 5365,
+                            "pv": 53472,
+                            "match_num": 236,
+                            "order_conversion_rate": 0.0989863853979653,
+                            "sales_amount": 19380112,
+                            "sales_content_num": 14,
+                            "match_order_num": 142,
+                            "format_order_conversion_rate": "7.5%~10%",
+                            "format_sales_amount": "¥10万+"
+                        },
+                        {
+                            "calculate_time": 20250911,
+                            "sales": 4649,
+                            "pv": 39383,
+                            "match_num": 225,
+                            "order_conversion_rate": 0.1155828657034761,
+                            "sales_amount": 16679877,
+                            "sales_content_num": 11,
+                            "match_order_num": 145,
+                            "format_order_conversion_rate": "10%~15%",
+                            "format_sales_amount": "¥10万+"
+                        },
+                        {
+                            "calculate_time": 20250912,
+                            "sales": 5653,
+                            "pv": 43664,
+                            "match_num": 197,
+                            "order_conversion_rate": 0.1265802491755222,
+                            "sales_amount": 19361055,
+                            "sales_content_num": 9,
+                            "match_order_num": 143,
+                            "format_order_conversion_rate": "10%~15%",
+                            "format_sales_amount": "¥10万+"
+                        },
+                        {
+                            "calculate_time": 20250913,
+                            "sales": 4001,
+                            "pv": 28957,
+                            "match_num": 154,
+                            "order_conversion_rate": 0.1361674206582174,
+                            "sales_amount": 13955486,
+                            "sales_content_num": 12,
+                            "match_order_num": 129,
+                            "format_order_conversion_rate": "10%~15%",
+                            "format_sales_amount": "¥10万+"
+                        },
+                        {
+                            "calculate_time": 20250914,
+                            "sales": 4474,
+                            "pv": 33350,
+                            "match_num": 101,
+                            "order_conversion_rate": 0.1322338830584708,
+                            "sales_amount": 15617169,
+                            "sales_content_num": 9,
+                            "match_order_num": 125,
+                            "format_order_conversion_rate": "10%~15%",
+                            "format_sales_amount": "¥10万+"
+                        },
+                        {
+                            "calculate_time": 20250915,
+                            "sales": 4379,
+                            "pv": 31689,
+                            "match_num": 187,
+                            "order_conversion_rate": 0.136040897472309,
+                            "sales_amount": 15657978,
+                            "sales_content_num": 12,
+                            "match_order_num": 119,
+                            "format_order_conversion_rate": "10%~15%",
+                            "format_sales_amount": "¥10万+"
+                        },
+                        {
+                            "calculate_time": 20250916,
+                            "sales": 3959,
+                            "pv": 22597,
+                            "match_num": 211,
+                            "order_conversion_rate": 0.1725007744390848,
+                            "sales_amount": 14112852,
+                            "sales_content_num": 12,
+                            "match_order_num": 121,
+                            "format_order_conversion_rate": "15%~20%",
+                            "format_sales_amount": "¥10万+"
+                        },
+                        {
+                            "calculate_time": 20250917,
+                            "sales": 3556,
+                            "pv": 21403,
+                            "match_num": 216,
+                            "order_conversion_rate": 0.1624071391860954,
+                            "sales_amount": 12804246,
+                            "sales_content_num": 13,
+                            "match_order_num": 121,
+                            "format_order_conversion_rate": "15%~20%",
+                            "format_sales_amount": "¥10万+"
+                        },
+                        {
+                            "calculate_time": 20250918,
+                            "sales": 3384,
+                            "pv": 18096,
+                            "match_num": 235,
+                            "order_conversion_rate": 0.1842948717948718,
+                            "sales_amount": 11982192,
+                            "sales_content_num": 12,
+                            "match_order_num": 117,
+                            "format_order_conversion_rate": "15%~20%",
+                            "format_sales_amount": "¥10万+"
+                        },
+                        {
+                            "calculate_time": 20250919,
+                            "sales": 2940,
+                            "pv": 14141,
+                            "match_num": 143,
+                            "order_conversion_rate": 0.2044409872003394,
+                            "sales_amount": 10274146,
+                            "sales_content_num": 6,
+                            "match_order_num": 108,
+                            "format_order_conversion_rate": "20%~25%",
+                            "format_sales_amount": "¥10万+"
+                        },
+                        {
+                            "calculate_time": 20250920,
+                            "sales": 2428,
+                            "pv": 12691,
+                            "match_num": 154,
+                            "order_conversion_rate": 0.1883224332203924,
+                            "sales_amount": 8635026,
+                            "sales_content_num": 6,
+                            "match_order_num": 105,
+                            "format_order_conversion_rate": "15%~20%",
+                            "format_sales_amount": "¥8万+"
+                        },
+                        {
+                            "calculate_time": 20250921,
+                            "sales": 2396,
+                            "pv": 12984,
+                            "match_num": 92,
+                            "order_conversion_rate": 0.1806069008009858,
+                            "sales_amount": 8491427,
+                            "sales_content_num": 8,
+                            "match_order_num": 99,
+                            "format_order_conversion_rate": "15%~20%",
+                            "format_sales_amount": "¥8万+"
+                        },
+                        {
+                            "calculate_time": 20250922,
+                            "sales": 2541,
+                            "pv": 12771,
+                            "match_num": 130,
+                            "order_conversion_rate": 0.1952861952861953,
+                            "sales_amount": 9035571,
+                            "sales_content_num": 11,
+                            "match_order_num": 108,
+                            "format_order_conversion_rate": "15%~20%",
+                            "format_sales_amount": "¥9万+"
+                        },
+                        {
+                            "calculate_time": 20250923,
+                            "sales": 2256,
+                            "pv": 12077,
+                            "match_num": 126,
+                            "order_conversion_rate": 0.1834064751179929,
+                            "sales_amount": 7885275,
+                            "sales_content_num": 7,
+                            "match_order_num": 109,
+                            "format_order_conversion_rate": "15%~20%",
+                            "format_sales_amount": "¥7万+"
+                        },
+                        {
+                            "calculate_time": 20250924,
+                            "sales": 2536,
+                            "pv": 13726,
+                            "match_num": 167,
+                            "order_conversion_rate": 0.1814075477196561,
+                            "sales_amount": 9014772,
+                            "sales_content_num": 8,
+                            "match_order_num": 113,
+                            "format_order_conversion_rate": "15%~20%",
+                            "format_sales_amount": "¥9万+"
+                        },
+                        {
+                            "calculate_time": 20250925,
+                            "sales": 2474,
+                            "pv": 11961,
+                            "match_num": 139,
+                            "order_conversion_rate": 0.2041635314773012,
+                            "sales_amount": 8759671,
+                            "sales_content_num": 10,
+                            "match_order_num": 106,
+                            "format_order_conversion_rate": "20%~25%",
+                            "format_sales_amount": "¥8万+"
+                        },
+                        {
+                            "calculate_time": 20250926,
+                            "sales": 3113,
+                            "pv": 17889,
+                            "match_num": 159,
+                            "order_conversion_rate": 0.1705517357035049,
+                            "sales_amount": 11073136,
+                            "sales_content_num": 4,
+                            "match_order_num": 97,
+                            "format_order_conversion_rate": "15%~20%",
+                            "format_sales_amount": "¥10万+"
+                        },
+                        {
+                            "calculate_time": 20250927,
+                            "sales": 3203,
+                            "pv": 19742,
+                            "match_num": 172,
+                            "order_conversion_rate": 0.1609765981156924,
+                            "sales_amount": 11328074,
+                            "sales_content_num": 8,
+                            "match_order_num": 110,
+                            "format_order_conversion_rate": "15%~20%",
+                            "format_sales_amount": "¥10万+"
+                        },
+                        {
+                            "calculate_time": 20250928,
+                            "sales": 5409,
+                            "pv": 36426,
+                            "match_num": 110,
+                            "order_conversion_rate": 0.1467083951023994,
+                            "sales_amount": 19122539,
+                            "sales_content_num": 11,
+                            "match_order_num": 113,
+                            "format_order_conversion_rate": "10%~15%",
+                            "format_sales_amount": "¥10万+"
+                        }
+                    ],
+                    "stat_data": {
+                        "promotion_stat_data_list": [
+                            {
+                                "title": "销售渠道",
+                                "swith_text": [
+                                    {
+                                        "key": "sales_amount",
+                                        "name": "销售额"
+                                    },
+                                    {
+                                        "key": "sales",
+                                        "name": "销量"
+                                    }
+                                ],
+                                "stat_data": {
+                                    "sales": {
+                                        "desc": "以达人推广为主，占比97.27%",
+                                        "stat_list": [
+                                            {
+                                                "key": "达人推广",
+                                                "value": 97.27
+                                            },
+                                            {
+                                                "key": "商家自卖",
+                                                "value": 2.73
+                                            }
+                                        ]
+                                    },
+                                    "sales_amount": {
+                                        "desc": "以达人推广为主，占比97.01%",
+                                        "stat_list": [
+                                            {
+                                                "key": "达人推广",
+                                                "value": 97.01
+                                            },
+                                            {
+                                                "key": "商家自卖",
+                                                "value": 2.99
+                                            }
+                                        ]
+                                    }
+                                }
+                            },
+                            {
+                                "title": "达人带货方式",
+                                "swith_text": [
+                                    {
+                                        "key": "sales_amount",
+                                        "name": "销售额"
+                                    },
+                                    {
+                                        "key": "sales",
+                                        "name": "销量"
+                                    }
+                                ],
+                                "stat_data": {
+                                    "sales": {
+                                        "desc": "以视频为主，占比98.09%",
+                                        "stat_list": [
+                                            {
+                                                "key": "直播",
+                                                "value": 1.11
+                                            },
+                                            {
+                                                "key": "视频",
+                                                "value": 98.09
+                                            },
+                                            {
+                                                "key": "图文",
+                                                "value": 0.07
+                                            },
+                                            {
+                                                "key": "橱窗",
+                                                "value": 0.72
+                                            }
+                                        ]
+                                    },
+                                    "sales_amount": {
+                                        "desc": "以视频为主，占比98.66%",
+                                        "stat_list": [
+                                            {
+                                                "key": "直播",
+                                                "value": 0.51
+                                            },
+                                            {
+                                                "key": "视频",
+                                                "value": 98.66
+                                            },
+                                            {
+                                                "key": "图文",
+                                                "value": 0.08
+                                            },
+                                            {
+                                                "key": "橱窗",
+                                                "value": 0.75
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        ]
+                    },
+                    "code": 0
+                },
+                "comment_data": {
+                    "code": -1
+                },
+                "author_data": {
+                    "code": -1
+                },
+                "content_data": {
+                    "calculate_data": {
+                        "calculate_time": 20250928,
+                        "live_sales": 1253,
+                        "format_live_sales": "1千+",
+                        "video_sales": 110375,
+                        "format_video_sales": "10万+",
+                        "image_text_sales": 83,
+                        "format_image_text_sales": "80+",
+                        "bind_shop_sales": 811,
+                        "format_bind_shop_sales": "800+",
+                        "live_sales_amount": 2030054,
+                        "format_live_sales_amount": "¥2万+",
+                        "video_sales_amount": 396285543,
+                        "format_video_sales_amount": "¥390万+",
+                        "image_text_sales_amount": 334626,
+                        "format_image_text_sales_amount": "¥3千+",
+                        "bind_shop_sales_amount": 3016922,
+                        "format_bind_shop_sales_amount": "¥3万+",
+                        "live_match_order_num": 35,
+                        "video_match_order_num": 354,
+                        "image_text_match_order_num": 23,
+                        "bind_shop_match_order_num": 235,
+                        "live_count": 154,
+                        "video_count": 2750,
+                        "image_text_count": 42,
+                        "live_order_conversion_rate": 0.2372429550647372,
+                        "format_live_order_conversion_rate": "20%~25%",
+                        "video_order_conversion_rate": 0.161774307512052,
+                        "format_video_order_conversion_rate": "15%~20%",
+                        "image_text_order_conversion_rate": 0.09875,
+                        "format_image_text_order_conversion_rate": "7.5%~10%",
+                        "bind_shop_order_conversion_rate": 0.1348295646304421,
+                        "format_bind_shop_order_conversion_rate": "10%~15%",
+                        "live_sales_content_num": 154,
+                        "video_sales_content_num": 2750,
+                        "image_text_sales_content_num": 42,
+                        "live_pv": 5252,
+                        "video_pv": 670842,
+                        "image_text_pv": 800,
+                        "bind_shop_pv": 5926
+                    },
+                    "calculate_data_list": [
+                        {
+                            "calculate_time": 20250830,
+                            "live_sales": 33,
+                            "format_live_sales": "30+",
+                            "video_sales": 1510,
+                            "format_video_sales": "1千+",
+                            "image_text_sales": 2,
+                            "format_image_text_sales": "0~10",
+                            "bind_shop_sales": 5,
+                            "format_bind_shop_sales": "0~10",
+                            "live_sales_amount": 52636,
+                            "format_live_sales_amount": "¥500+",
+                            "video_sales_amount": 5543378,
+                            "format_video_sales_amount": "¥5万+",
+                            "image_text_sales_amount": 8460,
+                            "format_image_text_sales_amount": "¥80+",
+                            "bind_shop_sales_amount": 18448,
+                            "format_bind_shop_sales_amount": "¥100+",
+                            "live_match_order_num": 7,
+                            "video_match_order_num": 68,
+                            "image_text_match_order_num": 2,
+                            "bind_shop_match_order_num": 3,
+                            "live_count": 11,
+                            "video_count": 243,
+                            "image_text_count": 2,
+                            "live_order_conversion_rate": 0.2619047619047619,
+                            "format_live_order_conversion_rate": "25%~30%",
+                            "video_order_conversion_rate": 0.314128362635035,
+                            "format_video_order_conversion_rate": "30%~35%",
+                            "image_text_order_conversion_rate": 0.0909090909090909,
+                            "format_image_text_order_conversion_rate": "7.5%~10%",
+                            "bind_shop_order_conversion_rate": 0.1612903225806452,
+                            "format_bind_shop_order_conversion_rate": "15%~20%",
+                            "live_sales_content_num": 11,
+                            "video_sales_content_num": 243,
+                            "image_text_sales_content_num": 2,
+                            "live_pv": 126,
+                            "video_pv": 4721,
+                            "image_text_pv": 22,
+                            "bind_shop_pv": 31
+                        },
+                        {
+                            "calculate_time": 20250831,
+                            "live_sales": 17,
+                            "format_live_sales": "10+",
+                            "video_sales": 1228,
+                            "format_video_sales": "1千+",
+                            "image_text_sales": 1,
+                            "format_image_text_sales": "0~10",
+                            "bind_shop_sales": 2,
+                            "format_bind_shop_sales": "0~10",
+                            "live_sales_amount": 21360,
+                            "format_live_sales_amount": "¥200+",
+                            "video_sales_amount": 4583188,
+                            "format_video_sales_amount": "¥4万+",
+                            "image_text_sales_amount": 4880,
+                            "format_image_text_sales_amount": "¥0~50",
+                            "bind_shop_sales_amount": 5760,
+                            "format_bind_shop_sales_amount": "¥50+",
+                            "live_match_order_num": 6,
+                            "video_match_order_num": 63,
+                            "image_text_match_order_num": 1,
+                            "bind_shop_match_order_num": 2,
+                            "live_count": 7,
+                            "video_count": 243,
+                            "image_text_count": 1,
+                            "live_order_conversion_rate": 0.1382113821138211,
+                            "format_live_order_conversion_rate": "10%~15%",
+                            "video_order_conversion_rate": 0.3149895178197065,
+                            "format_video_order_conversion_rate": "30%~35%",
+                            "image_text_order_conversion_rate": 0.0434782608695652,
+                            "format_image_text_order_conversion_rate": "2.5%~5%",
+                            "bind_shop_order_conversion_rate": 0.0689655172413793,
+                            "format_bind_shop_order_conversion_rate": "5%~7.5%",
+                            "live_sales_content_num": 7,
+                            "video_sales_content_num": 243,
+                            "image_text_sales_content_num": 1,
+                            "live_pv": 123,
+                            "video_pv": 3816,
+                            "image_text_pv": 23,
+                            "bind_shop_pv": 29
+                        },
+                        {
+                            "calculate_time": 20250901,
+                            "live_sales": 28,
+                            "format_live_sales": "20+",
+                            "video_sales": 1515,
+                            "format_video_sales": "1千+",
+                            "image_text_sales": 6,
+                            "format_image_text_sales": "0~10",
+                            "bind_shop_sales": 8,
+                            "format_bind_shop_sales": "0~10",
+                            "live_sales_amount": 62240,
+                            "format_live_sales_amount": "¥600+",
+                            "video_sales_amount": 5538007,
+                            "format_video_sales_amount": "¥5万+",
+                            "image_text_sales_amount": 29280,
+                            "format_image_text_sales_amount": "¥200+",
+                            "bind_shop_sales_amount": 36740,
+                            "format_bind_shop_sales_amount": "¥300+",
+                            "live_match_order_num": 8,
+                            "video_match_order_num": 64,
+                            "image_text_match_order_num": 3,
+                            "bind_shop_match_order_num": 6,
+                            "live_count": 11,
+                            "video_count": 266,
+                            "image_text_count": 3,
+                            "live_order_conversion_rate": 0.231404958677686,
+                            "format_live_order_conversion_rate": "20%~25%",
+                            "video_order_conversion_rate": 0.2363724071394115,
+                            "format_video_order_conversion_rate": "20%~25%",
+                            "image_text_order_conversion_rate": 0.1395348837209302,
+                            "format_image_text_order_conversion_rate": "10%~15%",
+                            "bind_shop_order_conversion_rate": 0.1707317073170732,
+                            "format_bind_shop_order_conversion_rate": "15%~20%",
+                            "live_sales_content_num": 11,
+                            "video_sales_content_num": 266,
+                            "image_text_sales_content_num": 3,
+                            "live_pv": 121,
+                            "video_pv": 6219,
+                            "image_text_pv": 43,
+                            "bind_shop_pv": 41
+                        },
+                        {
+                            "calculate_time": 20250902,
+                            "live_sales": 29,
+                            "format_live_sales": "20+",
+                            "video_sales": 1315,
+                            "format_video_sales": "1千+",
+                            "image_text_sales": 12,
+                            "format_image_text_sales": "10+",
+                            "bind_shop_sales": 7,
+                            "format_bind_shop_sales": "0~10",
+                            "live_sales_amount": 38520,
+                            "format_live_sales_amount": "¥300+",
+                            "video_sales_amount": 4731007,
+                            "format_video_sales_amount": "¥4万+",
+                            "image_text_sales_amount": 53460,
+                            "format_image_text_sales_amount": "¥500+",
+                            "bind_shop_sales_amount": 26060,
+                            "format_bind_shop_sales_amount": "¥200+",
+                            "live_match_order_num": 5,
+                            "video_match_order_num": 69,
+                            "image_text_match_order_num": 6,
+                            "bind_shop_match_order_num": 7,
+                            "live_count": 6,
+                            "video_count": 284,
+                            "image_text_count": 6,
+                            "live_order_conversion_rate": 0.2660550458715596,
+                            "format_live_order_conversion_rate": "25%~30%",
+                            "video_order_conversion_rate": 0.2922209695603157,
+                            "format_video_order_conversion_rate": "25%~30%",
+                            "image_text_order_conversion_rate": 0.1222222222222222,
+                            "format_image_text_order_conversion_rate": "10%~15%",
+                            "bind_shop_order_conversion_rate": 0.2692307692307692,
+                            "format_bind_shop_order_conversion_rate": "25%~30%",
+                            "live_sales_content_num": 6,
+                            "video_sales_content_num": 284,
+                            "image_text_sales_content_num": 6,
+                            "live_pv": 109,
+                            "video_pv": 4435,
+                            "image_text_pv": 90,
+                            "bind_shop_pv": 26
+                        },
+                        {
+                            "calculate_time": 20250903,
+                            "live_sales": 28,
+                            "format_live_sales": "20+",
+                            "video_sales": 1913,
+                            "format_video_sales": "1千+",
+                            "image_text_sales": 10,
+                            "format_image_text_sales": "10+",
+                            "bind_shop_sales": 11,
+                            "format_bind_shop_sales": "10+",
+                            "live_sales_amount": 34139,
+                            "format_live_sales_amount": "¥300+",
+                            "video_sales_amount": 7048205,
+                            "format_video_sales_amount": "¥7万+",
+                            "image_text_sales_amount": 36800,
+                            "format_image_text_sales_amount": "¥300+",
+                            "bind_shop_sales_amount": 38780,
+                            "format_bind_shop_sales_amount": "¥300+",
+                            "live_match_order_num": 5,
+                            "video_match_order_num": 68,
+                            "image_text_match_order_num": 6,
+                            "bind_shop_match_order_num": 9,
+                            "live_count": 6,
+                            "video_count": 270,
+                            "image_text_count": 5,
+                            "live_order_conversion_rate": 0.1931034482758621,
+                            "format_live_order_conversion_rate": "15%~20%",
+                            "video_order_conversion_rate": 0.1642038996240273,
+                            "format_video_order_conversion_rate": "15%~20%",
+                            "image_text_order_conversion_rate": 0.119047619047619,
+                            "format_image_text_order_conversion_rate": "10%~15%",
+                            "bind_shop_order_conversion_rate": 0.1833333333333333,
+                            "format_bind_shop_order_conversion_rate": "15%~20%",
+                            "live_sales_content_num": 6,
+                            "video_sales_content_num": 270,
+                            "image_text_sales_content_num": 5,
+                            "live_pv": 145,
+                            "video_pv": 11437,
+                            "image_text_pv": 84,
+                            "bind_shop_pv": 60
+                        },
+                        {
+                            "calculate_time": 20250904,
+                            "live_sales": 60,
+                            "format_live_sales": "60+",
+                            "video_sales": 13636,
+                            "format_video_sales": "1万+",
+                            "image_text_sales": 4,
+                            "format_image_text_sales": "0~10",
+                            "bind_shop_sales": 83,
+                            "format_bind_shop_sales": "80+",
+                            "live_sales_amount": 92360,
+                            "format_live_sales_amount": "¥900+",
+                            "video_sales_amount": 49496907,
+                            "format_video_sales_amount": "¥40万+",
+                            "image_text_sales_amount": 14220,
+                            "format_image_text_sales_amount": "¥100+",
+                            "bind_shop_sales_amount": 318456,
+                            "format_bind_shop_sales_amount": "¥3千+",
+                            "live_match_order_num": 7,
+                            "video_match_order_num": 98,
+                            "image_text_match_order_num": 2,
+                            "bind_shop_match_order_num": 23,
+                            "live_count": 9,
+                            "video_count": 362,
+                            "image_text_count": 2,
+                            "live_order_conversion_rate": 0.2631578947368421,
+                            "format_live_order_conversion_rate": "25%~30%",
+                            "video_order_conversion_rate": 0.1287807228915663,
+                            "format_video_order_conversion_rate": "10%~15%",
+                            "image_text_order_conversion_rate": 0.0909090909090909,
+                            "format_image_text_order_conversion_rate": "7.5%~10%",
+                            "bind_shop_order_conversion_rate": 0.1238670694864048,
+                            "format_bind_shop_order_conversion_rate": "10%~15%",
+                            "live_sales_content_num": 9,
+                            "video_sales_content_num": 362,
+                            "image_text_sales_content_num": 2,
+                            "live_pv": 228,
+                            "video_pv": 103750,
+                            "image_text_pv": 44,
+                            "bind_shop_pv": 662
+                        },
+                        {
+                            "calculate_time": 20250905,
+                            "live_sales": 71,
+                            "format_live_sales": "70+",
+                            "video_sales": 7000,
+                            "format_video_sales": "7千+",
+                            "image_text_sales": 0,
+                            "format_image_text_sales": "0~10",
+                            "bind_shop_sales": 59,
+                            "format_bind_shop_sales": "50+",
+                            "live_sales_amount": 105548,
+                            "format_live_sales_amount": "¥1千+",
+                            "video_sales_amount": 25824229,
+                            "format_video_sales_amount": "¥20万+",
+                            "image_text_sales_amount": 0,
+                            "format_image_text_sales_amount": "¥0~50",
+                            "bind_shop_sales_amount": 218459,
+                            "format_bind_shop_sales_amount": "¥2千+",
+                            "live_match_order_num": 10,
+                            "video_match_order_num": 123,
+                            "image_text_match_order_num": 0,
+                            "bind_shop_match_order_num": 18,
+                            "live_count": 11,
+                            "video_count": 377,
+                            "image_text_count": 0,
+                            "live_order_conversion_rate": 0.2491228070175439,
+                            "format_live_order_conversion_rate": "20%~25%",
+                            "video_order_conversion_rate": 0.1084551312274085,
+                            "format_video_order_conversion_rate": "10%~15%",
+                            "image_text_order_conversion_rate": 0,
+                            "format_image_text_order_conversion_rate": "0~2.5%",
+                            "bind_shop_order_conversion_rate": 0.1428571428571429,
+                            "format_bind_shop_order_conversion_rate": "10%~15%",
+                            "live_sales_content_num": 11,
+                            "video_sales_content_num": 377,
+                            "image_text_sales_content_num": 0,
+                            "live_pv": 285,
+                            "video_pv": 63630,
+                            "image_text_pv": 34,
+                            "bind_shop_pv": 413
+                        },
+                        {
+                            "calculate_time": 20250906,
+                            "live_sales": 79,
+                            "format_live_sales": "70+",
+                            "video_sales": 4986,
+                            "format_video_sales": "4千+",
+                            "image_text_sales": 5,
+                            "format_image_text_sales": "0~10",
+                            "bind_shop_sales": 35,
+                            "format_bind_shop_sales": "30+",
+                            "live_sales_amount": 123432,
+                            "format_live_sales_amount": "¥1千+",
+                            "video_sales_amount": 18516782,
+                            "format_video_sales_amount": "¥10万+",
+                            "image_text_sales_amount": 21299,
+                            "format_image_text_sales_amount": "¥200+",
+                            "bind_shop_sales_amount": 140779,
+                            "format_bind_shop_sales_amount": "¥1千+",
+                            "live_match_order_num": 9,
+                            "video_match_order_num": 115,
+                            "image_text_match_order_num": 3,
+                            "bind_shop_match_order_num": 14,
+                            "live_count": 10,
+                            "video_count": 383,
+                            "image_text_count": 3,
+                            "live_order_conversion_rate": 0.2925925925925926,
+                            "format_live_order_conversion_rate": "25%~30%",
+                            "video_order_conversion_rate": 0.1146468540454662,
+                            "format_video_order_conversion_rate": "10%~15%",
+                            "image_text_order_conversion_rate": 0.2,
+                            "format_image_text_order_conversion_rate": "20%~25%",
+                            "bind_shop_order_conversion_rate": 0.1118210862619808,
+                            "format_bind_shop_order_conversion_rate": "10%~15%",
+                            "live_sales_content_num": 10,
+                            "video_sales_content_num": 383,
+                            "image_text_sales_content_num": 3,
+                            "live_pv": 270,
+                            "video_pv": 42801,
+                            "image_text_pv": 25,
+                            "bind_shop_pv": 313
+                        },
+                        {
+                            "calculate_time": 20250907,
+                            "live_sales": 65,
+                            "format_live_sales": "60+",
+                            "video_sales": 3857,
+                            "format_video_sales": "3千+",
+                            "image_text_sales": 1,
+                            "format_image_text_sales": "0~10",
+                            "bind_shop_sales": 26,
+                            "format_bind_shop_sales": "20+",
+                            "live_sales_amount": 89848,
+                            "format_live_sales_amount": "¥800+",
+                            "video_sales_amount": 14320496,
+                            "format_video_sales_amount": "¥10万+",
+                            "image_text_sales_amount": 3580,
+                            "format_image_text_sales_amount": "¥0~50",
+                            "bind_shop_sales_amount": 96180,
+                            "format_bind_shop_sales_amount": "¥900+",
+                            "live_match_order_num": 7,
+                            "video_match_order_num": 111,
+                            "image_text_match_order_num": 1,
+                            "bind_shop_match_order_num": 16,
+                            "live_count": 11,
+                            "video_count": 339,
+                            "image_text_count": 1,
+                            "live_order_conversion_rate": 0.2603305785123967,
+                            "format_live_order_conversion_rate": "25%~30%",
+                            "video_order_conversion_rate": 0.2194173630454968,
+                            "format_video_order_conversion_rate": "20%~25%",
+                            "image_text_order_conversion_rate": 0.0384615384615385,
+                            "format_image_text_order_conversion_rate": "2.5%~5%",
+                            "bind_shop_order_conversion_rate": 0.143646408839779,
+                            "format_bind_shop_order_conversion_rate": "10%~15%",
+                            "live_sales_content_num": 11,
+                            "video_sales_content_num": 339,
+                            "image_text_sales_content_num": 1,
+                            "live_pv": 242,
+                            "video_pv": 17232,
+                            "image_text_pv": 26,
+                            "bind_shop_pv": 181
+                        },
+                        {
+                            "calculate_time": 20250908,
+                            "live_sales": 43,
+                            "format_live_sales": "40+",
+                            "video_sales": 4696,
+                            "format_video_sales": "4千+",
+                            "image_text_sales": 5,
+                            "format_image_text_sales": "0~10",
+                            "bind_shop_sales": 26,
+                            "format_bind_shop_sales": "20+",
+                            "live_sales_amount": 84234,
+                            "format_live_sales_amount": "¥800+",
+                            "video_sales_amount": 16756572,
+                            "format_video_sales_amount": "¥10万+",
+                            "image_text_sales_amount": 20500,
+                            "format_image_text_sales_amount": "¥200+",
+                            "bind_shop_sales_amount": 101180,
+                            "format_bind_shop_sales_amount": "¥1千+",
+                            "live_match_order_num": 6,
+                            "video_match_order_num": 109,
+                            "image_text_match_order_num": 3,
+                            "bind_shop_match_order_num": 12,
+                            "live_count": 7,
+                            "video_count": 342,
+                            "image_text_count": 3,
+                            "live_order_conversion_rate": 0.2038834951456311,
+                            "format_live_order_conversion_rate": "20%~25%",
+                            "video_order_conversion_rate": 0.1202595980921104,
+                            "format_video_order_conversion_rate": "10%~15%",
+                            "image_text_order_conversion_rate": 0.1724137931034483,
+                            "format_image_text_order_conversion_rate": "15%~20%",
+                            "bind_shop_order_conversion_rate": 0.1007751937984496,
+                            "format_bind_shop_order_conversion_rate": "10%~15%",
+                            "live_sales_content_num": 7,
+                            "video_sales_content_num": 342,
+                            "image_text_sales_content_num": 3,
+                            "live_pv": 206,
+                            "video_pv": 38367,
+                            "image_text_pv": 29,
+                            "bind_shop_pv": 258
+                        },
+                        {
+                            "calculate_time": 20250909,
+                            "live_sales": 28,
+                            "format_live_sales": "20+",
+                            "video_sales": 3403,
+                            "format_video_sales": "3千+",
+                            "image_text_sales": 1,
+                            "format_image_text_sales": "0~10",
+                            "bind_shop_sales": 41,
+                            "format_bind_shop_sales": "40+",
+                            "live_sales_amount": 51240,
+                            "format_live_sales_amount": "¥500+",
+                            "video_sales_amount": 12329396,
+                            "format_video_sales_amount": "¥10万+",
+                            "image_text_sales_amount": 2180,
+                            "format_image_text_sales_amount": "¥0~50",
+                            "bind_shop_sales_amount": 143180,
+                            "format_bind_shop_sales_amount": "¥1千+",
+                            "live_match_order_num": 6,
+                            "video_match_order_num": 99,
+                            "image_text_match_order_num": 1,
+                            "bind_shop_match_order_num": 19,
+                            "live_count": 8,
+                            "video_count": 342,
+                            "image_text_count": 1,
+                            "live_order_conversion_rate": 0.208955223880597,
+                            "format_live_order_conversion_rate": "20%~25%",
+                            "video_order_conversion_rate": 0.1403007645131479,
+                            "format_video_order_conversion_rate": "10%~15%",
+                            "image_text_order_conversion_rate": 0.024390243902439,
+                            "format_image_text_order_conversion_rate": "0~2.5%",
+                            "bind_shop_order_conversion_rate": 0.1464285714285714,
+                            "format_bind_shop_order_conversion_rate": "10%~15%",
+                            "live_sales_content_num": 8,
+                            "video_sales_content_num": 342,
+                            "image_text_sales_content_num": 1,
+                            "live_pv": 134,
+                            "video_pv": 23806,
+                            "image_text_pv": 41,
+                            "bind_shop_pv": 280
+                        },
+                        {
+                            "calculate_time": 20250910,
+                            "live_sales": 43,
+                            "format_live_sales": "40+",
+                            "video_sales": 5149,
+                            "format_video_sales": "5千+",
+                            "image_text_sales": 6,
+                            "format_image_text_sales": "0~10",
+                            "bind_shop_sales": 47,
+                            "format_bind_shop_sales": "40+",
+                            "live_sales_amount": 58820,
+                            "format_live_sales_amount": "¥500+",
+                            "video_sales_amount": 18644427,
+                            "format_video_sales_amount": "¥10万+",
+                            "image_text_sales_amount": 20180,
+                            "format_image_text_sales_amount": "¥200+",
+                            "bind_shop_sales_amount": 174004,
+                            "format_bind_shop_sales_amount": "¥1千+",
+                            "live_match_order_num": 7,
+                            "video_match_order_num": 122,
+                            "image_text_match_order_num": 5,
+                            "bind_shop_match_order_num": 16,
+                            "live_count": 9,
+                            "video_count": 400,
+                            "image_text_count": 4,
+                            "live_order_conversion_rate": 0.2443181818181818,
+                            "format_live_order_conversion_rate": "20%~25%",
+                            "video_order_conversion_rate": 0.1086013462976814,
+                            "format_video_order_conversion_rate": "10%~15%",
+                            "image_text_order_conversion_rate": 0.1785714285714286,
+                            "format_image_text_order_conversion_rate": "15%~20%",
+                            "bind_shop_order_conversion_rate": 0.1164556962025316,
+                            "format_bind_shop_order_conversion_rate": "10%~15%",
+                            "live_sales_content_num": 9,
+                            "video_sales_content_num": 400,
+                            "image_text_sales_content_num": 4,
+                            "live_pv": 176,
+                            "video_pv": 46795,
+                            "image_text_pv": 28,
+                            "bind_shop_pv": 395
+                        },
+                        {
+                            "calculate_time": 20250911,
+                            "live_sales": 42,
+                            "format_live_sales": "40+",
+                            "video_sales": 4429,
+                            "format_video_sales": "4千+",
+                            "image_text_sales": 2,
+                            "format_image_text_sales": "0~10",
+                            "bind_shop_sales": 52,
+                            "format_bind_shop_sales": "50+",
+                            "live_sales_amount": 59071,
+                            "format_live_sales_amount": "¥500+",
+                            "video_sales_amount": 15929852,
+                            "format_video_sales_amount": "¥10万+",
+                            "image_text_sales_amount": 6568,
+                            "format_image_text_sales_amount": "¥60+",
+                            "bind_shop_sales_amount": 201608,
+                            "format_bind_shop_sales_amount": "¥2千+",
+                            "live_match_order_num": 6,
+                            "video_match_order_num": 124,
+                            "image_text_match_order_num": 2,
+                            "bind_shop_match_order_num": 22,
+                            "live_count": 9,
+                            "video_count": 426,
+                            "image_text_count": 2,
+                            "live_order_conversion_rate": 0.3255813953488372,
+                            "format_live_order_conversion_rate": "30%~35%",
+                            "video_order_conversion_rate": 0.1307472560517215,
+                            "format_video_order_conversion_rate": "10%~15%",
+                            "image_text_order_conversion_rate": 0.1052631578947368,
+                            "format_image_text_order_conversion_rate": "10%~15%",
+                            "bind_shop_order_conversion_rate": 0.1404011461318052,
+                            "format_bind_shop_order_conversion_rate": "10%~15%",
+                            "live_sales_content_num": 9,
+                            "video_sales_content_num": 426,
+                            "image_text_sales_content_num": 2,
+                            "live_pv": 129,
+                            "video_pv": 33255,
+                            "image_text_pv": 19,
+                            "bind_shop_pv": 349
+                        },
+                        {
+                            "calculate_time": 20250912,
+                            "live_sales": 32,
+                            "format_live_sales": "30+",
+                            "video_sales": 5453,
+                            "format_video_sales": "5千+",
+                            "image_text_sales": 3,
+                            "format_image_text_sales": "0~10",
+                            "bind_shop_sales": 51,
+                            "format_bind_shop_sales": "50+",
+                            "live_sales_amount": 39440,
+                            "format_live_sales_amount": "¥300+",
+                            "video_sales_amount": 18675151,
+                            "format_video_sales_amount": "¥10万+",
+                            "image_text_sales_amount": 11940,
+                            "format_image_text_sales_amount": "¥100+",
+                            "bind_shop_sales_amount": 188213,
+                            "format_bind_shop_sales_amount": "¥1千+",
+                            "live_match_order_num": 6,
+                            "video_match_order_num": 122,
+                            "image_text_match_order_num": 3,
+                            "bind_shop_match_order_num": 21,
+                            "live_count": 6,
+                            "video_count": 441,
+                            "image_text_count": 2,
+                            "live_order_conversion_rate": 0.2237762237762238,
+                            "format_live_order_conversion_rate": "20%~25%",
+                            "video_order_conversion_rate": 0.1439440951892723,
+                            "format_video_order_conversion_rate": "10%~15%",
+                            "image_text_order_conversion_rate": 0.1,
+                            "format_image_text_order_conversion_rate": "10%~15%",
+                            "bind_shop_order_conversion_rate": 0.1420289855072464,
+                            "format_bind_shop_order_conversion_rate": "10%~15%",
+                            "live_sales_content_num": 6,
+                            "video_sales_content_num": 441,
+                            "image_text_sales_content_num": 2,
+                            "live_pv": 143,
+                            "video_pv": 37063,
+                            "image_text_pv": 30,
+                            "bind_shop_pv": 345
+                        },
+                        {
+                            "calculate_time": 20250913,
+                            "live_sales": 52,
+                            "format_live_sales": "50+",
+                            "video_sales": 3819,
+                            "format_video_sales": "3千+",
+                            "image_text_sales": 2,
+                            "format_image_text_sales": "0~10",
+                            "bind_shop_sales": 33,
+                            "format_bind_shop_sales": "30+",
+                            "live_sales_amount": 70614,
+                            "format_live_sales_amount": "¥700+",
+                            "video_sales_amount": 13390659,
+                            "format_video_sales_amount": "¥10万+",
+                            "image_text_sales_amount": 9760,
+                            "format_image_text_sales_amount": "¥90+",
+                            "bind_shop_sales_amount": 114505,
+                            "format_bind_shop_sales_amount": "¥1千+",
+                            "live_match_order_num": 8,
+                            "video_match_order_num": 114,
+                            "image_text_match_order_num": 2,
+                            "bind_shop_match_order_num": 19,
+                            "live_count": 10,
+                            "video_count": 455,
+                            "image_text_count": 2,
+                            "live_order_conversion_rate": 0.2626262626262626,
+                            "format_live_order_conversion_rate": "25%~30%",
+                            "video_order_conversion_rate": 0.1639729906338488,
+                            "format_video_order_conversion_rate": "15%~20%",
+                            "image_text_order_conversion_rate": 0.1,
+                            "format_image_text_order_conversion_rate": "10%~15%",
+                            "bind_shop_order_conversion_rate": 0.1479820627802691,
+                            "format_bind_shop_order_conversion_rate": "10%~15%",
+                            "live_sales_content_num": 10,
+                            "video_sales_content_num": 455,
+                            "image_text_sales_content_num": 2,
+                            "live_pv": 198,
+                            "video_pv": 22955,
+                            "image_text_pv": 20,
+                            "bind_shop_pv": 223
+                        },
+                        {
+                            "calculate_time": 20250914,
+                            "live_sales": 59,
+                            "format_live_sales": "50+",
+                            "video_sales": 4272,
+                            "format_video_sales": "4千+",
+                            "image_text_sales": 0,
+                            "format_image_text_sales": "0~10",
+                            "bind_shop_sales": 38,
+                            "format_bind_shop_sales": "30+",
+                            "live_sales_amount": 119108,
+                            "format_live_sales_amount": "¥1千+",
+                            "video_sales_amount": 14975928,
+                            "format_video_sales_amount": "¥10万+",
+                            "image_text_sales_amount": 0,
+                            "format_image_text_sales_amount": "¥0~50",
+                            "bind_shop_sales_amount": 134356,
+                            "format_bind_shop_sales_amount": "¥1千+",
+                            "live_match_order_num": 6,
+                            "video_match_order_num": 106,
+                            "image_text_match_order_num": 0,
+                            "bind_shop_match_order_num": 20,
+                            "live_count": 9,
+                            "video_count": 434,
+                            "image_text_count": 0,
+                            "live_order_conversion_rate": 0.2348178137651822,
+                            "format_live_order_conversion_rate": "20%~25%",
+                            "video_order_conversion_rate": 0.1571646966702711,
+                            "format_video_order_conversion_rate": "15%~20%",
+                            "image_text_order_conversion_rate": 0,
+                            "format_image_text_order_conversion_rate": "0~2.5%",
+                            "bind_shop_order_conversion_rate": 0.1615720524017467,
+                            "format_bind_shop_order_conversion_rate": "15%~20%",
+                            "live_sales_content_num": 9,
+                            "video_sales_content_num": 434,
+                            "image_text_sales_content_num": 0,
+                            "live_pv": 247,
+                            "video_pv": 26819,
+                            "image_text_pv": 19,
+                            "bind_shop_pv": 229
+                        },
+                        {
+                            "calculate_time": 20250915,
+                            "live_sales": 48,
+                            "format_live_sales": "40+",
+                            "video_sales": 4118,
+                            "format_video_sales": "4千+",
+                            "image_text_sales": 5,
+                            "format_image_text_sales": "0~10",
+                            "bind_shop_sales": 27,
+                            "format_bind_shop_sales": "20+",
+                            "live_sales_amount": 76110,
+                            "format_live_sales_amount": "¥700+",
+                            "video_sales_amount": 14766740,
+                            "format_video_sales_amount": "¥10万+",
+                            "image_text_sales_amount": 16700,
+                            "format_image_text_sales_amount": "¥100+",
+                            "bind_shop_sales_amount": 98660,
+                            "format_bind_shop_sales_amount": "¥900+",
+                            "live_match_order_num": 5,
+                            "video_match_order_num": 99,
+                            "image_text_match_order_num": 4,
+                            "bind_shop_match_order_num": 17,
+                            "live_count": 8,
+                            "video_count": 434,
+                            "image_text_count": 3,
+                            "live_order_conversion_rate": 0.1684210526315789,
+                            "format_live_order_conversion_rate": "15%~20%",
+                            "video_order_conversion_rate": 0.162147028237741,
+                            "format_video_order_conversion_rate": "15%~20%",
+                            "image_text_order_conversion_rate": 0.2105263157894737,
+                            "format_image_text_order_conversion_rate": "20%~25%",
+                            "bind_shop_order_conversion_rate": 0.1071428571428571,
+                            "format_bind_shop_order_conversion_rate": "10%~15%",
+                            "live_sales_content_num": 8,
+                            "video_sales_content_num": 434,
+                            "image_text_sales_content_num": 3,
+                            "live_pv": 285,
+                            "video_pv": 25002,
+                            "image_text_pv": 19,
+                            "bind_shop_pv": 252
+                        },
+                        {
+                            "calculate_time": 20250916,
+                            "live_sales": 52,
+                            "format_live_sales": "50+",
+                            "video_sales": 3780,
+                            "format_video_sales": "3千+",
+                            "image_text_sales": 0,
+                            "format_image_text_sales": "0~10",
+                            "bind_shop_sales": 19,
+                            "format_bind_shop_sales": "10+",
+                            "live_sales_amount": 86748,
+                            "format_live_sales_amount": "¥800+",
+                            "video_sales_amount": 13537904,
+                            "format_video_sales_amount": "¥10万+",
+                            "image_text_sales_amount": 0,
+                            "format_image_text_sales_amount": "¥0~50",
+                            "bind_shop_sales_amount": 75597,
+                            "format_bind_shop_sales_amount": "¥700+",
+                            "live_match_order_num": 9,
+                            "video_match_order_num": 104,
+                            "image_text_match_order_num": 0,
+                            "bind_shop_match_order_num": 14,
+                            "live_count": 12,
+                            "video_count": 397,
+                            "image_text_count": 0,
+                            "live_order_conversion_rate": 0.1977186311787072,
+                            "format_live_order_conversion_rate": "15%~20%",
+                            "video_order_conversion_rate": 0.2330431514999687,
+                            "format_video_order_conversion_rate": "20%~25%",
+                            "image_text_order_conversion_rate": 0,
+                            "format_image_text_order_conversion_rate": "0~2.5%",
+                            "bind_shop_order_conversion_rate": 0.1,
+                            "format_bind_shop_order_conversion_rate": "10%~15%",
+                            "live_sales_content_num": 12,
+                            "video_sales_content_num": 397,
+                            "image_text_sales_content_num": 0,
+                            "live_pv": 263,
+                            "video_pv": 15967,
+                            "image_text_pv": 17,
+                            "bind_shop_pv": 190
+                        },
+                        {
+                            "calculate_time": 20250917,
+                            "live_sales": 62,
+                            "format_live_sales": "60+",
+                            "video_sales": 3355,
+                            "format_video_sales": "3千+",
+                            "image_text_sales": 3,
+                            "format_image_text_sales": "0~10",
+                            "bind_shop_sales": 27,
+                            "format_bind_shop_sales": "20+",
+                            "live_sales_amount": 137258,
+                            "format_live_sales_amount": "¥1千+",
+                            "video_sales_amount": 12116088,
+                            "format_video_sales_amount": "¥10万+",
+                            "image_text_sales_amount": 13720,
+                            "format_image_text_sales_amount": "¥100+",
+                            "bind_shop_sales_amount": 101460,
+                            "format_bind_shop_sales_amount": "¥1千+",
+                            "live_match_order_num": 7,
+                            "video_match_order_num": 99,
+                            "image_text_match_order_num": 2,
+                            "bind_shop_match_order_num": 14,
+                            "live_count": 11,
+                            "video_count": 438,
+                            "image_text_count": 2,
+                            "live_order_conversion_rate": 0.2307692307692308,
+                            "format_live_order_conversion_rate": "20%~25%",
+                            "video_order_conversion_rate": 0.2159188245371285,
+                            "format_video_order_conversion_rate": "20%~25%",
+                            "image_text_order_conversion_rate": 0.2727272727272727,
+                            "format_image_text_order_conversion_rate": "25%~30%",
+                            "bind_shop_order_conversion_rate": 0.1436170212765957,
+                            "format_bind_shop_order_conversion_rate": "10%~15%",
+                            "live_sales_content_num": 11,
+                            "video_sales_content_num": 438,
+                            "image_text_sales_content_num": 2,
+                            "live_pv": 260,
+                            "video_pv": 15177,
+                            "image_text_pv": 11,
+                            "bind_shop_pv": 188
+                        },
+                        {
+                            "calculate_time": 20250918,
+                            "live_sales": 46,
+                            "format_live_sales": "40+",
+                            "video_sales": 3222,
+                            "format_video_sales": "3千+",
+                            "image_text_sales": 1,
+                            "format_image_text_sales": "0~10",
+                            "bind_shop_sales": 23,
+                            "format_bind_shop_sales": "20+",
+                            "live_sales_amount": 98084,
+                            "format_live_sales_amount": "¥900+",
+                            "video_sales_amount": 11436994,
+                            "format_video_sales_amount": "¥10万+",
+                            "image_text_sales_amount": 4880,
+                            "format_image_text_sales_amount": "¥0~50",
+                            "bind_shop_sales_amount": 84740,
+                            "format_bind_shop_sales_amount": "¥800+",
+                            "live_match_order_num": 7,
+                            "video_match_order_num": 99,
+                            "image_text_match_order_num": 1,
+                            "bind_shop_match_order_num": 17,
+                            "live_count": 11,
+                            "video_count": 364,
+                            "image_text_count": 1,
+                            "live_order_conversion_rate": 0.1939655172413793,
+                            "format_live_order_conversion_rate": "15%~20%",
+                            "video_order_conversion_rate": 0.2618301731244847,
+                            "format_video_order_conversion_rate": "25%~30%",
+                            "image_text_order_conversion_rate": 0.0714285714285714,
+                            "format_image_text_order_conversion_rate": "5%~7.5%",
+                            "bind_shop_order_conversion_rate": 0.1854838709677419,
+                            "format_bind_shop_order_conversion_rate": "15%~20%",
+                            "live_sales_content_num": 11,
+                            "video_sales_content_num": 364,
+                            "image_text_sales_content_num": 1,
+                            "live_pv": 232,
+                            "video_pv": 12130,
+                            "image_text_pv": 14,
+                            "bind_shop_pv": 124
+                        },
+                        {
+                            "calculate_time": 20250919,
+                            "live_sales": 32,
+                            "format_live_sales": "30+",
+                            "video_sales": 2811,
+                            "format_video_sales": "2千+",
+                            "image_text_sales": 0,
+                            "format_image_text_sales": "0~10",
+                            "bind_shop_sales": 19,
+                            "format_bind_shop_sales": "10+",
+                            "live_sales_amount": 38360,
+                            "format_live_sales_amount": "¥300+",
+                            "video_sales_amount": 9851158,
+                            "format_video_sales_amount": "¥9万+",
+                            "image_text_sales_amount": 0,
+                            "format_image_text_sales_amount": "¥0~50",
+                            "bind_shop_sales_amount": 69880,
+                            "format_bind_shop_sales_amount": "¥600+",
+                            "live_match_order_num": 6,
+                            "video_match_order_num": 91,
+                            "image_text_match_order_num": 0,
+                            "bind_shop_match_order_num": 13,
+                            "live_count": 6,
+                            "video_count": 352,
+                            "image_text_count": 0,
+                            "live_order_conversion_rate": 0.2064516129032258,
+                            "format_live_order_conversion_rate": "20%~25%",
+                            "video_order_conversion_rate": 0.3110510916047716,
+                            "format_video_order_conversion_rate": "30%~35%",
+                            "image_text_order_conversion_rate": 0,
+                            "format_image_text_order_conversion_rate": "0~2.5%",
+                            "bind_shop_order_conversion_rate": 0.1328671328671329,
+                            "format_bind_shop_order_conversion_rate": "10%~15%",
+                            "live_sales_content_num": 6,
+                            "video_sales_content_num": 352,
+                            "image_text_sales_content_num": 0,
+                            "live_pv": 155,
+                            "video_pv": 8886,
+                            "image_text_pv": 4,
+                            "bind_shop_pv": 143
+                        },
+                        {
+                            "calculate_time": 20250920,
+                            "live_sales": 26,
+                            "format_live_sales": "20+",
+                            "video_sales": 2289,
+                            "format_video_sales": "2千+",
+                            "image_text_sales": 0,
+                            "format_image_text_sales": "0~10",
+                            "bind_shop_sales": 11,
+                            "format_bind_shop_sales": "10+",
+                            "live_sales_amount": 43180,
+                            "format_live_sales_amount": "¥400+",
+                            "video_sales_amount": 8129817,
+                            "format_video_sales_amount": "¥8万+",
+                            "image_text_sales_amount": 0,
+                            "format_image_text_sales_amount": "¥0~50",
+                            "bind_shop_sales_amount": 41280,
+                            "format_bind_shop_sales_amount": "¥400+",
+                            "live_match_order_num": 5,
+                            "video_match_order_num": 92,
+                            "image_text_match_order_num": 0,
+                            "bind_shop_match_order_num": 9,
+                            "live_count": 6,
+                            "video_count": 357,
+                            "image_text_count": 0,
+                            "live_order_conversion_rate": 0.2795698924731183,
+                            "format_live_order_conversion_rate": "25%~30%",
+                            "video_order_conversion_rate": 0.278353057199211,
+                            "format_video_order_conversion_rate": "25%~30%",
+                            "image_text_order_conversion_rate": 0,
+                            "format_image_text_order_conversion_rate": "0~2.5%",
+                            "bind_shop_order_conversion_rate": 0.1222222222222222,
+                            "format_bind_shop_order_conversion_rate": "10%~15%",
+                            "live_sales_content_num": 6,
+                            "video_sales_content_num": 357,
+                            "image_text_sales_content_num": 0,
+                            "live_pv": 93,
+                            "video_pv": 8112,
+                            "image_text_pv": 3,
+                            "bind_shop_pv": 90
+                        },
+                        {
+                            "calculate_time": 20250921,
+                            "live_sales": 37,
+                            "format_live_sales": "30+",
+                            "video_sales": 2237,
+                            "format_video_sales": "2千+",
+                            "image_text_sales": 2,
+                            "format_image_text_sales": "0~10",
+                            "bind_shop_sales": 27,
+                            "format_bind_shop_sales": "20+",
+                            "live_sales_amount": 56437,
+                            "format_live_sales_amount": "¥500+",
+                            "video_sales_amount": 7933910,
+                            "format_video_sales_amount": "¥7万+",
+                            "image_text_sales_amount": 9760,
+                            "format_image_text_sales_amount": "¥90+",
+                            "bind_shop_sales_amount": 99465,
+                            "format_bind_shop_sales_amount": "¥900+",
+                            "live_match_order_num": 6,
+                            "video_match_order_num": 79,
+                            "image_text_match_order_num": 2,
+                            "bind_shop_match_order_num": 14,
+                            "live_count": 6,
+                            "video_count": 314,
+                            "image_text_count": 2,
+                            "live_order_conversion_rate": 0.2466666666666667,
+                            "format_live_order_conversion_rate": "20%~25%",
+                            "video_order_conversion_rate": 0.2720406141654284,
+                            "format_video_order_conversion_rate": "25%~30%",
+                            "image_text_order_conversion_rate": 0.3333333333333333,
+                            "format_image_text_order_conversion_rate": "30%~35%",
+                            "bind_shop_order_conversion_rate": 0.1804511278195489,
+                            "format_bind_shop_order_conversion_rate": "15%~20%",
+                            "live_sales_content_num": 6,
+                            "video_sales_content_num": 314,
+                            "image_text_sales_content_num": 2,
+                            "live_pv": 150,
+                            "video_pv": 8076,
+                            "image_text_pv": 6,
+                            "bind_shop_pv": 133
+                        },
+                        {
+                            "calculate_time": 20250922,
+                            "live_sales": 29,
+                            "format_live_sales": "20+",
+                            "video_sales": 2370,
+                            "format_video_sales": "2千+",
+                            "image_text_sales": 7,
+                            "format_image_text_sales": "0~10",
+                            "bind_shop_sales": 10,
+                            "format_bind_shop_sales": "10+",
+                            "live_sales_amount": 35992,
+                            "format_live_sales_amount": "¥300+",
+                            "video_sales_amount": 8434624,
+                            "format_video_sales_amount": "¥8万+",
+                            "image_text_sales_amount": 27359,
+                            "format_image_text_sales_amount": "¥200+",
+                            "bind_shop_sales_amount": 36700,
+                            "format_bind_shop_sales_amount": "¥300+",
+                            "live_match_order_num": 5,
+                            "video_match_order_num": 92,
+                            "image_text_match_order_num": 5,
+                            "bind_shop_match_order_num": 10,
+                            "live_count": 6,
+                            "video_count": 364,
+                            "image_text_count": 5,
+                            "live_order_conversion_rate": 0.2164179104477612,
+                            "format_live_order_conversion_rate": "20%~25%",
+                            "video_order_conversion_rate": 0.2829203109815355,
+                            "format_video_order_conversion_rate": "25%~30%",
+                            "image_text_order_conversion_rate": 0.3529411764705882,
+                            "format_image_text_order_conversion_rate": "35%~40%",
+                            "bind_shop_order_conversion_rate": 0.0952380952380952,
+                            "format_bind_shop_order_conversion_rate": "7.5%~10%",
+                            "live_sales_content_num": 6,
+                            "video_sales_content_num": 364,
+                            "image_text_sales_content_num": 5,
+                            "live_pv": 134,
+                            "video_pv": 8232,
+                            "image_text_pv": 17,
+                            "bind_shop_pv": 105
+                        },
+                        {
+                            "calculate_time": 20250923,
+                            "live_sales": 36,
+                            "format_live_sales": "30+",
+                            "video_sales": 2105,
+                            "format_video_sales": "2千+",
+                            "image_text_sales": 1,
+                            "format_image_text_sales": "0~10",
+                            "bind_shop_sales": 13,
+                            "format_bind_shop_sales": "10+",
+                            "live_sales_amount": 52680,
+                            "format_live_sales_amount": "¥500+",
+                            "video_sales_amount": 7382495,
+                            "format_video_sales_amount": "¥7万+",
+                            "image_text_sales_amount": 2180,
+                            "format_image_text_sales_amount": "¥0~50",
+                            "bind_shop_sales_amount": 42040,
+                            "format_bind_shop_sales_amount": "¥400+",
+                            "live_match_order_num": 6,
+                            "video_match_order_num": 93,
+                            "image_text_match_order_num": 1,
+                            "bind_shop_match_order_num": 8,
+                            "live_count": 6,
+                            "video_count": 358,
+                            "image_text_count": 1,
+                            "live_order_conversion_rate": 0.2608695652173913,
+                            "format_live_order_conversion_rate": "25%~30%",
+                            "video_order_conversion_rate": 0.2693510555121188,
+                            "format_video_order_conversion_rate": "25%~30%",
+                            "image_text_order_conversion_rate": 0.0357142857142857,
+                            "format_image_text_order_conversion_rate": "2.5%~5%",
+                            "bind_shop_order_conversion_rate": 0.104,
+                            "format_bind_shop_order_conversion_rate": "10%~15%",
+                            "live_sales_content_num": 6,
+                            "video_sales_content_num": 358,
+                            "image_text_sales_content_num": 1,
+                            "live_pv": 138,
+                            "video_pv": 7674,
+                            "image_text_pv": 28,
+                            "bind_shop_pv": 125
+                        },
+                        {
+                            "calculate_time": 20250924,
+                            "live_sales": 38,
+                            "format_live_sales": "30+",
+                            "video_sales": 2384,
+                            "format_video_sales": "2千+",
+                            "image_text_sales": 1,
+                            "format_image_text_sales": "0~10",
+                            "bind_shop_sales": 15,
+                            "format_bind_shop_sales": "10+",
+                            "live_sales_amount": 54080,
+                            "format_live_sales_amount": "¥500+",
+                            "video_sales_amount": 8503515,
+                            "format_video_sales_amount": "¥8万+",
+                            "image_text_sales_amount": 4880,
+                            "format_image_text_sales_amount": "¥0~50",
+                            "bind_shop_sales_amount": 54600,
+                            "format_bind_shop_sales_amount": "¥500+",
+                            "live_match_order_num": 6,
+                            "video_match_order_num": 94,
+                            "image_text_match_order_num": 1,
+                            "bind_shop_match_order_num": 10,
+                            "live_count": 7,
+                            "video_count": 375,
+                            "image_text_count": 1,
+                            "live_order_conversion_rate": 0.2657342657342657,
+                            "format_live_order_conversion_rate": "25%~30%",
+                            "video_order_conversion_rate": 0.250481489407233,
+                            "format_video_order_conversion_rate": "25%~30%",
+                            "image_text_order_conversion_rate": 0.0714285714285714,
+                            "format_image_text_order_conversion_rate": "5%~7.5%",
+                            "bind_shop_order_conversion_rate": 0.1293103448275862,
+                            "format_bind_shop_order_conversion_rate": "10%~15%",
+                            "live_sales_content_num": 7,
+                            "video_sales_content_num": 375,
+                            "image_text_sales_content_num": 1,
+                            "live_pv": 143,
+                            "video_pv": 9346,
+                            "image_text_pv": 14,
+                            "bind_shop_pv": 116
+                        },
+                        {
+                            "calculate_time": 20250925,
+                            "live_sales": 31,
+                            "format_live_sales": "30+",
+                            "video_sales": 2337,
+                            "format_video_sales": "2千+",
+                            "image_text_sales": 1,
+                            "format_image_text_sales": "0~10",
+                            "bind_shop_sales": 15,
+                            "format_bind_shop_sales": "10+",
+                            "live_sales_amount": 67080,
+                            "format_live_sales_amount": "¥600+",
+                            "video_sales_amount": 8261231,
+                            "format_video_sales_amount": "¥8万+",
+                            "image_text_sales_amount": 4880,
+                            "format_image_text_sales_amount": "¥0~50",
+                            "bind_shop_sales_amount": 61100,
+                            "format_bind_shop_sales_amount": "¥600+",
+                            "live_match_order_num": 9,
+                            "video_match_order_num": 90,
+                            "image_text_match_order_num": 1,
+                            "bind_shop_match_order_num": 10,
+                            "live_count": 9,
+                            "video_count": 343,
+                            "image_text_count": 1,
+                            "live_order_conversion_rate": 0.303921568627451,
+                            "format_live_order_conversion_rate": "30%~35%",
+                            "video_order_conversion_rate": 0.3002471705476779,
+                            "format_video_order_conversion_rate": "30%~35%",
+                            "image_text_order_conversion_rate": 0.0384615384615385,
+                            "format_image_text_order_conversion_rate": "2.5%~5%",
+                            "bind_shop_order_conversion_rate": 0.1363636363636364,
+                            "format_bind_shop_order_conversion_rate": "10%~15%",
+                            "live_sales_content_num": 9,
+                            "video_sales_content_num": 343,
+                            "image_text_sales_content_num": 1,
+                            "live_pv": 102,
+                            "video_pv": 7687,
+                            "image_text_pv": 26,
+                            "bind_shop_pv": 110
+                        },
+                        {
+                            "calculate_time": 20250926,
+                            "live_sales": 25,
+                            "format_live_sales": "20+",
+                            "video_sales": 2973,
+                            "format_video_sales": "2千+",
+                            "image_text_sales": 0,
+                            "format_image_text_sales": "0~10",
+                            "bind_shop_sales": 22,
+                            "format_bind_shop_sales": "20+",
+                            "live_sales_amount": 35500,
+                            "format_live_sales_amount": "¥300+",
+                            "video_sales_amount": 10588445,
+                            "format_video_sales_amount": "¥10万+",
+                            "image_text_sales_amount": 0,
+                            "format_image_text_sales_amount": "¥0~50",
+                            "bind_shop_sales_amount": 82872,
+                            "format_bind_shop_sales_amount": "¥800+",
+                            "live_match_order_num": 4,
+                            "video_match_order_num": 85,
+                            "image_text_match_order_num": 0,
+                            "bind_shop_match_order_num": 16,
+                            "live_count": 4,
+                            "video_count": 348,
+                            "image_text_count": 0,
+                            "live_order_conversion_rate": 0.2475247524752475,
+                            "format_live_order_conversion_rate": "20%~25%",
+                            "video_order_conversion_rate": 0.2193509615384615,
+                            "format_video_order_conversion_rate": "20%~25%",
+                            "image_text_order_conversion_rate": 0,
+                            "format_image_text_order_conversion_rate": "0~2.5%",
+                            "bind_shop_order_conversion_rate": 0.171875,
+                            "format_bind_shop_order_conversion_rate": "15%~20%",
+                            "live_sales_content_num": 4,
+                            "video_sales_content_num": 348,
+                            "image_text_sales_content_num": 0,
+                            "live_pv": 101,
+                            "video_pv": 13312,
+                            "image_text_pv": 12,
+                            "bind_shop_pv": 128
+                        },
+                        {
+                            "calculate_time": 20250927,
+                            "live_sales": 34,
+                            "format_live_sales": "30+",
+                            "video_sales": 3024,
+                            "format_video_sales": "3千+",
+                            "image_text_sales": 1,
+                            "format_image_text_sales": "0~10",
+                            "bind_shop_sales": 26,
+                            "format_bind_shop_sales": "20+",
+                            "live_sales_amount": 67332,
+                            "format_live_sales_amount": "¥600+",
+                            "video_sales_amount": 10683402,
+                            "format_video_sales_amount": "¥10万+",
+                            "image_text_sales_amount": 3580,
+                            "format_image_text_sales_amount": "¥0~50",
+                            "bind_shop_sales_amount": 85980,
+                            "format_bind_shop_sales_amount": "¥800+",
+                            "live_match_order_num": 6,
+                            "video_match_order_num": 91,
+                            "image_text_match_order_num": 1,
+                            "bind_shop_match_order_num": 16,
+                            "live_count": 7,
+                            "video_count": 361,
+                            "image_text_count": 1,
+                            "live_order_conversion_rate": 0.2328767123287671,
+                            "format_live_order_conversion_rate": "20%~25%",
+                            "video_order_conversion_rate": 0.2126123575624602,
+                            "format_video_order_conversion_rate": "20%~25%",
+                            "image_text_order_conversion_rate": 0.032258064516129,
+                            "format_image_text_order_conversion_rate": "2.5%~5%",
+                            "bind_shop_order_conversion_rate": 0.1347150259067358,
+                            "format_bind_shop_order_conversion_rate": "10%~15%",
+                            "live_sales_content_num": 7,
+                            "video_sales_content_num": 361,
+                            "image_text_sales_content_num": 1,
+                            "live_pv": 146,
+                            "video_pv": 14129,
+                            "image_text_pv": 31,
+                            "bind_shop_pv": 193
+                        },
+                        {
+                            "calculate_time": 20250928,
+                            "live_sales": 48,
+                            "format_live_sales": "40+",
+                            "video_sales": 5189,
+                            "format_video_sales": "5千+",
+                            "image_text_sales": 1,
+                            "format_image_text_sales": "0~10",
+                            "bind_shop_sales": 33,
+                            "format_bind_shop_sales": "30+",
+                            "live_sales_amount": 78603,
+                            "format_live_sales_amount": "¥700+",
+                            "video_sales_amount": 18355036,
+                            "format_video_sales_amount": "¥10万+",
+                            "image_text_sales_amount": 3580,
+                            "format_image_text_sales_amount": "¥0~50",
+                            "bind_shop_sales_amount": 125840,
+                            "format_bind_shop_sales_amount": "¥1千+",
+                            "live_match_order_num": 8,
+                            "video_match_order_num": 95,
+                            "image_text_match_order_num": 1,
+                            "bind_shop_match_order_num": 18,
+                            "live_count": 10,
+                            "video_count": 449,
+                            "image_text_count": 1,
+                            "live_order_conversion_rate": 0.2857142857142857,
+                            "format_live_order_conversion_rate": "25%~30%",
+                            "video_order_conversion_rate": 0.1710039652127553,
+                            "format_video_order_conversion_rate": "15%~20%",
+                            "image_text_order_conversion_rate": 0.0476190476190476,
+                            "format_image_text_order_conversion_rate": "2.5%~5%",
+                            "bind_shop_order_conversion_rate": 0.1701030927835052,
+                            "format_bind_shop_order_conversion_rate": "15%~20%",
+                            "live_sales_content_num": 10,
+                            "video_sales_content_num": 449,
+                            "image_text_sales_content_num": 1,
+                            "live_pv": 168,
+                            "video_pv": 30011,
+                            "image_text_pv": 21,
+                            "bind_shop_pv": 194
+                        }
+                    ],
+                    "code": 0
+                },
+                "hot_content_data": {
+                    "code": -1
+                },
+                "shop_product_data": {
+                    "shop_rec_product_list": [
+                        {
+                            "product_id": "",
+                            "item_type": 0,
+                            "promotion_id": "3712954189735947632"
+                        },
+                        {
+                            "product_id": "",
+                            "item_type": 0,
+                            "promotion_id": "3748025121747632248"
+                        },
+                        {
+                            "product_id": "",
+                            "item_type": 0,
+                            "promotion_id": "3767459786677944777"
+                        }
+                    ],
+                    "product_infos": [
+                        {
+                            "product_id": "3712213832584790054",
+                            "promotion_id": "3712954189735947632",
+                            "base_model": {
+                                "product_info": {
+                                    "name": "【快速除醛】光触媒甲醛清除剂 新房家用空气净化去甲醛除味WB",
+                                    "main_img": {
+                                        "uri": "ecom-shop-material/jpeg_m_43e9939b98414f5556a6abcf6c270be5_sx_1560762_www2222-2222",
+                                        "url_list": [
+                                            "https://p3-aio.ecombdimg.com/obj/ecom-shop-material/jpeg_m_43e9939b98414f5556a6abcf6c270be5_sx_1560762_www2222-2222"
+                                        ]
+                                    },
+                                    "white_img": {
+                                        "url_list": [
+                                            "https://p3-aio.ecombdimg.com/obj/ecom-shop-material/VTnkBzLw_m_0c32a4b2ce93de5f867546a6aa0dba1e_sx_486764_www3896-3896"
+                                        ]
+                                    },
+                                    "product_status": {
+                                        "status": 0,
+                                        "check_status": 3
+                                    },
+                                    "month_sale": {
+                                        "origin": 115643,
+                                        "integer": "",
+                                        "decimal": "",
+                                        "suffix": ""
+                                    },
+                                    "good_ratio": {
+                                        "origin": 93.73171352245261,
+                                        "integer": "93",
+                                        "decimal": "7",
+                                        "suffix": "%"
+                                    },
+                                    "month_sale_text": "月销"
+                                },
+                                "promotion_info": {
+                                    "promotion_status": 2,
+                                    "cos_info": {
+                                        "cos": {
+                                            "cos_fee": {
+                                                "origin": 872,
+                                                "integer": "8",
+                                                "decimal": "72",
+                                                "suffix": ""
+                                            },
+                                            "cos_ratio": {
+                                                "origin": 40,
+                                                "integer": "40",
+                                                "decimal": "",
+                                                "suffix": "%"
+                                            }
+                                        },
+                                        "cos_type": 3,
+                                        "tiered_cos_info": {}
+                                    },
+                                    "ticket_tip_info": {
+                                        "type": 1
+                                    }
+                                },
+                                "marketing_info": {
+                                    "price_desc": {
+                                        "price": {
+                                            "origin": 2180,
+                                            "integer": "21",
+                                            "decimal": "8",
+                                            "suffix": ""
+                                        },
+                                        "price_text": "到手价"
+                                    }
+                                },
+                                "tag_info": {
+                                    "main_tags": [
+                                        {
+                                            "type": "aweme_flagship",
+                                            "pic": "https://p3-infra.elabpic.com/tos-cn-i-ax5x5hote5/495598616358408ea09d6ec62f05c4d2~tplv-ax5x5hote5-image.image"
+                                        }
+                                    ],
+                                    "second_tags": [
+                                        {
+                                            "type": "insurance_freight",
+                                            "text": {
+                                                "text": "运费险"
+                                            },
+                                            "border_color": "rgba(255, 112, 29, 0.34)"
+                                        },
+                                        {
+                                            "type": "delay_send_pay_money",
+                                            "text": {
+                                                "text": "晚发即赔"
+                                            },
+                                            "border_color": "rgba(255, 112, 29, 0.34)"
+                                        }
+                                    ],
+                                    "tag_codes": [
+                                        "aweme_flagship",
+                                        "insurance_freight",
+                                        "delay_send_pay_money"
+                                    ]
+                                },
+                                "extend_info": {
+                                    "is_in_cart": false,
+                                    "data_report": null
+                                }
+                            },
+                            "custom_model": {
+                                "selection_square_model": {
+                                    "recommend_info": {
+                                        "recall_source": "shop_goods_recalls:0:1,FIRST#shop_lastest_recall:0:200 | "
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "product_id": "3747479390318100499",
+                            "promotion_id": "3748025121747632248",
+                            "base_model": {
+                                "product_info": {
+                                    "name": "【母婴急住根源除醛】光触媒甲醛清除剂新房家用空气净化除甲醛除味",
+                                    "main_img": {
+                                        "uri": "ecom-shop-material/jpeg_m_40447fc2790068d4071f9ee7439693b9_sx_1584665_www2222-2222",
+                                        "url_list": [
+                                            "https://p3-aio.ecombdimg.com/obj/ecom-shop-material/jpeg_m_40447fc2790068d4071f9ee7439693b9_sx_1584665_www2222-2222"
+                                        ]
+                                    },
+                                    "white_img": {
+                                        "url_list": [
+                                            "https://p3-aio.ecombdimg.com/obj/ecom-shop-material/VTnkBzLw_m_0c32a4b2ce93de5f867546a6aa0dba1e_sx_486764_www3896-3896"
+                                        ]
+                                    },
+                                    "product_status": {
+                                        "status": 0,
+                                        "check_status": 3
+                                    },
+                                    "month_sale": {
+                                        "origin": 8745,
+                                        "integer": "",
+                                        "decimal": "",
+                                        "suffix": ""
+                                    },
+                                    "good_ratio": {
+                                        "origin": 91.42259414225941,
+                                        "integer": "91",
+                                        "decimal": "4",
+                                        "suffix": "%"
+                                    },
+                                    "month_sale_text": "月销"
+                                },
+                                "promotion_info": {
+                                    "promotion_status": 2,
+                                    "cos_info": {
+                                        "cos": {
+                                            "cos_fee": {
+                                                "origin": 872,
+                                                "integer": "8",
+                                                "decimal": "72",
+                                                "suffix": ""
+                                            },
+                                            "cos_ratio": {
+                                                "origin": 40,
+                                                "integer": "40",
+                                                "decimal": "",
+                                                "suffix": "%"
+                                            }
+                                        },
+                                        "cos_type": 3,
+                                        "tiered_cos_info": {}
+                                    },
+                                    "ticket_tip_info": {
+                                        "type": 1
+                                    }
+                                },
+                                "marketing_info": {
+                                    "price_desc": {
+                                        "price": {
+                                            "origin": 2180,
+                                            "integer": "21",
+                                            "decimal": "8",
+                                            "suffix": ""
+                                        },
+                                        "price_text": "到手价"
+                                    }
+                                },
+                                "tag_info": {
+                                    "main_tags": [
+                                        {
+                                            "type": "aweme_flagship",
+                                            "pic": "https://p3-infra.elabpic.com/tos-cn-i-ax5x5hote5/495598616358408ea09d6ec62f05c4d2~tplv-ax5x5hote5-image.image"
+                                        }
+                                    ],
+                                    "second_tags": [
+                                        {
+                                            "type": "insurance_freight",
+                                            "text": {
+                                                "text": "运费险"
+                                            },
+                                            "border_color": "rgba(255, 112, 29, 0.34)"
+                                        },
+                                        {
+                                            "type": "delay_send_pay_money",
+                                            "text": {
+                                                "text": "晚发即赔"
+                                            },
+                                            "border_color": "rgba(255, 112, 29, 0.34)"
+                                        }
+                                    ],
+                                    "tag_codes": [
+                                        "aweme_flagship",
+                                        "insurance_freight",
+                                        "delay_send_pay_money"
+                                    ]
+                                },
+                                "extend_info": {
+                                    "is_in_cart": false,
+                                    "data_report": null
+                                }
+                            },
+                            "custom_model": {
+                                "selection_square_model": {
+                                    "recommend_info": {
+                                        "recall_source": "shop_goods_recalls:1:2,FIRST#shop_lastest_recall:1:199 | "
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "product_id": "3766590027681890344",
+                            "promotion_id": "3767459786677944777",
+                            "base_model": {
+                                "product_info": {
+                                    "name": "除甲醛变色凝胶 家用除甲醛清除空气净化祛味方形除醛果冻",
+                                    "main_img": {
+                                        "uri": "ecom-shop-material/jpeg_m_063ade5277b783fb2b767f7adfd87d3c_sx_546707_www800-800",
+                                        "url_list": [
+                                            "https://p9-aio.ecombdimg.com/obj/ecom-shop-material/jpeg_m_063ade5277b783fb2b767f7adfd87d3c_sx_546707_www800-800"
+                                        ]
+                                    },
+                                    "product_status": {
+                                        "status": 0,
+                                        "check_status": 3
+                                    },
+                                    "month_sale": {
+                                        "origin": 37,
+                                        "integer": "",
+                                        "decimal": "",
+                                        "suffix": ""
+                                    },
+                                    "good_ratio": {
+                                        "origin": 100,
+                                        "integer": "100",
+                                        "decimal": "",
+                                        "suffix": "%"
+                                    },
+                                    "month_sale_text": "月销"
+                                },
+                                "promotion_info": {
+                                    "promotion_status": 2,
+                                    "cos_info": {
+                                        "cos": {
+                                            "cos_fee": {
+                                                "origin": 1495,
+                                                "integer": "14",
+                                                "decimal": "95",
+                                                "suffix": ""
+                                            },
+                                            "cos_ratio": {
+                                                "origin": 50,
+                                                "integer": "50",
+                                                "decimal": "",
+                                                "suffix": "%"
+                                            }
+                                        },
+                                        "cos_type": 3,
+                                        "tiered_cos_info": {}
+                                    },
+                                    "ticket_tip_info": {
+                                        "type": 1
+                                    }
+                                },
+                                "marketing_info": {
+                                    "price_desc": {
+                                        "price": {
+                                            "origin": 2990,
+                                            "integer": "29",
+                                            "decimal": "9",
+                                            "suffix": ""
+                                        },
+                                        "price_text": "到手价"
+                                    }
+                                },
+                                "tag_info": {
+                                    "main_tags": [
+                                        {
+                                            "type": "aweme_flagship",
+                                            "pic": "https://p3-infra.elabpic.com/tos-cn-i-ax5x5hote5/495598616358408ea09d6ec62f05c4d2~tplv-ax5x5hote5-image.image"
+                                        }
+                                    ],
+                                    "second_tags": [
+                                        {
+                                            "type": "insurance_freight",
+                                            "text": {
+                                                "text": "运费险"
+                                            },
+                                            "border_color": "rgba(255, 112, 29, 0.34)"
+                                        },
+                                        {
+                                            "type": "delay_send_pay_money",
+                                            "text": {
+                                                "text": "晚发即赔"
+                                            },
+                                            "border_color": "rgba(255, 112, 29, 0.34)"
+                                        }
+                                    ],
+                                    "tag_codes": [
+                                        "aweme_flagship",
+                                        "insurance_freight",
+                                        "delay_send_pay_money"
+                                    ]
+                                },
+                                "extend_info": {
+                                    "is_in_cart": false,
+                                    "data_report": null
+                                }
+                            },
+                            "custom_model": {
+                                "selection_square_model": {
+                                    "recommend_info": {
+                                        "recall_source": "FIRST#shop_goods_recalls:7:7 | "
+                                    }
+                                }
+                            }
+                        }
+                    ],
+                    "code": 0
+                },
+                "author_permission": {
+                    "homepage_not_visible": false
+                }
+            },
+            "label": {
+                "service_module": {}
+            }
+        },
+        "log_id": "20250929111437219C45628C88854D5794",
+        "msg": "",
+        "st": 0
+    }
+}
