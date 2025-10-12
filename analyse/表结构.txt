@@ -21,6 +21,7 @@
 商家分: detail_data.data.model.shop.shop_exper_scores.shop_exper_score_label.service_score.score
 店铺名: detail_data.data.model.shop.shop_base.shop_name
 创建时间
+来源json名称
 
 推广数据表：
 日期
@@ -31,11 +32,20 @@
 类型：视频
 总销售额：thirty_data.data.model.content_data.calculate_data.video_sales_amount
 总销售额格式化：thirty_data.data.model.content_data.calculate_data.format_video_sales_amount
-总销量：thirty_data.data.model.content_data.calculate_data.video_sales
-总销量格式化：thirty_data.data.model.content_data.calculate_data.format_video_sales
+橱窗销量：thirty_data.data.model.content_data.calculate_data.bind_shop_sales
+橱窗销量格式化：thirty_data.data.model.content_data.calculate_data.format_bind_shop_sales
+图文销量：thirty_data.data.model.content_data.calculate_data.image_text_sales
+图文销量格式化：thirty_data.data.model.content_data.calculate_data.format_image_text_sales
+直播销量：thirty_data.data.model.content_data.calculate_data.live_sales
+直播销量格式化：thirty_data.data.model.content_data.calculate_data.format_live_sales
+视频销量：thirty_data.data.model.content_data.calculate_data.video_sales
+视频销量格式化：thirty_data.data.model.content_data.calculate_data.format_video_sales
 出单达人数：thirty_data.data.model.content_data.calculate_data.video_match_order_num
 出单内容数：thirty_data.data.model.content_data.calculate_data.video_sales_content_num
 下单转化率：thirty_data.data.model.content_data.calculate_data.video_order_conversion_rate
 下单转化率格式化：thirty_data.data.model.content_data.calculate_data.format_video_order_conversion_rate
-浏览量：thirty_data.data.model.content_data.calculate_data.video_pv
+视频浏览量：thirty_data.data.model.content_data.calculate_data.video_pv
 创建时间
+视频销量占比: 视频销量 / (视频销量 + 直播销量 + 图文销量 + 橱窗销量)
+视频浏览销售比: 视频浏览量 / 视频销量
+来源json名称

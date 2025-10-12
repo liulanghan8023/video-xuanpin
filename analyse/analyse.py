@@ -1,4 +1,3 @@
-
 import json
 import sqlite3
 from pathlib import Path
@@ -42,6 +41,7 @@ def init_db():
             logistics_score INTEGER,
             seller_score INTEGER,
             shop_name TEXT,
+            source_json_filename TEXT,
             creation_time DATETIME DEFAULT CURRENT_TIMESTAMP,
             PRIMARY KEY (date, product_id, promotion_id)
         )
@@ -57,13 +57,22 @@ def init_db():
             type TEXT,
             total_sales_amount REAL,
             total_sales_amount_formatted TEXT,
-            total_sales_volume INTEGER,
-            total_sales_volume_formatted TEXT,
+            window_sales REAL,
+            window_sales_formatted TEXT,
+            image_text_sales REAL,
+            image_text_sales_formatted TEXT,
+            live_sales REAL,
+            live_sales_formatted TEXT,
+            video_sales REAL,
+            video_sales_formatted TEXT,
             converting_influencers INTEGER,
             converting_contents INTEGER,
             order_conversion_rate REAL,
             order_conversion_rate_formatted TEXT,
             views INTEGER,
+            video_sales_ratio REAL,
+            video_view_sales_ratio REAL,
+            source_json_filename TEXT,
             creation_time DATETIME DEFAULT CURRENT_TIMESTAMP,
             PRIMARY KEY (date, product_id, promotion_id)
         )
@@ -102,6 +111,7 @@ def process_json_file(file_path: Path, conn: sqlite3.Connection):
     # 提取关键ID
     product_id = get_json_value(data, 'detail_data.data.product_id')
     promotion_id = get_json_value(data, 'detail_data.data.promotion_id')
+    source_filename = file_path.name
 
     if not all([product_id, promotion_id]):
         print(f"文件 {file_path} 缺少 product_id 或 promotion_id，跳过。")
@@ -133,10 +143,11 @@ def process_json_file(file_path: Path, conn: sqlite3.Connection):
             get_json_value(data, 'detail_data.data.model.shop.shop_exper_scores.shop_exper_score_label.goods_score.score'),
             get_json_value(data, 'detail_data.data.model.shop.shop_exper_scores.shop_exper_score_label.logistics_score.score'),
             get_json_value(data, 'detail_data.data.model.shop.shop_exper_scores.shop_exper_score_label.service_score.score'),
-            get_json_value(data, 'detail_data.data.model.shop.shop_base.shop_name')
+            get_json_value(data, 'detail_data.data.model.shop.shop_base.shop_name'),
+            source_filename
         )
         # The creation_time column is filled by default by the database
-        cursor.execute("INSERT INTO products (date, product_id, promotion_id, category, title, cover, rank, sold, douyin_share_text, juliang_url, douyin_url, price, commission_rate, good_review_rate, influencer_count, shop_experience_score, product_score, logistics_score, seller_score, shop_name) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", product_data)
+        cursor.execute("INSERT INTO products (date, product_id, promotion_id, category, title, cover, rank, sold, douyin_share_text, juliang_url, douyin_url, price, commission_rate, good_review_rate, influencer_count, shop_experience_score, product_score, logistics_score, seller_score, shop_name, source_json_filename) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", product_data)
         print(f"成功插入产品数据: {date_str}, {product_id}, {promotion_id}")
 
     # 推广数据表使用文件路径中的日期
@@ -148,6 +159,21 @@ def process_json_file(file_path: Path, conn: sqlite3.Connection):
     if cursor.fetchone():
         print(f"推广数据已存在: {promo_date}, {product_id}, {promotion_id}")
     else:
+        # Extract sales data
+        base_path = 'thirty_data.data.model.content_data.calculate_data.'
+        window_sales = get_json_value(data, base_path + 'bind_shop_sales', 0)
+        image_text_sales = get_json_value(data, base_path + 'image_text_sales', 0)
+        live_sales = get_json_value(data, base_path + 'live_sales', 0)
+        video_sales = get_json_value(data, base_path + 'video_sales', 0)
+        views = get_json_value(data, base_path + 'video_pv', 0)
+
+        # Calculate total sales for ratio
+        total_sales_volume = window_sales + image_text_sales + live_sales + video_sales
+
+        # Calculate ratios, handle division by zero
+        video_sales_ratio = (video_sales / total_sales_volume) if total_sales_volume > 0 else 0
+        video_view_sales_ratio = (views / video_sales) if video_sales > 0 else 0
+
         promotion_table_data = (
             promo_date,
             product_id,
@@ -155,18 +181,40 @@ def process_json_file(file_path: Path, conn: sqlite3.Connection):
             '7日',  # 时间范围
             get_json_value(data, 'category'), # 商品类目
             '视频',  # 类型
-            get_json_value(data, 'thirty_data.data.model.content_data.calculate_data.video_sales_amount', 0) / 100.0,
-            get_json_value(data, 'thirty_data.data.model.content_data.calculate_data.format_video_sales_amount'),
-            get_json_value(data, 'thirty_data.data.model.content_data.calculate_data.video_sales', 0),
-            get_json_value(data, 'thirty_data.data.model.content_data.calculate_data.format_video_sales'),
-            get_json_value(data, 'thirty_data.data.model.content_data.calculate_data.video_match_order_num', 0),
-            get_json_value(data, 'thirty_data.data.model.content_data.calculate_data.video_sales_content_num', 0),
-            get_json_value(data, 'thirty_data.data.model.content_data.calculate_data.video_order_conversion_rate', 0),
-            get_json_value(data, 'thirty_data.data.model.content_data.calculate_data.format_video_order_conversion_rate'),
-            get_json_value(data, 'thirty_data.data.model.content_data.calculate_data.video_pv', 0)
+            get_json_value(data, base_path + 'video_sales_amount', 0) / 100.0,
+            get_json_value(data, base_path + 'format_video_sales_amount'),
+            window_sales,
+            get_json_value(data, base_path + 'format_bind_shop_sales'),
+            image_text_sales,
+            get_json_value(data, base_path + 'format_image_text_sales'),
+            live_sales,
+            get_json_value(data, base_path + 'format_live_sales'),
+            video_sales,
+            get_json_value(data, base_path + 'format_video_sales'),
+            get_json_value(data, base_path + 'video_match_order_num', 0),
+            get_json_value(data, base_path + 'video_sales_content_num', 0),
+            get_json_value(data, base_path + 'video_order_conversion_rate', 0),
+            get_json_value(data, base_path + 'format_video_order_conversion_rate'),
+            views,
+            video_sales_ratio,
+            video_view_sales_ratio,
+            source_filename
         )
         # The creation_time column is filled by default by the database
-        cursor.execute("INSERT INTO promotion_data (date, product_id, promotion_id, time_range, category, type, total_sales_amount, total_sales_amount_formatted, total_sales_volume, total_sales_volume_formatted, converting_influencers, converting_contents, order_conversion_rate, order_conversion_rate_formatted, views) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", promotion_table_data)
+        cursor.execute("""
+            INSERT INTO promotion_data (
+                date, product_id, promotion_id, time_range, category, type,
+                total_sales_amount, total_sales_amount_formatted,
+                window_sales, window_sales_formatted,
+                image_text_sales, image_text_sales_formatted,
+                live_sales, live_sales_formatted,
+                video_sales, video_sales_formatted,
+                converting_influencers, converting_contents,
+                order_conversion_rate, order_conversion_rate_formatted,
+                views, video_sales_ratio, video_view_sales_ratio,
+                source_json_filename
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        """, promotion_table_data)
         print(f"成功插入推广数据: {promo_date}, {product_id}, {promotion_id}")
 
 def main():
