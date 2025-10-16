@@ -77,6 +77,26 @@ def init_db():
             PRIMARY KEY (date, product_id, promotion_id)
         )
         """)
+        # 创建推广数据详情表
+        cursor.execute("""
+        CREATE TABLE IF NOT EXISTS promotion_data_detail (
+            date TEXT,
+            product_id TEXT,
+            promotion_id TEXT,
+            calculate_time TEXT,
+            sales INTEGER,
+            pv INTEGER,
+            match_num INTEGER,
+            order_conversion_rate REAL,
+            sales_amount REAL,
+            sales_content_num INTEGER,
+            match_order_num INTEGER,
+            format_order_conversion_rate TEXT,
+            format_sales_amount TEXT,
+            creation_time DATETIME DEFAULT CURRENT_TIMESTAMP,
+            PRIMARY KEY (date, product_id, promotion_id, calculate_time)
+        )
+        """)
         conn.commit()
         print("数据库和表已成功初始化 (新结构)。")
 
@@ -105,6 +125,12 @@ def process_json_file(file_path: Path, conn: sqlite3.Connection):
 
     with open(file_path, 'r', encoding='utf-8') as f:
         data = json.load(f)
+
+    # 检查视频销量，如果为0则跳过
+    video_sales = get_json_value(data, 'thirty_data.data.model.content_data.calculate_data.video_sales', 0)
+    if video_sales == 0:
+        print(f"视频销量为0，跳过文件: {file_path}")
+        return
 
     cursor = conn.cursor()
 
@@ -178,7 +204,7 @@ def process_json_file(file_path: Path, conn: sqlite3.Connection):
             promo_date,
             product_id,
             promotion_id,
-            '7日',  # 时间范围
+            '30日',  # 时间范围
             get_json_value(data, 'category'), # 商品类目
             '视频',  # 类型
             get_json_value(data, base_path + 'video_sales_amount', 0) / 100.0,
@@ -216,6 +242,45 @@ def process_json_file(file_path: Path, conn: sqlite3.Connection):
             ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         """, promotion_table_data)
         print(f"成功插入推广数据: {promo_date}, {product_id}, {promotion_id}")
+
+    # 处理推广数据详情
+    calculate_data_list = get_json_value(data, 'thirty_data.data.model.promotion_data.calculate_data_list')
+    if calculate_data_list and isinstance(calculate_data_list, list):
+        for item in calculate_data_list:
+            calculate_time = item.get('calculate_time')
+            if not calculate_time:
+                continue
+
+            # 检查数据是否存在
+            cursor.execute("SELECT 1 FROM promotion_data_detail WHERE date = ? AND product_id = ? AND promotion_id = ? AND calculate_time = ?",
+                           (date_str, product_id, promotion_id, str(calculate_time)))
+            if cursor.fetchone():
+                print(f"推广数据详情已存在: {date_str}, {product_id}, {promotion_id}, {calculate_time}")
+                continue
+
+            detail_data = (
+                date_str,
+                product_id,
+                promotion_id,
+                str(calculate_time),
+                item.get('sales', 0),
+                item.get('pv', 0),
+                item.get('match_num', 0),
+                item.get('order_conversion_rate', 0),
+                item.get('sales_amount', 0) / 100.0,
+                item.get('sales_content_num', 0),
+                item.get('match_order_num', 0),
+                item.get('format_order_conversion_rate'),
+                item.get('format_sales_amount')
+            )
+            cursor.execute("""
+                INSERT INTO promotion_data_detail (
+                    date, product_id, promotion_id, calculate_time, sales, pv, match_num,
+                    order_conversion_rate, sales_amount, sales_content_num, match_order_num,
+                    format_order_conversion_rate, format_sales_amount
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            """, detail_data)
+            print(f"成功插入推广数据详情: {date_str}, {product_id}, {promotion_id}, {calculate_time}")
 
 def main():
     """主函数"""

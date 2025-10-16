@@ -146,6 +146,30 @@ def get_promotion_data_item():
         return jsonify(data), 404
     return jsonify(data)
 
+@app.route('/api/promotion_data_detail')
+def get_promotion_data_detail():
+    """获取推广数据详情的API端点"""
+    date = request.args.get('date')
+    product_id = request.args.get('product_id')
+    promotion_id = request.args.get('promotion_id')
+    if not all([date, product_id, promotion_id]):
+        return jsonify({"error": "缺少必须的查询参数: date, product_id, promotion_id"}), 400
+
+    try:
+        conn = get_db_connection()
+    except FileNotFoundError as e:
+        return jsonify({"error": str(e)}), 500
+
+    try:
+        query = "SELECT * FROM promotion_data_detail WHERE date = ? AND product_id = ? AND promotion_id = ? ORDER BY calculate_time"
+        cursor = conn.execute(query, (date, product_id, promotion_id))
+        data = [dict(row) for row in cursor.fetchall()]
+        conn.close()
+        return jsonify(data)
+    except sqlite3.OperationalError as e:
+        conn.close()
+        return jsonify({"error": f'查询失败: {e}'}), 500
+
 if __name__ == '__main__':
     # 检查模板文件是否存在
     if not os.path.exists(os.path.join(os.path.dirname(__file__), 'templates', 'index.html')):
