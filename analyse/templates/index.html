@@ -179,15 +179,44 @@
                     'product_id': '产品ID',
                     'promotion_id': '促销ID',
                     'calculate_time': '计算时间',
-                    'sales': '销量',
-                    'pv': '浏览量',
-                    'match_num': '匹配数',
-                    'order_conversion_rate': '下单转化率',
-                    'sales_amount': '销售额',
-                    'sales_content_num': '销售内容数',
-                    'match_order_num': '匹配订单数',
-                    'format_order_conversion_rate': '下单转化率(格式化)',
-                    'format_sales_amount': '销售额(格式化)',
+                    'live_sales': '直播销量',
+                    'format_live_sales': '直播销量(格式化)',
+                    'video_sales': '视频销量',
+                    'format_video_sales': '视频销量(格式化)',
+                    'image_text_sales': '图文销量',
+                    'format_image_text_sales': '图文销量(格式化)',
+                    'bind_shop_sales': '橱窗销量',
+                    'format_bind_shop_sales': '橱窗销量(格式化)',
+                    'live_sales_amount': '直播销售额',
+                    'format_live_sales_amount': '直播销售额(格式化)',
+                    'video_sales_amount': '视频销售额',
+                    'format_video_sales_amount': '视频销售额(格式化)',
+                    'image_text_sales_amount': '图文销售额',
+                    'format_image_text_sales_amount': '图文销售额(格式化)',
+                    'bind_shop_sales_amount': '橱窗销售额',
+                    'format_bind_shop_sales_amount': '橱窗销售额(格式化)',
+                    'live_match_order_num': '直播匹配订单数',
+                    'video_match_order_num': '视频匹配订单数',
+                    'image_text_match_order_num': '图文匹配订单数',
+                    'bind_shop_match_order_num': '橱窗匹配订单数',
+                    'live_count': '直播数',
+                    'video_count': '视频数',
+                    'image_text_count': '图文数',
+                    'live_order_conversion_rate': '直播下单转化率',
+                    'format_live_order_conversion_rate': '直播下单转化率(格式化)',
+                    'video_order_conversion_rate': '视频下单转化率',
+                    'format_video_order_conversion_rate': '视频下单转化率(格式化)',
+                    'image_text_order_conversion_rate': '图文下单转化率',
+                    'format_image_text_order_conversion_rate': '图文下单转化率(格式化)',
+                    'bind_shop_order_conversion_rate': '橱窗下单转化率',
+                    'format_bind_shop_order_conversion_rate': '橱窗下单转化率(格式化)',
+                    'live_sales_content_num': '直播销售内容数',
+                    'video_sales_content_num': '视频销售内容数',
+                    'image_text_sales_content_num': '图文销售内容数',
+                    'live_pv': '直播浏览量',
+                    'video_pv': '视频浏览量',
+                    'image_text_pv': '图文浏览量',
+                    'bind_shop_pv': '橱窗浏览量',
                     'creation_time': '创建时间'
                 }
             };
@@ -375,10 +404,26 @@
                         .then(([itemData, detailData]) => {
                             if (itemData.error) throw new Error(itemData.error);
 
-                            // Render item details
-                            let contentHtml = '<dl class="row">';
+                            // Build content, starting with the chart
+                            let contentHtml = '<canvas id="popover-chart"></canvas>';
+
+                            // Add item details
+                            contentHtml += '<hr/><dl class="row">';
                             const itemTranslations = columnTranslations[targetTable] || {};
-                            const keys = Object.keys(itemData);
+                            let keys = Object.keys(itemData);
+
+                            if (targetTable === 'promotion_data') {
+                                const preferredOrder = [
+                                    'date', 'time_range', 'category', 'type', 'video_sales', 
+                                    'converting_influencers', 'converting_contents', 'views', 
+                                    'video_sales_ratio', 'video_view_sales_ratio', 'window_sales', 
+                                    'image_text_sales', 'live_sales', 'order_conversion_rate', 
+                                    'product_id', 'promotion_id', 'total_sales_amount'
+                                ];
+                                const orderedKeys = preferredOrder.filter(k => keys.includes(k));
+                                const remainingKeys = keys.filter(k => !preferredOrder.includes(k));
+                                keys = [...orderedKeys, ...remainingKeys];
+                            }
 
                             for (const key of keys) {
                                 if (key.endsWith('_formatted') || ['creation_time', 'source_json_filename', 'time_range'].includes(key)) {
@@ -410,8 +455,6 @@
                             }
                             contentHtml += '</dl>';
 
-                            // Add canvas for chart
-                            contentHtml += '<hr/><h6 class="mt-3">推广数据详情</h6><canvas id="popover-chart"></canvas>';
                             popoverBody.innerHTML = contentHtml;
                             popoverTitle.textContent = `关联 ${targetTable.replace(/_/g, ' ')} 数据`;
 
@@ -424,17 +467,38 @@
                                     type: 'line',
                                     data: {
                                         labels: detailData.map(d => d.calculate_time),
-                                        datasets: [{
-                                            label: '销量',
-                                            data: detailData.map(d => d.sales),
-                                            borderColor: 'rgb(75, 192, 192)',
-                                            tension: 0.1
-                                        }]
+                                        datasets: [
+                                            {
+                                                label: '视频销量',
+                                                data: detailData.map(d => d.video_sales),
+                                                borderColor: 'rgb(75, 192, 192)',
+                                                tension: 0.1
+                                            },
+                                            {
+                                                label: '直播销量',
+                                                data: detailData.map(d => d.live_sales),
+                                                borderColor: 'rgb(255, 99, 132)',
+                                                tension: 0.1
+                                            },
+                                            {
+                                                label: '图文销量',
+                                                data: detailData.map(d => d.image_text_sales),
+                                                borderColor: 'rgb(54, 162, 235)',
+                                                tension: 0.1
+                                            },
+                                            {
+                                                label: '橱窗销量',
+                                                data: detailData.map(d => d.bind_shop_sales),
+                                                borderColor: 'rgb(255, 206, 86)',
+                                                tension: 0.1
+                                            }
+                                        ]
                                     },
                                     options: {
                                         responsive: true,
                                         plugins: {
                                             tooltip: {
+                                                yAlign: 'bottom',
                                                 callbacks: {
                                                     label: function(context) {
                                                         const dataIndex = context.dataIndex;

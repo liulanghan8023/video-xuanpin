@@ -77,22 +77,51 @@ def init_db():
             PRIMARY KEY (date, product_id, promotion_id)
         )
         """)
-        # 创建推广数据详情表
+        # 创建推广数据详情表 (新结构)
         cursor.execute("""
         CREATE TABLE IF NOT EXISTS promotion_data_detail (
             date TEXT,
             product_id TEXT,
             promotion_id TEXT,
             calculate_time TEXT,
-            sales INTEGER,
-            pv INTEGER,
-            match_num INTEGER,
-            order_conversion_rate REAL,
-            sales_amount REAL,
-            sales_content_num INTEGER,
-            match_order_num INTEGER,
-            format_order_conversion_rate TEXT,
-            format_sales_amount TEXT,
+            live_sales INTEGER,
+            format_live_sales TEXT,
+            video_sales INTEGER,
+            format_video_sales TEXT,
+            image_text_sales INTEGER,
+            format_image_text_sales TEXT,
+            bind_shop_sales INTEGER,
+            format_bind_shop_sales TEXT,
+            live_sales_amount REAL,
+            format_live_sales_amount TEXT,
+            video_sales_amount REAL,
+            format_video_sales_amount TEXT,
+            image_text_sales_amount REAL,
+            format_image_text_sales_amount TEXT,
+            bind_shop_sales_amount REAL,
+            format_bind_shop_sales_amount TEXT,
+            live_match_order_num INTEGER,
+            video_match_order_num INTEGER,
+            image_text_match_order_num INTEGER,
+            bind_shop_match_order_num INTEGER,
+            live_count INTEGER,
+            video_count INTEGER,
+            image_text_count INTEGER,
+            live_order_conversion_rate REAL,
+            format_live_order_conversion_rate TEXT,
+            video_order_conversion_rate REAL,
+            format_video_order_conversion_rate TEXT,
+            image_text_order_conversion_rate REAL,
+            format_image_text_order_conversion_rate TEXT,
+            bind_shop_order_conversion_rate REAL,
+            format_bind_shop_order_conversion_rate TEXT,
+            live_sales_content_num INTEGER,
+            video_sales_content_num INTEGER,
+            image_text_sales_content_num INTEGER,
+            live_pv INTEGER,
+            video_pv INTEGER,
+            image_text_pv INTEGER,
+            bind_shop_pv INTEGER,
             creation_time DATETIME DEFAULT CURRENT_TIMESTAMP,
             PRIMARY KEY (date, product_id, promotion_id, calculate_time)
         )
@@ -244,7 +273,7 @@ def process_json_file(file_path: Path, conn: sqlite3.Connection):
         print(f"成功插入推广数据: {promo_date}, {product_id}, {promotion_id}")
 
     # 处理推广数据详情
-    calculate_data_list = get_json_value(data, 'thirty_data.data.model.promotion_data.calculate_data_list')
+    calculate_data_list = get_json_value(data, 'thirty_data.data.model.content_data.calculate_data_list')
     if calculate_data_list and isinstance(calculate_data_list, list):
         for item in calculate_data_list:
             calculate_time = item.get('calculate_time')
@@ -263,22 +292,61 @@ def process_json_file(file_path: Path, conn: sqlite3.Connection):
                 product_id,
                 promotion_id,
                 str(calculate_time),
-                item.get('sales', 0),
-                item.get('pv', 0),
-                item.get('match_num', 0),
-                item.get('order_conversion_rate', 0),
-                item.get('sales_amount', 0) / 100.0,
-                item.get('sales_content_num', 0),
-                item.get('match_order_num', 0),
-                item.get('format_order_conversion_rate'),
-                item.get('format_sales_amount')
+                item.get('live_sales', 0),
+                item.get('format_live_sales'),
+                item.get('video_sales', 0),
+                item.get('format_video_sales'),
+                item.get('image_text_sales', 0),
+                item.get('format_image_text_sales'),
+                item.get('bind_shop_sales', 0),
+                item.get('format_bind_shop_sales'),
+                item.get('live_sales_amount', 0) / 100.0,
+                item.get('format_live_sales_amount'),
+                item.get('video_sales_amount', 0) / 100.0,
+                item.get('format_video_sales_amount'),
+                item.get('image_text_sales_amount', 0) / 100.0,
+                item.get('format_image_text_sales_amount'),
+                item.get('bind_shop_sales_amount', 0) / 100.0,
+                item.get('format_bind_shop_sales_amount'),
+                item.get('live_match_order_num', 0),
+                item.get('video_match_order_num', 0),
+                item.get('image_text_match_order_num', 0),
+                item.get('bind_shop_match_order_num', 0),
+                item.get('live_count', 0),
+                item.get('video_count', 0),
+                item.get('image_text_count', 0),
+                item.get('live_order_conversion_rate', 0),
+                item.get('format_live_order_conversion_rate'),
+                item.get('video_order_conversion_rate', 0),
+                item.get('format_video_order_conversion_rate'),
+                item.get('image_text_order_conversion_rate', 0),
+                item.get('format_image_text_order_conversion_rate'),
+                item.get('bind_shop_order_conversion_rate', 0),
+                item.get('format_bind_shop_order_conversion_rate'),
+                item.get('live_sales_content_num', 0),
+                item.get('video_sales_content_num', 0),
+                item.get('image_text_sales_content_num', 0),
+                item.get('live_pv', 0),
+                item.get('video_pv', 0),
+                item.get('image_text_pv', 0),
+                item.get('bind_shop_pv', 0)
             )
             cursor.execute("""
                 INSERT INTO promotion_data_detail (
-                    date, product_id, promotion_id, calculate_time, sales, pv, match_num,
-                    order_conversion_rate, sales_amount, sales_content_num, match_order_num,
-                    format_order_conversion_rate, format_sales_amount
-                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                    date, product_id, promotion_id, calculate_time,
+                    live_sales, format_live_sales, video_sales, format_video_sales,
+                    image_text_sales, format_image_text_sales, bind_shop_sales, format_bind_shop_sales,
+                    live_sales_amount, format_live_sales_amount, video_sales_amount, format_video_sales_amount,
+                    image_text_sales_amount, format_image_text_sales_amount, bind_shop_sales_amount, format_bind_shop_sales_amount,
+                    live_match_order_num, video_match_order_num, image_text_match_order_num, bind_shop_match_order_num,
+                    live_count, video_count, image_text_count,
+                    live_order_conversion_rate, format_live_order_conversion_rate,
+                    video_order_conversion_rate, format_video_order_conversion_rate,
+                    image_text_order_conversion_rate, format_image_text_order_conversion_rate,
+                    bind_shop_order_conversion_rate, format_bind_shop_order_conversion_rate,
+                    live_sales_content_num, video_sales_content_num, image_text_sales_content_num,
+                    live_pv, video_pv, image_text_pv, bind_shop_pv
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
             """, detail_data)
             print(f"成功插入推广数据详情: {date_str}, {product_id}, {promotion_id}, {calculate_time}")
 
