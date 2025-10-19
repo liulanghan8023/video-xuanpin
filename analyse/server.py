@@ -167,5 +167,5 @@ if __name__ == '__main__':
         print("请确保前端文件存在于正确的位置。")
     else:
         print("启动Flask服务...")
-        print("请在浏览器中打开 http://127.0.0.1:5001")
-        app.run(host='0.0.0.0', port=5001, debug=True)
+        print("请在浏览器中打开 http://127.0.0.1:8700")
+        app.run(host='0.0.0.0', port=8700, debug=True)
