@@ -120,6 +120,7 @@
 
             const columnTranslations = {
                 'products': {
+                    'avg_content_per_influencer': '平均达人出单数(视频)',
                     'date': '日期',
                     'product_id': '产品ID',
                     'promotion_id': '促销ID',
@@ -160,7 +161,8 @@
                     'views': '视频浏览量',
                     'video_sales_ratio': '视频销量:总销量',
                     'video_view_sales_ratio': '视频浏览销售比',
-                    'creation_time': '创建时间'
+                    'creation_time': '创建时间',
+                    "sales_trend":'销量趋势',
                 },
                 'promotion_data_detail': {
                     'date': '日期',
@@ -259,10 +261,66 @@
             }
 
             const preferredChineseOrderForTable = [
-                '日期', '商品标题', '视频销量:总销量', '视频浏览销售比', '下单转化率(视频)',
+                '日期', '商品标题', '销量趋势', '视频销量:总销量', '视频浏览销售比', '平均达人出单数(视频)', '下单转化率(视频)',
                 '商家分', '店铺体验分', '到手价', '好评率', '佣金率', '物流分', '商品分',
                 '封面', '产品ID', '促销ID'
             ];
+
+            function renderChart(canvas, data) {
+                if (!canvas) return;
+                new Chart(canvas.getContext('2d'), {
+                    type: 'line',
+                    data: {
+                        labels: data.map((_, i) => i),
+                        datasets: [{
+                            data: data,
+                            borderColor: 'rgb(75, 192, 192)',
+                            borderWidth: 1.5,
+                            tension: 0.4,
+                            pointRadius: 0,
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: { display: false },
+                            tooltip: { enabled: false }
+                        },
+                        scales: {
+                            x: { display: false },
+                            y: { display: false }
+                        }
+                    }
+                });
+            }
+
+            function renderSparklines(tableContainer) {
+                const canvases = tableContainer.querySelectorAll('canvas.sparkline-chart');
+                const promises = [];
+
+                canvases.forEach(canvas => {
+                    const { productId, promotionId, date } = canvas.dataset;
+                    if (!productId || !promotionId || !date) return;
+
+                    const detailApi = `/api/promotion_data_detail`;
+                    const params = new URLSearchParams({ date, product_id: productId, promotion_id: promotionId });
+                    
+                    const promise = fetch(`${detailApi}?${params.toString()}`)
+                        .then(res => res.ok ? res.json() : Promise.reject(new Error(`HTTP ${res.status}`)))
+                        .then(detailData => {
+                            if (detailData && detailData.length > 0) {
+                                const videoSalesData = detailData.map(d => d.video_sales);
+                                renderChart(canvas, videoSalesData);
+                            }
+                        }).catch(err => {
+                            console.warn(`Could not load sparkline for ${productId}: ${err.message}`);
+                        });
+                    promises.push(promise);
+                });
+
+                Promise.all(promises);
+            }
 
             // Initial Load
             loadTable('products', 1, perPage);
@@ -330,7 +388,7 @@
 
                         const preferredTableOrder = preferredChineseOrderForTable.map(name => reversePopoverTranslations[name]).filter(Boolean);
                         
-                        const finalColumnOrder = preferredTableOrder.filter(c => columns.includes(c));
+                        const finalColumnOrder = preferredTableOrder.filter(c => ['sales_trend', 'avg_content_per_influencer'].includes(c) || columns.includes(c));
 
                         let tableHtml = '<table class="table table-bordered table-striped table-hover">';
                         tableHtml += '<thead class="table-dark" style="position: sticky; top: 0; z-index: 1;"><tr>';
@@ -352,7 +410,16 @@
 
                                 let cellHtml;
 
-                                if (col === 'title') {
+                                if (col === 'sales_trend') {
+                                    cellHtml = `<canvas class="sparkline-chart" data-product-id="${row.product_id}" data-promotion-id="${row.promotion_id}" data-date="${row.date}" style="max-width: 100px; max-height: 30px;"></canvas>`;
+                                } else if (col === 'avg_content_per_influencer') {
+                                    if (row.converting_influencers > 0) {
+                                        const ratio = row.converting_contents / row.converting_influencers;
+                                        cellHtml = ratio.toFixed(2);
+                                    } else {
+                                        cellHtml = 'N/A';
+                                    }
+                                } else if (col === 'title') {
                                     const promotionId = row.promotion_id;
                                     const titleText = value;
                                     let titleDisplay = escapeHtml(titleText);
@@ -423,6 +490,7 @@
 
                         buildPagination(tableName, paginationContainer, page, total_pages, perPage, searchTerm);
                         initializeRowClickListeners(tableContainer, tableName);
+                        renderSparklines(tableContainer);
                     })
                     .catch(error => {
                         console.error(`Error loading ${tableName}:`, error);
@@ -462,6 +530,15 @@
                         ])
                         .then(([itemData, detailData]) => {
                             if (itemData.error) throw new Error(itemData.error);
+
+                            // Add computed property for popover
+                            if (itemData.hasOwnProperty('converting_contents') && itemData.hasOwnProperty('converting_influencers')) {
+                                if (itemData.converting_influencers > 0) {
+                                    itemData.avg_content_per_influencer = (itemData.converting_contents / itemData.converting_influencers).toFixed(2);
+                                } else {
+                                    itemData.avg_content_per_influencer = 'N/A';
+                                }
+                            }
 
                             // Build content, starting with the chart
                             let contentHtml = '<canvas id="popover-chart"></canvas>';
