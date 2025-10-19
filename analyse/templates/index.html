@@ -155,7 +155,7 @@
                     'video_sales_formatted': '视频销量(格式化)',
                     'converting_influencers': '出单达人数(视频)',
                     'converting_contents': '出单内容数(视频)',
-                    'order_conversion_rate': '下单转化率',
+                    'order_conversion_rate': '下单转化率(视频)',
                     'order_conversion_rate_formatted': '下单转化率(格式化)',
                     'views': '视频浏览量',
                     'video_sales_ratio': '视频销量:总销量',
@@ -258,6 +258,12 @@
                 document.removeEventListener('mouseup', onDragMouseUp);
             }
 
+            const preferredChineseOrderForTable = [
+                '日期', '商品标题', '视频销量:总销量', '视频浏览销售比', '下单转化率(视频)',
+                '商家分', '店铺体验分', '到手价', '好评率', '佣金率', '物流分', '商品分',
+                '封面', '产品ID', '促销ID'
+            ];
+
             // Initial Load
             loadTable('products', 1, perPage);
 
@@ -321,20 +327,10 @@
                         for (const key in popoverTranslations) {
                             reversePopoverTranslations[popoverTranslations[key]] = key;
                         }
-                        const preferredChineseOrderForTable = [
-                            '日期', '商品标题', '视频销量', '视频浏览量', '视频销量:总销量', '视频浏览销售比',
-                            '下单转化率', '总销售额(视频)', '出单内容数(视频)', '出单达人数(视频)',
-                            '店铺名', '带货人数','商家分', '店铺体验分', '到手价', '好评率', '佣金率', '物流分',
-                            '商品分', '已售',
-                            '橱窗销量', '图文销量', '直播销量',
-                            '排名', '类型', '时间范围', '封面',
-                            '抖音分享文本', '抖音URL', '产品ID', '促销ID', '商品类目', '巨量URL'
-                        ];
+
                         const preferredTableOrder = preferredChineseOrderForTable.map(name => reversePopoverTranslations[name]).filter(Boolean);
                         
                         const finalColumnOrder = preferredTableOrder.filter(c => columns.includes(c));
-                        const remainingApiCols = columns.filter(c => !finalColumnOrder.includes(c));
-                        finalColumnOrder.push(...remainingApiCols);
 
                         let tableHtml = '<table class="table table-bordered table-striped table-hover">';
                         tableHtml += '<thead class="table-dark" style="position: sticky; top: 0; z-index: 1;"><tr>';
@@ -480,17 +476,7 @@
                                 reverseTranslations[itemTranslations[key]] = key;
                             }
 
-                            const preferredChineseOrder = [
-                                '商品标题', '日期', '视频销量', '视频浏览量', '视频销量:总销量', '视频浏览销售比',
-                                '下单转化率', '总销售额(视频)', '出单内容数(视频)', '出单达人数(视频)',
-                                '店铺名', '带货人数','商家分', '店铺体验分', '到手价', '好评率', '佣金率', '物流分',
-                                '商品分', '已售',
-                                '橱窗销量', '图文销量', '直播销量',
-                                '排名', '类型', '时间范围', '封面',
-                                '抖音分享文本', '抖音URL', '产品ID', '促销ID', '商品类目'
-                            ];
-
-                            const preferredOrder = preferredChineseOrder.map(name => reverseTranslations[name]).filter(Boolean);
+                            const preferredOrder = preferredChineseOrderForTable.map(name => reverseTranslations[name]).filter(Boolean);
                             const allKeys = Object.keys(itemData);
                             const remainingKeys = allKeys.filter(key => !preferredOrder.includes(key));
                             const displayKeys = [...preferredOrder, ...remainingKeys];
@@ -501,6 +487,10 @@
                                 }
                                 const value = itemData[key];
                                 if (value === null || value === '') continue;
+
+                                if (key === 'category') {
+                                    contentHtml += '<div class="col-12"><hr class="my-2"></div>';
+                                }
 
                                 let displayValue;
                                 const displayName = itemTranslations[key] || key.replace(/_/g, ' ');
