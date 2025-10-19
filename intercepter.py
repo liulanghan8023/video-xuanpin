@@ -92,19 +92,22 @@ def sleep_catch(catch_per_minute):
     time.sleep(sleep_time)
 
 
-async def cat_run(page, page_detail, cat, max_count=None, catch_per_minute=3):
+async def cat_run(page, page_detail, cat, max_count=None, catch_per_minute=3, point_id=None):
     data_list = []
     try:
-        async with page.expect_response(_is_rank_data_response, timeout=Config.REQUEST_TIMEOUT) as response_info:
-            await page.locator("div").filter(has_text=re.compile(r"^" + cat + "$")).click()
+        if not point_id:
+            async with page.expect_response(_is_rank_data_response, timeout=Config.REQUEST_TIMEOUT) as response_info:
+                await page.locator("div").filter(has_text=re.compile(r"^" + cat + "$")).click()
 
-        rank_response = await response_info.value
-        rank_data = await get_response_json(rank_response, "Rank Data")
+            rank_response = await response_info.value
+            rank_data = await get_response_json(rank_response, "Rank Data")
 
-        promotions = rank_data.get("data", {}).get("promotions") if rank_data else []
-        if not promotions:
-            print("❌ Could not find 'promotions' in rank data. Cannot proceed.")
-            return data_list
+            promotions = rank_data.get("data", {}).get("promotions") if rank_data else []
+            if not promotions:
+                print("❌ Could not find 'promotions' in rank data. Cannot proceed.")
+                return data_list
+        else:
+            promotions = [{"promotion_id": point_id}]
         # 今日的日期
         today = time.strftime("%Y-%m-%d", time.localtime())
         # 存储地址
@@ -230,7 +233,7 @@ async def get_chrome(playwright, mode, remote_config):
     await stealth.apply_stealth_async(page)
     return browser, page, context
 
-async def run(cats, playwright: Playwright, mode, remote_config, catch_num, catch_per_minute):
+async def run(cats, playwright: Playwright, mode, remote_config, catch_num, catch_per_minute, point_id):
     browser, page, context = await get_chrome(playwright, mode, remote_config)
     try:
         print(f"Navigating to rank page: {Config.RANK_URL}")
@@ -264,7 +267,7 @@ async def run(cats, playwright: Playwright, mode, remote_config, catch_num, catc
         for cat in cats:
             print("触发类目", cat)
             try:
-                data_list = await cat_run(page, page_detail, cat, catch_num, catch_per_minute)
+                data_list = await cat_run(page, page_detail, cat, catch_num, catch_per_minute, point_id)
             except Exception as e:
                 continue
     except TimeoutError:
@@ -314,7 +317,24 @@ async def main():
         await run(cats, playwright, "remote", {
             "user_data_dir": user_data_dir,
             "executable_path": executable_path,
-        }, catch_num, catch_per_minute)
+        }, catch_num, catch_per_minute, None)
+
+
+async def main_point():
+    user_data_dir = r"C:\Users\gsma\AppData\Local\Google\Chrome\User Data"
+    executable_path = r"C:\Users\gsma\AppData\Local\Google\Chrome\Application\chrome.exe"
+    # 每个榜单抓取的数据量
+    catch_num = 18
+    # 没分钟抓几个
+    catch_per_minute = 0.1
+    point_id = "3775472243623199049"
+    # 指定抓去一个
+    cats = ["个护家清"]
+    async with async_playwright() as playwright:
+        await run(cats, playwright, "remote", {
+            "user_data_dir": user_data_dir,
+            "executable_path": executable_path,
+        }, catch_num, catch_per_minute, point_id)
 
 
 if __name__ == "__main__":
@@ -327,4 +347,5 @@ if __name__ == "__main__":
         print("And then run: playwright install")
         exit(1)
 
-    asyncio.run(main())
+    # asyncio.run(main())
+    asyncio.run(main_point())
