@@ -93,13 +93,7 @@
                 <nav id="products-pagination" class="mt-3 d-flex justify-content-center"></nav>
             </div>
         </div>
-        <div class="card mt-4 shadow-sm">
-            <div class="card-header"><h2>推广数据 (Promotion Data)</h2></div>
-            <div class="card-body">
-                <div id="promotion-data-table-container" class="table-responsive"></div>
-                <nav id="promotion-data-pagination" class="mt-3 d-flex justify-content-center"></nav>
-            </div>
-        </div>
+        
     </div>
 
     <!-- Custom Popover Element -->
@@ -121,6 +115,8 @@
             const productSearchInput = document.getElementById('products-search-input');
             const productSearchBtn = document.getElementById('products-search-btn');
             const productClearBtn = document.getElementById('products-clear-btn');
+
+            let currentSort = { by: 'creation_time', order: 'desc' };
 
             const columnTranslations = {
                 'products': {
@@ -145,14 +141,7 @@
                     'seller_score': '商家分',
                     'shop_name': '店铺名',
                     'source_json_filename': '来源JSON',
-                    'creation_time': '创建时间'
-                },
-                'promotion_data': {
-                    'date': '日期',
-                    'product_id': '产品ID',
-                    'promotion_id': '促销ID',
                     'time_range': '时间范围',
-                    'category': '商品类目',
                     'type': '类型',
                     'total_sales_amount': '总销售额',
                     'total_sales_amount_formatted': '总销售额(格式化)',
@@ -171,7 +160,6 @@
                     'views': '视频浏览量',
                     'video_sales_ratio': '视频销量占比',
                     'video_view_sales_ratio': '视频浏览销售比',
-                    'source_json_filename': '来源JSON',
                     'creation_time': '创建时间'
                 },
                 'promotion_data_detail': {
@@ -272,7 +260,7 @@
 
             // Initial Load
             loadTable('products', 1, perPage);
-            loadTable('promotion_data', 1, perPage);
+            
 
             // Event Listeners
             document.getElementById('popover-close').addEventListener('click', () => {
@@ -303,7 +291,7 @@
 
                 tableContainer.innerHTML = '<div class="d-flex justify-content-center align-items-center p-5"><div class="spinner-border text-primary" role="status"><span class="visually-hidden">Loading...</span></div></div>';
 
-                let apiUrl = `/api/${tableName}?page=${page}&per_page=${perPage}`;
+                let apiUrl = `/api/${tableName}?page=${page}&per_page=${perPage}&sort_by=${currentSort.by}&sort_order=${currentSort.order}`;
                 if (searchTerm && tableName === 'products') {
                     apiUrl += `&search=${encodeURIComponent(searchTerm)}`;
                 }
@@ -320,7 +308,7 @@
 
                         if (!data || data.length === 0) {
                             if (searchTerm) {
-                                tableContainer.innerHTML = `<p class="text-center text-muted p-5">未找到与 \"${escapeHtml(searchTerm)}\" 相关的商品。</p>`;
+                                tableContainer.innerHTML = `<p class="text-center text-muted p-5">未找到与 "${escapeHtml(searchTerm)}" 相关的商品。</p>`;
                             } else {
                                 tableContainer.innerHTML = '<p class="text-center text-muted p-5">没有数据</p>';
                             }
@@ -332,7 +320,11 @@
                         tableHtml += '<thead class="table-dark" style="position: sticky; top: 0; z-index: 1;"><tr>';
                         const translations = columnTranslations[tableName] || {};
                         columns.forEach(col => {
-                            tableHtml += `<th>${translations[col] || col.replace(/_/g, ' ')}</th>`;
+                            let sortIndicator = '';
+                            if (col === currentSort.by) {
+                                sortIndicator = currentSort.order === 'asc' ? ' ▲' : ' ▼';
+                            }
+                            tableHtml += `<th data-col="${col}" style="cursor: pointer;">${translations[col] || col.replace(/_/g, ' ')}${sortIndicator}</th>`;
                         });
                         tableHtml += '</tr></thead><tbody>';
 
@@ -342,12 +334,24 @@
                                 let value = row[col];
                                 if (value === null || value === undefined) value = '';
 
-                                const formatCols = ['order_conversion_rate', 'video_sales_ratio', 'video_view_sales_ratio'];
-                                if (formatCols.includes(col) && typeof value === 'number') {
+                                const percentTimes100 = ['order_conversion_rate', 'video_sales_ratio', 'video_view_sales_ratio'];
+                                const percentAsIs = ['commission_rate', 'good_review_rate'];
+
+                                if (percentTimes100.includes(col) && typeof value === 'number') {
                                     value = (value * 100).toFixed(2) + '%';
+                                } else if (percentAsIs.includes(col) && typeof value === 'number') {
+                                    value = value.toFixed(2) + '%';
                                 }
 
-                                if ((col === 'cover' || col === '封面') && typeof value === 'string' && value.startsWith('http')) {
+                                if (col === 'juliang_url') {
+                                    const promotionId = row.promotion_id;
+                                    if (promotionId) {
+                                        const url = `https://buyin.jinritemai.com/dashboard/merch-picking-library/merch-promoting?id=${promotionId}`;
+                                        value = `<a href="${url}" target="_blank" title="${url}">${escapeHtml(url.substring(0, 30))}...</a>`;
+                                    } else {
+                                        value = '';
+                                    }
+                                } else if ((col === 'cover' || col === '封面') && typeof value === 'string' && value.startsWith('http')) {
                                     value = `<a href="${value}" target="_blank" title="点击查看大图"><img src="${value}" alt="cover" height="40"></a>`;
                                 } else if (typeof value === 'string' && value.startsWith('http')) {
                                     value = `<a href="${value}" target="_blank" title="${escapeHtml(value)}">${escapeHtml(value.substring(0, 30))}...</a>`;
@@ -360,6 +364,24 @@
                         });
                         tableHtml += '</tbody></table>';
                         tableContainer.innerHTML = tableHtml;
+
+                        // Add sort listeners to headers
+                        if (tableName === 'products') {
+                            tableContainer.querySelectorAll('thead th').forEach(th => {
+                                th.addEventListener('click', () => {
+                                    const columnKey = th.dataset.col;
+                                    if (!columnKey) return;
+
+                                    if (currentSort.by === columnKey) {
+                                        currentSort.order = currentSort.order === 'asc' ? 'desc' : 'asc';
+                                    } else {
+                                        currentSort.by = columnKey;
+                                        currentSort.order = 'desc';
+                                    }
+                                    loadTable(tableName, 1, perPage, searchTerm);
+                                });
+                            });
+                        }
 
                         buildPagination(tableName, paginationContainer, page, total_pages, perPage, searchTerm);
                         initializeRowClickListeners(tableContainer, tableName);
@@ -381,7 +403,7 @@
                         document.querySelectorAll('tbody tr.table-primary').forEach(r => r.classList.remove('table-primary'));
                         row.classList.add('table-primary');
 
-                        popoverTitle.textContent = '关联数据';
+                        popoverTitle.textContent = '加载数据...';
                         popoverBody.innerHTML = '<div class="d-flex justify-content-center align-items-center p-5"><div class="spinner-border" role="status"><span class="visually-hidden">Loading...</span></div></div>';
                         customPopover.classList.add('is-visible');
 
@@ -391,14 +413,13 @@
                         }
 
                         const rowData = row.dataset;
-                        const targetTable = tableName === 'products' ? 'promotion_data' : 'products';
-                        const targetApi = `/api/${targetTable}_item`;
+                        const itemApi = `/api/product_item`;
                         const detailApi = `/api/promotion_data_detail`;
 
                         const params = new URLSearchParams({ date: rowData.date, product_id: rowData.productId, promotion_id: rowData.promotionId });
 
                         Promise.all([
-                            fetch(`${targetApi}?${params.toString()}`).then(res => res.ok ? res.json() : Promise.reject(new Error(`HTTP ${res.status}`))),
+                            fetch(`${itemApi}?${params.toString()}`).then(res => res.ok ? res.json() : Promise.reject(new Error(`HTTP ${res.status}`))),
                             fetch(`${detailApi}?${params.toString()}`).then(res => res.ok ? res.json() : Promise.reject(new Error(`HTTP ${res.status}`)))
                         ])
                         .then(([itemData, detailData]) => {
@@ -409,24 +430,30 @@
 
                             // Add item details
                             contentHtml += '<hr/><dl class="row">';
-                            const itemTranslations = columnTranslations[targetTable] || {};
-                            let keys = Object.keys(itemData);
-
-                            if (targetTable === 'promotion_data') {
-                                const preferredOrder = [
-                                    'date', 'time_range', 'category', 'type', 'video_sales', 
-                                    'converting_influencers', 'converting_contents', 'views', 
-                                    'video_sales_ratio', 'video_view_sales_ratio', 'window_sales', 
-                                    'image_text_sales', 'live_sales', 'order_conversion_rate', 
-                                    'product_id', 'promotion_id', 'total_sales_amount'
-                                ];
-                                const orderedKeys = preferredOrder.filter(k => keys.includes(k));
-                                const remainingKeys = keys.filter(k => !preferredOrder.includes(k));
-                                keys = [...orderedKeys, ...remainingKeys];
+                            const itemTranslations = columnTranslations['products'] || {};
+                            
+                            // Create reverse map from translations
+                            const reverseTranslations = {};
+                            for (const key in itemTranslations) {
+                                reverseTranslations[itemTranslations[key]] = key;
                             }
 
-                            for (const key of keys) {
-                                if (key.endsWith('_formatted') || ['creation_time', 'source_json_filename', 'time_range'].includes(key)) {
+                            const preferredChineseOrder = [
+                                '商品标题', '日期', '视频销量', '视频销量占比', '视频浏览销售比', 
+                                '视频浏览量', '橱窗销量', '好评率', '图文销量', '带货人数', 
+                                '直播销量', '下单转化率', '总销售额', '出单内容数', '出单达人数', 
+                                '店铺名', '商家分', '店铺体验分', '到手价', '佣金率', '物流分', 
+                                '商品分', '已售', '排名', '类型', '时间范围', '封面', 
+                                '抖音分享文本', '抖音URL', '产品ID', '促销ID', '商品类目'
+                            ];
+
+                            const preferredOrder = preferredChineseOrder.map(name => reverseTranslations[name]).filter(Boolean);
+                            const allKeys = Object.keys(itemData);
+                            const remainingKeys = allKeys.filter(key => !preferredOrder.includes(key));
+                            const displayKeys = [...preferredOrder, ...remainingKeys];
+
+                            for (const key of displayKeys) {
+                                if (!allKeys.includes(key) || key.endsWith('_formatted') || ['creation_time', 'source_json_filename'].includes(key)) {
                                     continue;
                                 }
                                 const value = itemData[key];
@@ -436,15 +463,20 @@
                                 const displayName = itemTranslations[key] || key.replace(/_/g, ' ');
                                 const formattedKey = `${key}_formatted`;
                                 
+                                const percentTimes100 = ['order_conversion_rate', 'video_sales_ratio', 'video_view_sales_ratio'];
+                                const percentAsIs = ['commission_rate', 'good_review_rate'];
+
                                 if (itemData.hasOwnProperty(formattedKey)) {
                                     const formattedValue = itemData[formattedKey] || '';
-                                    if (key.includes('rate') || key.includes('ratio')) {
+                                    if (percentTimes100.includes(key)) {
                                         displayValue = `${(value * 100).toFixed(2)}% (${formattedValue})`;
                                     } else {
                                         displayValue = `${value} (${formattedValue})`;
                                     }
-                                } else if ((key.includes('rate') || key.includes('ratio')) && typeof value === 'number') {
+                                } else if (percentTimes100.includes(key) && typeof value === 'number') {
                                     displayValue = (value * 100).toFixed(2) + '%';
+                                } else if (percentAsIs.includes(key) && typeof value === 'number') {
+                                    displayValue = value.toFixed(2) + '%';
                                 } else if (typeof value === 'string' && value.startsWith('http')) {
                                     displayValue = `<a href="${value}" target="_blank">link</a>`;
                                 } else {
@@ -456,7 +488,7 @@
                             contentHtml += '</dl>';
 
                             popoverBody.innerHTML = contentHtml;
-                            popoverTitle.textContent = `关联 ${targetTable.replace(/_/g, ' ')} 数据`;
+                            popoverTitle.textContent = `数据详情`;
 
                             // Render chart
                             if (detailData && detailData.length > 0) {

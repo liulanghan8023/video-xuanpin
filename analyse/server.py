@@ -19,8 +19,8 @@ def get_db_connection():
     conn.row_factory = sqlite3.Row
     return conn
 
-def query_table(table_name, page, per_page, search_term=None):
-    """通用查询函数，支持分页和搜索"""
+def query_table(table_name, page, per_page, search_term=None, sort_by='creation_time', sort_order='desc'):
+    """通用查询函数，支持分页、搜索和排序"""
     try:
         conn = get_db_connection()
     except FileNotFoundError as e:
@@ -39,6 +39,13 @@ def query_table(table_name, page, per_page, search_term=None):
         cursor.execute(f"PRAGMA table_info({table_name})")
         columns = [row['name'] for row in cursor.fetchall()]
 
+        # 安全校验：确保排序字段是合法的列名
+        if sort_by not in columns:
+            sort_by = 'creation_time'
+        # 安全校验：确保排序顺序是 asc 或 desc
+        if sort_order.lower() not in ['asc', 'desc']:
+            sort_order = 'desc'
+
         # 构建查询
         base_query = f"FROM {table_name}"
         if where_clauses:
@@ -52,7 +59,8 @@ def query_table(table_name, page, per_page, search_term=None):
 
         # 查询分页数据
         offset = (page - 1) * per_page
-        query = f"SELECT * {base_query} ORDER BY creation_time DESC LIMIT ? OFFSET ?"
+        order_clause = f"ORDER BY {sort_by} {sort_order.upper()}"
+        query = f"SELECT * {base_query} {order_clause} LIMIT ? OFFSET ?"
         data_cursor = conn.execute(query, params + [per_page, offset])
         data = data_cursor.fetchall()
         conn.close()
@@ -103,20 +111,14 @@ def get_products():
     page = request.args.get('page', 1, type=int)
     per_page = request.args.get('per_page', 30, type=int)
     search_term = request.args.get('search', None, type=str)
-    data = query_table('products', page, per_page, search_term)
+    sort_by = request.args.get('sort_by', 'creation_time', type=str)
+    sort_order = request.args.get('sort_order', 'desc', type=str)
+    data = query_table('products', page, per_page, search_term, sort_by, sort_order)
     if "error" in data:
         return jsonify(data), 500
     return jsonify(data)
 
-@app.route('/api/promotion_data')
-def get_promotion_data():
-    """提供推广数据的API端点"""
-    page = request.args.get('page', 1, type=int)
-    per_page = request.args.get('per_page', 30, type=int)
-    data = query_table('promotion_data', page, per_page)
-    if "error" in data:
-        return jsonify(data), 500
-    return jsonify(data)
+
 
 @app.route('/api/product_item')
 def get_product_item():
@@ -132,19 +134,7 @@ def get_product_item():
         return jsonify(data), 404
     return jsonify(data)
 
-@app.route('/api/promotion_data_item')
-def get_promotion_data_item():
-    """获取单条推广数据"""
-    date = request.args.get('date')
-    product_id = request.args.get('product_id')
-    promotion_id = request.args.get('promotion_id')
-    if not all([date, product_id, promotion_id]):
-        return jsonify({"error": "缺少必须的查询参数: date, product_id, promotion_id"}), 400
 
-    data = query_single_item('promotion_data', date, product_id, promotion_id)
-    if "error" in data:
-        return jsonify(data), 404
-    return jsonify(data)
 
 @app.route('/api/promotion_data_detail')
 def get_promotion_data_detail():

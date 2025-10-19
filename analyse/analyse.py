@@ -42,18 +42,7 @@ def init_db():
             seller_score INTEGER,
             shop_name TEXT,
             source_json_filename TEXT,
-            creation_time DATETIME DEFAULT CURRENT_TIMESTAMP,
-            PRIMARY KEY (date, product_id, promotion_id)
-        )
-        """)
-        # 创建推广数据表 (新结构)
-        cursor.execute("""
-        CREATE TABLE IF NOT EXISTS promotion_data (
-            date TEXT,
-            product_id TEXT,
-            promotion_id TEXT,
             time_range TEXT,
-            category TEXT,
             type TEXT,
             total_sales_amount REAL,
             total_sales_amount_formatted TEXT,
@@ -72,7 +61,6 @@ def init_db():
             views INTEGER,
             video_sales_ratio REAL,
             video_view_sales_ratio REAL,
-            source_json_filename TEXT,
             creation_time DATETIME DEFAULT CURRENT_TIMESTAMP,
             PRIMARY KEY (date, product_id, promotion_id)
         )
@@ -178,6 +166,21 @@ def process_json_file(file_path: Path, conn: sqlite3.Connection):
     if cursor.fetchone():
         print(f"产品数据已存在: {date_str}, {product_id}, {promotion_id}")
     else:
+        # Extract sales data
+        base_path = 'thirty_data.data.model.content_data.calculate_data.'
+        window_sales = get_json_value(data, base_path + 'bind_shop_sales', 0)
+        image_text_sales = get_json_value(data, base_path + 'image_text_sales', 0)
+        live_sales = get_json_value(data, base_path + 'live_sales', 0)
+        video_sales_val = get_json_value(data, base_path + 'video_sales', 0)
+        views = get_json_value(data, base_path + 'video_pv', 0)
+
+        # Calculate total sales for ratio
+        total_sales_volume = window_sales + image_text_sales + live_sales + video_sales_val
+
+        # Calculate ratios, handle division by zero
+        video_sales_ratio = (video_sales_val / total_sales_volume) if total_sales_volume > 0 else 0
+        video_view_sales_ratio = (views / video_sales_val) if video_sales_val > 0 else 0
+
         product_data = (
             date_str,
             product_id,
@@ -199,42 +202,8 @@ def process_json_file(file_path: Path, conn: sqlite3.Connection):
             get_json_value(data, 'detail_data.data.model.shop.shop_exper_scores.shop_exper_score_label.logistics_score.score'),
             get_json_value(data, 'detail_data.data.model.shop.shop_exper_scores.shop_exper_score_label.service_score.score'),
             get_json_value(data, 'detail_data.data.model.shop.shop_base.shop_name'),
-            source_filename
-        )
-        # The creation_time column is filled by default by the database
-        cursor.execute("INSERT INTO products (date, product_id, promotion_id, category, title, cover, rank, sold, douyin_share_text, juliang_url, douyin_url, price, commission_rate, good_review_rate, influencer_count, shop_experience_score, product_score, logistics_score, seller_score, shop_name, source_json_filename) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", product_data)
-        print(f"成功插入产品数据: {date_str}, {product_id}, {promotion_id}")
-
-    # 推广数据表使用文件路径中的日期
-    promo_date = date_str
-
-    # 检查推广数据是否存在
-    cursor.execute("SELECT 1 FROM promotion_data WHERE date = ? AND product_id = ? AND promotion_id = ?",
-                   (promo_date, product_id, promotion_id))
-    if cursor.fetchone():
-        print(f"推广数据已存在: {promo_date}, {product_id}, {promotion_id}")
-    else:
-        # Extract sales data
-        base_path = 'thirty_data.data.model.content_data.calculate_data.'
-        window_sales = get_json_value(data, base_path + 'bind_shop_sales', 0)
-        image_text_sales = get_json_value(data, base_path + 'image_text_sales', 0)
-        live_sales = get_json_value(data, base_path + 'live_sales', 0)
-        video_sales = get_json_value(data, base_path + 'video_sales', 0)
-        views = get_json_value(data, base_path + 'video_pv', 0)
-
-        # Calculate total sales for ratio
-        total_sales_volume = window_sales + image_text_sales + live_sales + video_sales
-
-        # Calculate ratios, handle division by zero
-        video_sales_ratio = (video_sales / total_sales_volume) if total_sales_volume > 0 else 0
-        video_view_sales_ratio = (views / video_sales) if video_sales > 0 else 0
-
-        promotion_table_data = (
-            promo_date,
-            product_id,
-            promotion_id,
+            source_filename,
             '30日',  # 时间范围
-            get_json_value(data, 'category'), # 商品类目
             '视频',  # 类型
             get_json_value(data, base_path + 'video_sales_amount', 0) / 100.0,
             get_json_value(data, base_path + 'format_video_sales_amount'),
@@ -244,7 +213,7 @@ def process_json_file(file_path: Path, conn: sqlite3.Connection):
             get_json_value(data, base_path + 'format_image_text_sales'),
             live_sales,
             get_json_value(data, base_path + 'format_live_sales'),
-            video_sales,
+            video_sales_val,
             get_json_value(data, base_path + 'format_video_sales'),
             get_json_value(data, base_path + 'video_match_order_num', 0),
             get_json_value(data, base_path + 'video_sales_content_num', 0),
@@ -252,25 +221,23 @@ def process_json_file(file_path: Path, conn: sqlite3.Connection):
             get_json_value(data, base_path + 'format_video_order_conversion_rate'),
             views,
             video_sales_ratio,
-            video_view_sales_ratio,
-            source_filename
+            video_view_sales_ratio
         )
         # The creation_time column is filled by default by the database
         cursor.execute("""
-            INSERT INTO promotion_data (
-                date, product_id, promotion_id, time_range, category, type,
-                total_sales_amount, total_sales_amount_formatted,
-                window_sales, window_sales_formatted,
-                image_text_sales, image_text_sales_formatted,
-                live_sales, live_sales_formatted,
-                video_sales, video_sales_formatted,
-                converting_influencers, converting_contents,
-                order_conversion_rate, order_conversion_rate_formatted,
-                views, video_sales_ratio, video_view_sales_ratio,
-                source_json_filename
-            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-        """, promotion_table_data)
-        print(f"成功插入推广数据: {promo_date}, {product_id}, {promotion_id}")
+            INSERT INTO products (
+                date, product_id, promotion_id, category, title, cover, rank, sold, 
+                douyin_share_text, juliang_url, douyin_url, price, commission_rate, 
+                good_review_rate, influencer_count, shop_experience_score, product_score, 
+                logistics_score, seller_score, shop_name, source_json_filename,
+                time_range, type, total_sales_amount, total_sales_amount_formatted,
+                window_sales, window_sales_formatted, image_text_sales, image_text_sales_formatted,
+                live_sales, live_sales_formatted, video_sales, video_sales_formatted,
+                converting_influencers, converting_contents, order_conversion_rate,
+                order_conversion_rate_formatted, views, video_sales_ratio, video_view_sales_ratio
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        """, product_data)
+        print(f"成功插入产品数据: {date_str}, {product_id}, {promotion_id}")
 
     # 处理推广数据详情
     calculate_data_list = get_json_value(data, 'thirty_data.data.model.content_data.calculate_data_list')
