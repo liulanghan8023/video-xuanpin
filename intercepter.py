@@ -327,7 +327,7 @@ async def main_point():
     catch_num = 18
     # 没分钟抓几个
     catch_per_minute = 0.1
-    point_id = "3775472243623199049"
+    point_id = "3468214474207543651"
     # 指定抓去一个
     cats = ["个护家清"]
     async with async_playwright() as playwright:

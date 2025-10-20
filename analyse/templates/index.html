@@ -387,7 +387,6 @@
                         }
 
                         const preferredTableOrder = preferredChineseOrderForTable.map(name => reversePopoverTranslations[name]).filter(Boolean);
-                        
                         const finalColumnOrder = preferredTableOrder.filter(c => ['sales_trend', 'avg_content_per_influencer'].includes(c) || columns.includes(c));
 
                         let tableHtml = '<table class="table table-bordered table-striped table-hover">';
@@ -427,11 +426,18 @@
                                         titleDisplay = `${escapeHtml(titleText.substring(0, 40))}...`;
                                     }
                                     
+                                    let titleColor = '';
+                                    if (row.hasOwnProperty('video_sales_ratio') && typeof row.video_sales_ratio === 'number') {
+                                        const percentage = row.video_sales_ratio * 100;
+                                        titleColor = percentage >= 65 ? 'red' : 'green';
+                                    }
+
+                                    let url = ''; // Declare url here
                                     if (promotionId) {
-                                        const url = `https://buyin.jinritemai.com/dashboard/merch-picking-library/merch-promoting?id=${promotionId}`;
-                                        cellHtml = `<a href="${url}" target="_blank" title="${escapeHtml(titleText)}">${titleDisplay}</a>`;
+                                        url = `https://buyin.jinritemai.com/dashboard/merch-picking-library/merch-promoting?id=${promotionId}`;
+                                        cellHtml = `<a href="${url}" target="_blank" title="${escapeHtml(titleText)}" style="color: ${titleColor};">${titleDisplay}</a>`;
                                     } else {
-                                        cellHtml = `<span title="${escapeHtml(titleText)}">${titleDisplay}</span>`;
+                                        cellHtml = `<span title="${escapeHtml(titleText)}" style="color: ${titleColor};">${titleDisplay}</span>`;
                                     }
                                 } else if (col === 'juliang_url') {
                                     cellHtml = '';
@@ -579,11 +585,17 @@
                                 if (key === 'title') {
                                     const promotionId = itemData.promotion_id;
                                     const titleText = value;
+                                    let titleColor = '';
+                                    if (itemData.hasOwnProperty('video_sales_ratio') && typeof itemData.video_sales_ratio === 'number') {
+                                        const percentage = itemData.video_sales_ratio * 100;
+                                        titleColor = percentage >= 65 ? 'red' : 'green';
+                                    }
+                                    let url = ''; // Declare url here
                                     if (promotionId) {
-                                        const url = `https://buyin.jinritemai.com/dashboard/merch-picking-library/merch-promoting?id=${promotionId}`;
-                                        displayValue = `<a href="${url}" target="_blank">${escapeHtml(titleText)}</a>`;
+                                        url = `https://buyin.jinritemai.com/dashboard/merch-picking-library/merch-promoting?id=${promotionId}`;
+                                        displayValue = `<a href="${url}" target="_blank" style="color: ${titleColor};">${escapeHtml(titleText)}</a>`;
                                     } else {
-                                        displayValue = escapeHtml(titleText);
+                                        displayValue = `<span style="color: ${titleColor};">${escapeHtml(titleText)}</span>`;
                                     }
                                 } else if (key === 'video_view_sales_ratio' && typeof value === 'number' && value > 0) {
                                     displayValue = `${Math.round(value)}:1`;
