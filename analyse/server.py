@@ -19,7 +19,7 @@ def get_db_connection():
     conn.row_factory = sqlite3.Row
     return conn
 
-def query_table(table_name, page, per_page, search_term=None, sort_by='creation_time', sort_order='desc'):
+def query_table(table_name, page, per_page, search_term=None, sort_by='creation_time', sort_order='desc', filter_video_sales_ratio=False):
     """通用查询函数，支持分页、搜索和排序"""
     try:
         conn = get_db_connection()
@@ -35,7 +35,7 @@ def query_table(table_name, page, per_page, search_term=None, sort_by='creation_
         where_clauses.append("(promotion_id LIKE ? OR product_id LIKE ? OR title LIKE ?)")
         params.extend([like_term, like_term, like_term])
 
-    if table_name == 'products':
+    if table_name == 'products' and filter_video_sales_ratio:
         where_clauses.append("video_sales_ratio >= 0.65")
 
     try:
@@ -114,9 +114,10 @@ def get_products():
     page = request.args.get('page', 1, type=int)
     per_page = request.args.get('per_page', 30, type=int)
     search_term = request.args.get('search', None, type=str)
-    sort_by = request.args.get('sort_by', 'creation_time', type=str)
+    sort_by = request.args.get('sort_by', 'date', type=str)
     sort_order = request.args.get('sort_order', 'desc', type=str)
-    data = query_table('products', page, per_page, search_term, sort_by, sort_order)
+    filter_video_sales_ratio = request.args.get('filter_video_sales_ratio', 'false', type=str).lower() == 'true'
+    data = query_table('products', page, per_page, search_term, sort_by, sort_order, filter_video_sales_ratio)
     if "error" in data:
         return jsonify(data), 500
     return jsonify(data)

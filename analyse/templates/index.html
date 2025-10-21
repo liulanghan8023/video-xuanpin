@@ -88,6 +88,14 @@
                             <button id="products-clear-btn" class="btn btn-outline-secondary">清空</button>
                         </div>
                     </div>
+                    <div class="col-md-4 d-flex align-items-center">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="filter-video-sales-ratio-checkbox" checked>
+                            <label class="form-check-label" for="filter-video-sales-ratio-checkbox">
+                                过滤视频销量:总销量 >= 65%
+                            </label>
+                        </div>
+                    </div>
                 </div>
                 <div id="products-table-container" class="table-responsive"></div>
                 <nav id="products-pagination" class="mt-3 d-flex justify-content-center"></nav>
@@ -115,8 +123,13 @@
             const productSearchInput = document.getElementById('products-search-input');
             const productSearchBtn = document.getElementById('products-search-btn');
             const productClearBtn = document.getElementById('products-clear-btn');
+            const filterVideoSalesRatioCheckbox = document.getElementById('filter-video-sales-ratio-checkbox');
 
-            let currentSort = { by: 'creation_time', order: 'desc' };
+            let currentSort = { by: 'date', order: 'desc' };
+
+            filterVideoSalesRatioCheckbox.addEventListener('change', () => {
+                loadTable('products', 1, perPage, productSearchInput.value.trim());
+            });
 
             const columnTranslations = {
                 'products': {
@@ -358,6 +371,10 @@
                 let apiUrl = `/api/${tableName}?page=${page}&per_page=${perPage}&sort_by=${currentSort.by}&sort_order=${currentSort.order}`;
                 if (searchTerm && tableName === 'products') {
                     apiUrl += `&search=${encodeURIComponent(searchTerm)}`;
+                }
+                const filterVideoSalesRatioCheckbox = document.getElementById('filter-video-sales-ratio-checkbox');
+                if (tableName === 'products' && filterVideoSalesRatioCheckbox && filterVideoSalesRatioCheckbox.checked) {
+                    apiUrl += `&filter_video_sales_ratio=true`;
                 }
 
                 fetch(apiUrl)
