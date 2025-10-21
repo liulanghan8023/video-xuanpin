@@ -35,6 +35,9 @@ def query_table(table_name, page, per_page, search_term=None, sort_by='creation_
         where_clauses.append("(promotion_id LIKE ? OR product_id LIKE ? OR title LIKE ?)")
         params.extend([like_term, like_term, like_term])
 
+    if table_name == 'products':
+        where_clauses.append("video_sales_ratio >= 0.65")
+
     try:
         cursor.execute(f"PRAGMA table_info({table_name})")
         columns = [row['name'] for row in cursor.fetchall()]
