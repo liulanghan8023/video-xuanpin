@@ -1,5 +1,6 @@
 import json
 import sqlite3
+import time
 from pathlib import Path
 import re
 import os
@@ -7,7 +8,7 @@ import os
 # 数据库文件路径
 DB_FILE = Path(__file__).parent / "data.db"
 # 数据目录路径
-DATA_DIR = Path(__file__).parent / "data"
+DATA_DIR = Path(__file__).parent.parent / "data"
 
 def init_db():
     """初始化数据库，创建表"""
@@ -335,4 +336,6 @@ def main():
     print("\n所有文件处理完毕。")
 
 if __name__ == "__main__":
-    main()
+    while True:
+        main()
+        time.sleep(60)

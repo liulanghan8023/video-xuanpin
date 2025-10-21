@@ -347,5 +347,5 @@ if __name__ == "__main__":
         print("And then run: playwright install")
         exit(1)
 
-    # asyncio.run(main())
-    asyncio.run(main_point())
+    asyncio.run(main())
+    # asyncio.run(main_point())
