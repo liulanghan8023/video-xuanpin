@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Viewer - Mobile</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+            background-color: #f0f2f5;
+        }
+        .card {
+            margin-bottom: 0.75rem;
+            border: 1px solid #e9ecef;
+            border-radius: 0.5rem;
+        }
+        .card-body {
+            padding: 1rem;
+        }
+        .product-title {
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: #333;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            line-height: 1.4;
+        }
+        .product-metric {
+            font-size: 0.8rem;
+            color: #555;
+        }
+        .product-metric strong {
+            color: #000;
+        }
+        .ratio-red { color: #dc3545; font-weight: bold; }
+        .ratio-green { color: #198754; font-weight: bold; }
+
+        .detail-view dt {
+            font-weight: 500;
+            font-size: 0.85rem;
+        }
+        .detail-view dd {
+            font-size: 0.85rem;
+            color: #454545;
+        }
+        .back-link {
+            font-weight: 500;
+            color: #0d6efd;
+            text-decoration: none;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid" id="main-container">
+        <!-- This will be populated by JavaScript -->
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const mainContainer = document.getElementById('main-container');
+            const perPage = 20;
+            let currentSort = { by: 'date', order: 'desc' };
+
+            const columnTranslations = {
+                'products': {
+                    'avg_content_per_influencer': '平均达人出单数(视频)', 'date': '日期', 'product_id': '产品ID', 'promotion_id': '促销ID', 'category': '商品类目', 'title': '商品标题', 'cover': '封面', 'rank': '排名', 'sold': '已售', 'douyin_share_text': '抖音分享文本', 'juliang_url': '巨量URL', 'douyin_url': '抖音URL', 'price': '到手价', 'commission_rate': '佣金率', 'good_review_rate': '好评率', 'influencer_count': '带货人数', 'shop_experience_score': '店铺体验分', 'product_score': '商品分', 'logistics_score': '物流分', 'seller_score': '商家分', 'shop_name': '店铺名', 'source_json_filename': '来源JSON', 'time_range': '时间范围', 'type': '类型', 'total_sales_amount': '总销售额(视频)', 'total_sales_amount_formatted': '总销售额(格式化)', 'window_sales': '橱窗销量', 'window_sales_formatted': '橱窗销量(格式化)', 'image_text_sales': '图文销量', 'image_text_sales_formatted': '图文销量(格式化)', 'live_sales': '直播销量', 'live_sales_formatted': '直播销量(格式化)', 'video_sales': '视频销量', 'video_sales_formatted': '视频销量(格式化)', 'converting_influencers': '出单达人数(视频)', 'converting_contents': '出单内容数(视频)', 'order_conversion_rate': '下单转化率(视频)', 'order_conversion_rate_formatted': '下单转化率(格式化)', 'views': '视频浏览量', 'video_sales_ratio': '视频销量:总销量', 'video_view_sales_ratio': '视频浏览销售比', 'creation_time': '创建时间', "sales_trend":'销量趋势',
+                },
+                'promotion_data_detail': {
+                    'date': '日期', 'product_id': '产品ID', 'promotion_id': '促销ID', 'calculate_time': '计算时间', 'live_sales': '直播销量', 'format_live_sales': '直播销量(格式化)', 'video_sales': '视频销量', 'format_video_sales': '视频销量(格式化)', 'image_text_sales': '图文销量', 'format_image_text_sales': '图文销量(格式化)', 'bind_shop_sales': '橱窗销量', 'format_bind_shop_sales': '橱窗销量(格式化)', 'live_sales_amount': '直播销售额', 'format_live_sales_amount': '直播销售额(格式化)', 'video_sales_amount': '视频销售额', 'format_video_sales_amount': '视频销售额(格式化)', 'image_text_sales_amount': '图文销售额', 'format_image_text_sales_amount': '图文销售额(格式化)', 'bind_shop_sales_amount': '橱窗销售额', 'format_bind_shop_sales_amount': '橱窗销售额(格式化)', 'live_match_order_num': '直播匹配订单数', 'video_match_order_num': '视频匹配订单数', 'image_text_match_order_num': '图文匹配订单数', 'bind_shop_match_order_num': '橱窗匹配订单数', 'live_count': '直播数', 'video_count': '视频数', 'image_text_count': '图文数', 'live_order_conversion_rate': '直播下单转化率', 'format_live_order_conversion_rate': '直播下单转化率(格式化)', 'video_order_conversion_rate': '视频下单转化率', 'format_video_order_conversion_rate': '视频下单转化率(格式化)', 'image_text_order_conversion_rate': '图文下单转化率', 'format_image_text_order_conversion_rate': '图文下单转化率(格式化)', 'bind_shop_order_conversion_rate': '橱窗下单转化率', 'format_bind_shop_order_conversion_rate': '橱窗下单转化率(格式化)', 'live_sales_content_num': '直播销售内容数', 'video_sales_content_num': '视频销售内容数', 'image_text_sales_content_num': '图文销售内容数', 'live_pv': '直播浏览量', 'video_pv': '视频浏览量', 'image_text_pv': '图文浏览量', 'bind_shop_pv': '橱窗浏览量', 'creation_time': '创建时间'
+                }
+            };
+
+            const urlParams = new URLSearchParams(window.location.search);
+            const view = urlParams.get('view');
+            const productId = urlParams.get('product_id');
+            const promotionId = urlParams.get('promotion_id');
+            const date = urlParams.get('date');
+
+            if (view === 'detail' && productId && promotionId && date) {
+                loadDetailView(date, productId, promotionId);
+            } else {
+                loadListView();
+            }
+
+            function renderLoading() {
+                return '<div class="d-flex justify-content-center align-items-center p-5"><div class="spinner-border text-primary" role="status"><span class="visually-hidden">Loading...</span></div></div>';
+            }
+
+            function escapeHtml(unsafe) {
+                if (unsafe === null || unsafe === undefined) return '';
+                return unsafe.toString().replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
+            }
+
+            // ----------------- LIST VIEW -----------------
+
+            function loadListView(page = 1, searchTerm = '') {
+                mainContainer.innerHTML = `
+                    <div class="mb-3">
+                        <div class="input-group">
+                            <input type="text" id="search-input" class="form-control" placeholder="搜索..." value="${escapeHtml(searchTerm)}">
+                            <button id="search-btn" class="btn btn-primary">搜索</button>
+                        </div>
+                    </div>
+                    <div class="form-check mb-3">
+                        <input class="form-check-input" type="checkbox" id="filter-checkbox" checked>
+                        <label class="form-check-label" for="filter-checkbox">过滤视频销量:总销量 >= 65%</label>
+                    </div>
+                    <div id="product-list"></div>
+                    <nav id="pagination" class="mt-3 d-flex justify-content-center"></nav>
+                `;
+
+                const productListContainer = document.getElementById('product-list');
+                productListContainer.innerHTML = renderLoading();
+
+                const filterCheckbox = document.getElementById('filter-checkbox');
+                
+                let apiUrl = `/api/products?page=${page}&per_page=${perPage}&sort_by=${currentSort.by}&sort_order=${currentSort.order}`;
+                if (searchTerm) {
+                    apiUrl += `&search=${encodeURIComponent(searchTerm)}`;
+                }
+                if (filterCheckbox.checked) {
+                    apiUrl += `&filter_video_sales_ratio=true`;
+                }
+
+                fetch(apiUrl)
+                    .then(response => response.ok ? response.json() : Promise.reject(new Error(`HTTP ${response.status}`)))
+                    .then(result => {
+                        const { data, total_pages } = result;
+                        if (!data || data.length === 0) {
+                            productListContainer.innerHTML = `<p class="text-center text-muted p-4">没有数据</p>`;
+                            return;
+                        }
+                        renderProductList(data);
+                        renderPagination('pagination', page, total_pages, searchTerm);
+                    })
+                    .catch(error => {
+                        productListContainer.innerHTML = `<p class="text-danger text-center p-4">加载失败: ${error.message}</p>`;
+                    });
+
+                // Add event listeners after rendering the controls
+                document.getElementById('search-btn').addEventListener('click', () => {
+                    const newSearchTerm = document.getElementById('search-input').value.trim();
+                    loadListView(1, newSearchTerm);
+                });
+                document.getElementById('search-input').addEventListener('keyup', (event) => {
+                    if (event.key === 'Enter') {
+                        document.getElementById('search-btn').click();
+                    }
+                });
+                filterCheckbox.addEventListener('change', () => {
+                    const currentSearchTerm = document.getElementById('search-input').value.trim();
+                    loadListView(1, currentSearchTerm);
+                });
+            }
+
+            function renderProductList(data) {
+                const container = document.getElementById('product-list');
+                let cardsHtml = '';
+                data.forEach(item => {
+                    const detailUrl = `?view=detail&date=${item.date}&product_id=${item.product_id}&promotion_id=${item.promotion_id}`;
+                    
+                    let ratioHtml = '';
+                    if (typeof item.video_sales_ratio === 'number') {
+                        const percentage = item.video_sales_ratio * 100;
+                        const ratioClass = percentage >= 65 ? 'ratio-red' : 'ratio-green';
+                        ratioHtml = `<span class="${ratioClass}">${percentage.toFixed(1)}%</span>`;
+                    }
+
+                    let avgContent = 'N/A';
+                    if (item.converting_influencers > 0) {
+                        avgContent = (item.converting_contents / item.converting_influencers).toFixed(2);
+                    }
+
+                    cardsHtml += `
+                        <a href="${detailUrl}" class="card-link text-decoration-none">
+                            <div class="card">
+                                <div class="card-body">
+                                    <p class="product-title">${escapeHtml(item.title)}</p>
+                                    <div class="row mt-2">
+                                        <div class="col-6 product-metric">视频销量/总销: <strong>${ratioHtml}</strong></div>
+                                        <div class="col-6 product-metric">到手价: <strong>¥${item.price}</strong></div>
+                                    </div>
+                                    <div class="row mt-1">
+                                        <div class="col-6 product-metric">商家分: <strong>${item.seller_score}</strong></div>
+                                        <div class="col-6 product-metric">平均达人出单: <strong>${avgContent}</strong></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    `;
+                });
+                container.innerHTML = cardsHtml;
+            }
+
+            function renderPagination(containerId, currentPage, totalPages, searchTerm) {
+                const container = document.getElementById(containerId);
+                container.innerHTML = '';
+                if (totalPages <= 1) return;
+
+                const ul = document.createElement('ul');
+                ul.className = 'pagination pagination-sm';
+
+                const createPageItem = (text, pageNum, isDisabled = false, isActive = false) => {
+                    const li = document.createElement('li');
+                    li.className = `page-item ${isDisabled ? 'disabled' : ''} ${isActive ? 'active' : ''}`;
+                    const a = document.createElement('a');
+                    a.className = 'page-link';
+                    a.href = '#';
+                    a.innerText = text;
+                    if (!isDisabled) {
+                        a.addEventListener('click', (e) => { e.preventDefault(); loadListView(pageNum, searchTerm); });
+                    }
+                    li.appendChild(a);
+                    return li;
+                };
+
+                ul.appendChild(createPageItem('«', currentPage - 1, currentPage === 1));
+
+                let startPage = Math.max(1, currentPage - 1);
+                let endPage = Math.min(totalPages, currentPage + 1);
+
+                if (startPage > 1) {
+                    ul.appendChild(createPageItem('1', 1));
+                    if (startPage > 2) ul.appendChild(createPageItem('...', 0, true));
+                }
+
+                for (let i = startPage; i <= endPage; i++) {
+                    ul.appendChild(createPageItem(i, i, false, i === currentPage));
+                }
+
+                if (endPage < totalPages) {
+                    if (endPage < totalPages - 1) ul.appendChild(createPageItem('...', 0, true));
+                    ul.appendChild(createPageItem(totalPages, totalPages));
+                }
+
+                ul.appendChild(createPageItem('»', currentPage + 1, currentPage === totalPages));
+                container.appendChild(ul);
+            }
+
+
+            // ----------------- DETAIL VIEW -----------------
+
+            function loadDetailView(date, productId, promotionId) {
+                mainContainer.innerHTML = renderLoading();
+
+                const itemApi = `/api/product_item?date=${date}&product_id=${productId}&promotion_id=${promotionId}`;
+                const detailApi = `/api/promotion_data_detail?date=${date}&product_id=${productId}&promotion_id=${promotionId}`;
+
+                Promise.all([
+                    fetch(itemApi).then(res => res.ok ? res.json() : Promise.reject(new Error(`Item API: ${res.status}`))),
+                    fetch(detailApi).then(res => res.ok ? res.json() : Promise.reject(new Error(`Detail API: ${res.status}`)))
+                ])
+                .then(([itemData, detailData]) => {
+                    if (itemData.error) throw new Error(itemData.error);
+                    renderDetailView(itemData, detailData);
+                })
+                .catch(err => {
+                    mainContainer.innerHTML = `<div class="alert alert-danger">加载详情失败: ${err.message}</div><a href="mobile" class="back-link">返回列表</a>`;
+                });
+            }
+
+            function renderDetailView(itemData, detailData) {
+                let contentHtml = `<a href="mobile" class="back-link">&laquo; 返回列表</a>`;
+                contentHtml += `<h4>${escapeHtml(itemData.title)}</h4>`;
+                
+                // Chart
+                contentHtml += '<div class="card"><div class="card-body"><canvas id="detail-chart"></canvas></div></div>';
+
+                // Details
+                contentHtml += '<div class="card mt-3"><div class="card-body"><dl class="row detail-view mb-0">';
+
+                const itemTranslations = columnTranslations['products'] || {};
+                const allKeys = Object.keys(itemData);
+
+                for (const key of allKeys) {
+                    if (key.endsWith('_formatted') || ['creation_time', 'source_json_filename', 'juliang_url', 'douyin_url', 'cover', 'title'].includes(key)) continue;
+                    
+                    const value = itemData[key];
+                    if (value === null || value === '') continue;
+
+                    const displayName = itemTranslations[key] || key.replace(/_/g, ' ');
+                    let displayValue = escapeHtml(String(value));
+
+                    // Special formatting
+                    if (key === 'video_sales_ratio' && typeof value === 'number') {
+                        const percentage = value * 100;
+                        const ratioClass = percentage >= 65 ? 'ratio-red' : 'ratio-green';
+                        displayValue = `<span class="${ratioClass}">${percentage.toFixed(2)}%</span>`;
+                    } else if (['order_conversion_rate'].includes(key) && typeof value === 'number') {
+                        displayValue = (value * 100).toFixed(2) + '%';
+                    } else if (['commission_rate', 'good_review_rate'].includes(key) && typeof value === 'number') {
+                        displayValue = value.toFixed(2) + '%';
+                    } else if (typeof value === 'string' && value.startsWith('http')) {
+                        displayValue = `<a href="${value}" target="_blank">查看链接</a>`;
+                    }
+
+                    contentHtml += `<dt class="col-5 text-truncate">${displayName}</dt><dd class="col-7">${displayValue}</dd>`;
+                }
+
+                contentHtml += '</dl></div></div>';
+                mainContainer.innerHTML = contentHtml;
+
+                // Render Chart
+                const chartCanvas = document.getElementById('detail-chart');
+                if (detailData && detailData.length > 0) {
+                    new Chart(chartCanvas.getContext('2d'), {
+                        type: 'line',
+                        data: {
+                            labels: detailData.map(d => new Date(d.calculate_time).toLocaleTimeString()),
+                            datasets: [{
+                                label: '视频销量', data: detailData.map(d => d.video_sales),
+                                borderColor: 'rgb(75, 192, 192)', tension: 0.1,
+                            }, {
+                                label: '直播销量', data: detailData.map(d => d.live_sales),
+                                borderColor: 'rgb(255, 99, 132)', tension: 0.1,
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            plugins: { legend: { position: 'bottom', labels: { boxWidth: 12, font: { size: 10 } } } },
+                            scales: { y: { beginAtZero: true } }
+                        }
+                    });
+                } else {
+                    chartCanvas.outerHTML = '<p class="text-center text-muted">无详细销售趋势数据</p>';
+                }
+            }
+        });
+    </script>
+</body>
+</html>

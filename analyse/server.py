@@ -108,6 +108,11 @@ def index():
     """渲染主页"""
     return render_template('index.html')
 
+@app.route('/mobile')
+def mobile():
+    """渲染主页"""
+    return render_template('mobile.html')
+
 @app.route('/api/products')
 def get_products():
     """提供商品数据的API端点"""
