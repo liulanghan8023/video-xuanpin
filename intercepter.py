@@ -98,6 +98,9 @@ async def cat_run(page, page_detail, cat, max_count=None, catch_per_minute=3, po
         if not point_id:
             async with page.expect_response(_is_rank_data_response, timeout=Config.REQUEST_TIMEOUT) as response_info:
                 await page.locator("div").filter(has_text=re.compile(r"^" + cat + "$")).click()
+                if cat == "个护家清":
+                    # 抓取更细节分类
+                    await page.locator("span").filter(has_text=re.compile(r"^" + "洗护清洁" + "$")).click()
 
             rank_response = await response_info.value
             rank_data = await get_response_json(rank_response, "Rank Data")
