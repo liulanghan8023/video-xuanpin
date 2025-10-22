@@ -70,6 +70,12 @@
             const perPage = 20;
             let currentSort = { by: 'date', order: 'desc' };
 
+            const preferredChineseOrderForTable = [
+                '日期', '商品标题', '销量趋势', '视频销量:总销量', '视频浏览销售比', '平均达人出单数(视频)', '下单转化率(视频)',
+                '商家分', '店铺体验分', '到手价', '好评率', '佣金率', '物流分', '商品分',
+                '封面', '产品ID', '促销ID'
+            ];
+
             const columnTranslations = {
                 'products': {
                     'avg_content_per_influencer': '平均达人出单数(视频)', 'date': '日期', 'product_id': '产品ID', 'promotion_id': '促销ID', 'category': '商品类目', 'title': '商品标题', 'cover': '封面', 'rank': '排名', 'sold': '已售', 'douyin_share_text': '抖音分享文本', 'juliang_url': '巨量URL', 'douyin_url': '抖音URL', 'price': '到手价', 'commission_rate': '佣金率', 'good_review_rate': '好评率', 'influencer_count': '带货人数', 'shop_experience_score': '店铺体验分', 'product_score': '商品分', 'logistics_score': '物流分', 'seller_score': '商家分', 'shop_name': '店铺名', 'source_json_filename': '来源JSON', 'time_range': '时间范围', 'type': '类型', 'total_sales_amount': '总销售额(视频)', 'total_sales_amount_formatted': '总销售额(格式化)', 'window_sales': '橱窗销量', 'window_sales_formatted': '橱窗销量(格式化)', 'image_text_sales': '图文销量', 'image_text_sales_formatted': '图文销量(格式化)', 'live_sales': '直播销量', 'live_sales_formatted': '直播销量(格式化)', 'video_sales': '视频销量', 'video_sales_formatted': '视频销量(格式化)', 'converting_influencers': '出单达人数(视频)', 'converting_contents': '出单内容数(视频)', 'order_conversion_rate': '下单转化率(视频)', 'order_conversion_rate_formatted': '下单转化率(格式化)', 'views': '视频浏览量', 'video_sales_ratio': '视频销量:总销量', 'video_view_sales_ratio': '视频浏览销售比', 'creation_time': '创建时间', "sales_trend":'销量趋势',
@@ -180,6 +186,16 @@
                         avgContent = (item.converting_contents / item.converting_influencers).toFixed(2);
                     }
 
+                    let videoViewSalesRatio = 'N/A';
+                    if (typeof item.video_view_sales_ratio === 'number' && item.video_view_sales_ratio > 0) {
+                        videoViewSalesRatio = `${Math.round(item.video_view_sales_ratio)}:1`;
+                    }
+
+                    let orderConversionRate = 'N/A';
+                    if (typeof item.order_conversion_rate === 'number') {
+                        orderConversionRate = (item.order_conversion_rate * 100).toFixed(2) + '%';
+                    }
+
                     cardsHtml += `
                         <a href="${detailUrl}" class="card-link text-decoration-none">
                             <div class="card">
@@ -187,11 +203,19 @@
                                     <p class="product-title">${escapeHtml(item.title)}</p>
                                     <div class="row mt-2">
                                         <div class="col-6 product-metric">视频销量/总销: <strong>${ratioHtml}</strong></div>
-                                        <div class="col-6 product-metric">到手价: <strong>¥${item.price}</strong></div>
+                                        <div class="col-6 product-metric">视频浏览销售比: <strong>${videoViewSalesRatio}</strong></div>
+                                    </div>
+                                    <div class="row mt-1">
+                                        <div class="col-6 product-metric">平均达人出单: <strong>${avgContent}</strong></div>
+                                        <div class="col-6 product-metric">下单转化率: <strong>${orderConversionRate}</strong></div>
                                     </div>
                                     <div class="row mt-1">
                                         <div class="col-6 product-metric">商家分: <strong>${item.seller_score}</strong></div>
-                                        <div class="col-6 product-metric">平均达人出单: <strong>${avgContent}</strong></div>
+                                        <div class="col-6 product-metric">店铺体验分: <strong>${item.shop_experience_score}</strong></div>
+                                    </div>
+                                    <div class="row mt-1">
+                                        <div class="col-6 product-metric">到手价: <strong>¥${item.price}</strong></div>
+                                        <div class="col-6 product-metric">好评率: <strong>${item.good_review_rate ? item.good_review_rate.toFixed(2) + '%' : 'N/A'}</strong></div>
                                     </div>
                                 </div>
                             </div>
@@ -270,7 +294,23 @@
 
             function renderDetailView(itemData, detailData) {
                 let contentHtml = `<a href="mobile" class="back-link">&laquo; 返回列表</a>`;
-                contentHtml += `<h4>${escapeHtml(itemData.title)}</h4>`;
+
+                // Title with link and color
+                const promotionId = itemData.promotion_id;
+                const titleText = itemData.title;
+                let titleColor = '';
+                if (itemData.hasOwnProperty('video_sales_ratio') && typeof itemData.video_sales_ratio === 'number') {
+                    const percentage = itemData.video_sales_ratio * 100;
+                    titleColor = percentage >= 65 ? 'red' : 'green';
+                }
+                let titleElement = '';
+                if (promotionId) {
+                    const url = `https://buyin.jinritemai.com/dashboard/merch-picking-library/merch-promoting?id=${promotionId}`;
+                    titleElement = `<a href="${url}" target="_blank" style="color: ${titleColor}; text-decoration: none;">${escapeHtml(titleText)}</a>`;
+                } else {
+                    titleElement = `<span style="color: ${titleColor};">${escapeHtml(titleText)}</span>`;
+                }
+                contentHtml += `<h4>${titleElement}</h4>`;
                 
                 // Chart
                 contentHtml += '<div class="card"><div class="card-body"><canvas id="detail-chart"></canvas></div></div>';
@@ -278,32 +318,88 @@
                 // Details
                 contentHtml += '<div class="card mt-3"><div class="card-body"><dl class="row detail-view mb-0">';
 
-                const itemTranslations = columnTranslations['products'] || {};
-                const allKeys = Object.keys(itemData);
+                // Add computed property for avg_content_per_influencer
+                if (itemData.hasOwnProperty('converting_contents') && itemData.hasOwnProperty('converting_influencers')) {
+                    if (itemData.converting_influencers > 0) {
+                        itemData.avg_content_per_influencer = (itemData.converting_contents / itemData.converting_influencers).toFixed(2);
+                    } else {
+                        itemData.avg_content_per_influencer = 'N/A';
+                    }
+                }
 
-                for (const key of allKeys) {
-                    if (key.endsWith('_formatted') || ['creation_time', 'source_json_filename', 'juliang_url', 'douyin_url', 'cover', 'title'].includes(key)) continue;
-                    
+                const itemTranslations = columnTranslations['products'] || {};
+                const reverseTranslations = {};
+                for (const key in itemTranslations) {
+                    reverseTranslations[itemTranslations[key]] = key;
+                }
+
+                const preferredOrder = preferredChineseOrderForTable.map(name => reverseTranslations[name]).filter(Boolean);
+                const allKeys = Object.keys(itemData);
+                const remainingKeys = allKeys.filter(key => !preferredOrder.includes(key));
+                const displayKeys = [...preferredOrder, ...remainingKeys];
+
+                for (const key of displayKeys) {
+                    if (!allKeys.includes(key) || key.endsWith('_formatted') || ['creation_time', 'source_json_filename', 'juliang_url', 'douyin_url', 'cover', 'title'].includes(key)) {
+                        continue;
+                    }
                     const value = itemData[key];
                     if (value === null || value === '') continue;
 
-                    const displayName = itemTranslations[key] || key.replace(/_/g, ' ');
-                    let displayValue = escapeHtml(String(value));
-
-                    // Special formatting
-                    if (key === 'video_sales_ratio' && typeof value === 'number') {
-                        const percentage = value * 100;
-                        const ratioClass = percentage >= 65 ? 'ratio-red' : 'ratio-green';
-                        displayValue = `<span class="${ratioClass}">${percentage.toFixed(2)}%</span>`;
-                    } else if (['order_conversion_rate'].includes(key) && typeof value === 'number') {
-                        displayValue = (value * 100).toFixed(2) + '%';
-                    } else if (['commission_rate', 'good_review_rate'].includes(key) && typeof value === 'number') {
-                        displayValue = value.toFixed(2) + '%';
-                    } else if (typeof value === 'string' && value.startsWith('http')) {
-                        displayValue = `<a href="${value}" target="_blank">查看链接</a>`;
+                    if (key === 'category') {
+                        contentHtml += '<div class="col-12"><hr class="my-2"></div>';
                     }
 
-                    contentHtml += `<dt class="col-5 text-truncate">${displayName}</dt><dd class="col-7">${displayValue}</dd>`;
+                    let displayValue;
+                    const displayName = itemTranslations[key] || key.replace(/_/g, ' ');
+                    const formattedKey = `${key}_formatted`;
+                    
+                    const percentTimes100 = ['order_conversion_rate'];
+                    const percentAsIs = ['commission_rate', 'good_review_rate'];
+
+                    if (key === 'video_view_sales_ratio' && typeof value === 'number' && value > 0) {
+                        displayValue = `${Math.round(value)}:1`;
+                        if (itemData.hasOwnProperty(formattedKey)) {
+                            const formattedValue = itemData[formattedKey] || '';
+                            if (formattedValue) {
+                                displayValue += ` (${formattedValue})`;
+                            }
+                        }
+                    } else if (key === 'video_sales_ratio' && typeof value === 'number') {
+                        const percentage = value * 100;
+                        let comparison_str = '';
+                        let color = '';
+                        if (percentage >= 65) {
+                            comparison_str = '(&gt;=65%)';
+                            color = 'red';
+                        } else {
+                            comparison_str = '(&lt;65%)';
+                            color = 'green';
+                        }
+                        displayValue = `<span style="color: ${color};">${percentage.toFixed(2)}% ${comparison_str}</span>`;
+                        if (itemData.hasOwnProperty(formattedKey)) {
+                            const formattedValue = itemData[formattedKey] || '';
+                            if (formattedValue) {
+                                displayValue += ` (${formattedValue})`;
+                            }
+                        }
+                    } else if (itemData.hasOwnProperty(formattedKey)) {
+                        const formattedValue = itemData[formattedKey] || '';
+                        if (percentTimes100.includes(key)) {
+                            displayValue = `${(value * 100).toFixed(2)}% (${formattedValue})`;
+                        } else {
+                            displayValue = `${value} (${formattedValue})`;
+                        }
+                    } else if (percentTimes100.includes(key) && typeof value === 'number') {
+                        displayValue = (value * 100).toFixed(2) + '%';
+                    } else if (percentAsIs.includes(key) && typeof value === 'number') {
+                        displayValue = value.toFixed(2) + '%';
+                    } else if (typeof value === 'string' && value.startsWith('http')) {
+                        displayValue = `<a href="${value}" target="_blank">link</a>`;
+                    } else {
+                        displayValue = escapeHtml(String(value));
+                    }
+                    
+                    contentHtml += `<dt class="col-5 text-truncate" title="${displayName}">${displayName}</dt><dd class="col-7">${displayValue}</dd>`;
                 }
 
                 contentHtml += '</dl></div></div>';
